@@ -599,7 +599,7 @@
       color: #111827;
     }
 
-    /* Responsive（PC/スマホ共通レイアウト） */
+    /* Responsive */
 
     @media (max-width: 900px) {
       .hero-inner,
@@ -614,7 +614,7 @@
       }
 
       nav ul {
-        display: none; /* シンプルなサンプルのためSPナビは非表示に */
+        display: none;
       }
 
       .hero-title {
@@ -630,51 +630,52 @@
        ▼ Dify チャットUI カスタム ▼
        ========================== */
 
-    /* デフォルトのバブルボタン */
+    /* デフォルトのバブルボタン（PCではそのまま使用） */
     #dify-chatbot-bubble-button {
-      background-color: #1C64F2 !important;
-      position: fixed !important;
-      bottom: 16px !important;
-      right: 16px !important;
-      width: 56px !important;
-      height: 56px !important;
-      border-radius: 999px !important;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35) !important;
-      z-index: 9998 !important;
+      background-color: #1C64F2;
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
+      z-index: 9998;
     }
 
-    /* メインのチャットウィンドウ（PC 基本サイズ） */
+    /* メインのチャットウィンドウ（PC 初期サイズ） */
     #dify-chatbot-bubble-window {
-      width: 25vw !important;      /* 画面の約1/4 */
-      max-width: 420px !important;
-      min-width: 260px !important;
-      height: 50vh !important;     /* 画面の約1/2 */
-      min-height: 320px !important;
-      position: fixed !important;
-      bottom: 88px !important;     /* バブルボタンの少し上 */
-      right: 16px !important;
-      border-radius: 16px !important;
-      overflow: hidden !important;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55) !important;
-      z-index: 9999 !important;
+      width: 25vw;        /* 画面の約1/4 */
+      max-width: 420px;
+      min-width: 260px;
+      height: 50vh;       /* 画面の約1/2 */
+      min-height: 320px;
+      position: fixed;
+      bottom: 88px;       /* バブルボタンの少し上 */
+      right: 16px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
+      z-index: 9999;
     }
 
-    /* ▼ スマホ表示用（max-width: 900px） */
+    /* スマホ表示用（max-width: 900px） */
     @media (max-width: 900px) {
-      /* チャットウィンドウは全画面表示 */
+      /* チャットウィンドウ：全画面的なレイアウト希望だが
+         Dify側の拡大・縮小や×ボタンを優先するため !important は付けない */
       #dify-chatbot-bubble-window {
-        width: 100vw !important;
-        height: 100vh !important;
-        left: 0 !important;
-        right: 0 !important;
-        top: 0 !important;
-        bottom: 0 !important;
-        border-radius: 0 !important;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border-radius: 0;
       }
 
-      /* デフォルトの丸バブルは隠す（スマホは使わない） */
+      /* デフォルトの丸バブルは見せず、「チャットボットはこちら」ボタンから開閉 */
       #dify-chatbot-bubble-button {
-        display: none !important;
+        display: none;
       }
     }
 
@@ -939,142 +940,4 @@
           </p>
           <div class="pharma-tags">
             <span class="pharma-tag">基礎知識</span>
-            <span class="pharma-tag">アンメットニーズ</span>
-            <span class="pharma-tag">メディカルプラン</span>
-            <span class="pharma-tag">エビデンス創出</span>
-            <span class="pharma-tag">情報提供</span>
-          </div>
-          <p class="pharma-benefits">
-            無料会員登録のイメージとして、限定コンテンツ閲覧や新着記事のお知らせなどを
-            想定しています。（すべてダミーです）
-          </p>
-          <div class="pharma-links">
-            <a href="#" class="pharma-link">基礎から学ぶMAの役割</a>
-            <a href="#" class="pharma-link">アンメットニーズ探索のポイント</a>
-            <a href="#" class="pharma-link">RWDを活用したエビデンス創出</a>
-          </div>
-        </div>
-
-        <div class="pharma-box">
-          <div class="pharma-box-title">無料メール会員（サンプル）の特典</div>
-          <ul>
-            <li>限定記事・資料の閲覧（疾患領域別 解説など）</li>
-            <li>ウェビナー・イベント情報のメール配信</li>
-            <li>新着ナレッジの月次まとめレポート</li>
-          </ul>
-          <br />
-          <button class="btn-primary" style="margin-top: 4px; font-size: 12px; padding: 8px 14px;">
-            メール会員に登録（デモ）
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA / Download -->
-  <section id="download" class="section cta">
-    <div class="container">
-      <div class="cta-box">
-        <h2 class="cta-title">サービスコンセプト資料をダウンロード（想定）</h2>
-        <p class="cta-text">
-          取り扱いデータや想定ユースケース、導入ステップの概要をまとめた
-          PDF資料をイメージしています。実際には何も送信されません。
-        </p>
-        <div class="cta-actions">
-          <button class="btn-primary">資料ダウンロードフォームへ</button>
-          <button class="btn-primary cta-secondary">お問い合わせページへ</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Anchor (dummy) -->
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title">お問い合わせ（フォーム設置イメージ）</h2>
-        <p class="section-desc">
-          実際のフォーム実装は省略し、ここに問い合わせフォームが入る想定です。
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-nav">
-        <a href="#about">サービス概要</a>
-        <a href="#service">提供メニュー</a>
-        <a href="#news">お知らせ</a>
-        <a href="#pharma">ナレッジベース</a>
-        <a href="#download">資料ダウンロード</a>
-        <a href="#contact">お問い合わせ</a>
-        <a href="#">匿名加工情報の取扱い（ダミー）</a>
-        <a href="#">プライバシーポリシー（ダミー）</a>
-      </div>
-      <div>© 2025 MEDiDATA LINK（デモサイト）</div>
-    </div>
-  </footer>
-
-  <!-- ▼ スマホ用ランチャーボタン（テキスト） ▼ -->
-  <div id="custom-chat-launcher">
-    チャットボットはこちら<span>💬</span>
-  </div>
-
-  <!-- ▼ Dify チャットボット埋め込みコード ▼ -->
-  <script>
-    window.difyChatbotConfig = {
-      token: 'F9AWvU5keMPp0Ogc',
-      baseUrl: 'https://bchealthcare.click',
-      inputs: {},
-      systemVariables: {},
-      userVariables: {},
-    }
-  </script>
-  <script
-    src="https://bchealthcare.click/embed.min.js"
-    id="F9AWvU5keMPp0Ogc"
-    defer>
-  </script>
-
-  <!-- ▼ PC自動オープン + スマホ用ランチャー制御 ▼ -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      function initDify() {
-        var bubbleWindow = document.getElementById('dify-chatbot-bubble-window');
-        var bubbleButton = document.getElementById('dify-chatbot-bubble-button');
-        var customLauncher = document.getElementById('custom-chat-launcher');
-
-        if (!bubbleWindow || !bubbleButton) {
-          setTimeout(initDify, 500);
-          return;
-        }
-
-        var isMobile = window.matchMedia('(max-width: 900px)').matches;
-
-        // PC のときは、初期表示でチャットを自動オープン
-        if (!isMobile) {
-          setTimeout(function () {
-            var style = window.getComputedStyle(bubbleWindow);
-            if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
-              bubbleButton.click();
-            }
-          }, 300);
-        }
-
-        // スマホの「チャットボットはこちら」ボタン → Dify のバブルボタンを裏でクリック
-        if (isMobile && customLauncher) {
-          customLauncher.addEventListener('click', function () {
-            bubbleButton.click();
-          });
-        }
-      }
-
-      initDify();
-    });
-  </script>
-
-</body>
-</html>
+            <span class
