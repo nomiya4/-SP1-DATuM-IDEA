@@ -630,7 +630,7 @@
        ▼ Dify チャットUI カスタム ▼
        ========================== */
 
-    /* チャット起動バブル（閉じた状態で右下に小さく表示） */
+    /* デフォルトのバブルボタン */
     #dify-chatbot-bubble-button {
       background-color: #1C64F2 !important;
       position: fixed !important;
@@ -659,7 +659,7 @@
       z-index: 9999 !important;
     }
 
-    /* スマホ表示用（max-width: 900px） */
+    /* ▼ スマホ表示用（max-width: 900px） */
     @media (max-width: 900px) {
       /* チャットウィンドウは全画面表示 */
       #dify-chatbot-bubble-window {
@@ -672,9 +672,39 @@
         border-radius: 0 !important;
       }
 
+      /* デフォルトの丸バブルは隠す（スマホは使わない） */
       #dify-chatbot-bubble-button {
-        bottom: 16px !important;
-        right: 16px !important;
+        display: none !important;
+      }
+    }
+
+    /* ▼ スマホ用「チャットボットはこちら」ランチャーボタン ▼ */
+    #custom-chat-launcher {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #1C64F2;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
+      z-index: 9998;
+      cursor: pointer;
+      display: none; /* デフォルトは非表示 → スマホだけ表示 */
+    }
+
+    #custom-chat-launcher span {
+      margin-left: 4px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      #custom-chat-launcher {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   </style>
@@ -988,6 +1018,11 @@
     </div>
   </footer>
 
+  <!-- ▼ スマホ用ランチャーボタン（テキスト） ▼ -->
+  <div id="custom-chat-launcher">
+    チャットボットはこちら<span>💬</span>
+  </div>
+
   <!-- ▼ Dify チャットボット埋め込みコード ▼ -->
   <script>
     window.difyChatbotConfig = {
@@ -1004,31 +1039,37 @@
     defer>
   </script>
 
-  <!-- ▼ PC でだけ「最初から開いておく」JS ▼ -->
+  <!-- ▼ PC自動オープン + スマホ用ランチャー制御 ▼ -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       function initDify() {
         var bubbleWindow = document.getElementById('dify-chatbot-bubble-window');
         var bubbleButton = document.getElementById('dify-chatbot-bubble-button');
+        var customLauncher = document.getElementById('custom-chat-launcher');
 
         if (!bubbleWindow || !bubbleButton) {
           setTimeout(initDify, 500);
           return;
         }
 
-        // スマホ（900px以下）の場合は何もしない → ユーザーがタップして開く
-        if (window.matchMedia('(max-width: 900px)').matches) {
-          return;
+        var isMobile = window.matchMedia('(max-width: 900px)').matches;
+
+        // PC のときは、初期表示でチャットを自動オープン
+        if (!isMobile) {
+          setTimeout(function () {
+            var style = window.getComputedStyle(bubbleWindow);
+            if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+              bubbleButton.click();
+            }
+          }, 300);
         }
 
-        // PC のときだけ、初回ロード時にチャットを開く
-        setTimeout(function () {
-          var style = window.getComputedStyle(bubbleWindow);
-          // 非表示っぽいときだけクリック（Dify 側で自動オープンしていれば何もしない）
-          if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+        // スマホの「チャットボットはこちら」ボタン → Dify のバブルボタンを裏でクリック
+        if (isMobile && customLauncher) {
+          customLauncher.addEventListener('click', function () {
             bubbleButton.click();
-          }
-        }, 300);
+          });
+        }
       }
 
       initDify();
