@@ -527,3 +527,175 @@
       content: "▸";
       position: absolute;
       left: 0;
+      font-size: 9px;
+      top: 3px;
+    }
+
+    /* CTA / 資料DL */
+
+    .cta {
+      text-align: center;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: #e5e7eb;
+      border-radius: 18px;
+      padding: 32px 20px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.5);
+    }
+
+    .cta-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .cta-text {
+      font-size: 14px;
+      color: #cbd5f5;
+      margin-bottom: 20px;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cta-secondary {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #64748b;
+      color: #e5e7eb;
+    }
+
+    .cta-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+    }
+
+    /* Footer */
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0 32px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+
+    .footer-nav a {
+      color: #6b7280;
+    }
+
+    .footer-nav a:hover {
+      color: #111827;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .hero-inner,
+      .service-grid,
+      .news-layout,
+      .pharma-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-inner {
+        gap: 32px;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 26px;
+      }
+
+      .section {
+        padding: 48px 0;
+      }
+    }
+
+    /* ==========================
+       ▼ Dify チャットUI カスタム ▼
+       ========================== */
+
+    /* デフォルトのバブルボタン（PCではそのまま使用） */
+    #dify-chatbot-bubble-button {
+      background-color: #1C64F2;
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
+      z-index: 9998;
+    }
+
+    /* メインのチャットウィンドウ（PC 初期サイズ） */
+    #dify-chatbot-bubble-window {
+      width: 25vw;        /* 画面の約1/4 */
+      max-width: 420px;
+      min-width: 260px;
+      height: 50vh;       /* 画面の約1/2 */
+      min-height: 320px;
+      position: fixed;
+      bottom: 88px;       /* バブルボタンの少し上 */
+      right: 16px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
+      z-index: 9999;
+    }
+
+    /* スマホ表示用（max-width: 900px） */
+    @media (max-width: 900px) {
+      /* チャットウィンドウは全画面寄りに。ただし !important 付けず Dify の拡大/×を邪魔しない */
+      #dify-chatbot-bubble-window {
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border-radius: 0;
+      }
+
+      /* バブルボタンは“見えないけど存在する”状態に
+         → JS から click するために必要 */
+      #dify-chatbot-bubble-button {
+        width: 0;
+        height: 0;
+        padding: 0;
+        border: none;
+        opacity: 0;
+        overflow: hidden;
+      }
+    }
+
+    /* ▼ スマホ用「チャットボットはこちら」ランチャーボタン ▼ */
+    #custom-chat-launcher {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #1C64F2;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
+      z-index: 9998;
+      cursor: pointer;
+      display: none; /* デ*
