@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>MEDiDATA LINK｜医療データ活用サービス（サンプルサイト）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --main-bg: #0b1530;
+      --accent: #35c4ff;
+      --accent-soft: #e6f7ff;
+      --text-main: #111827;
+      --text-soft: #6b7280;
+      --surface: #ffffff;
+      --border-soft: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      color: var(--text-main);
+      background-color: #f3f4f6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Layout Utilities */
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    /* Header / Navigation */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11, 21, 48, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #f9fafb;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .logo-mark {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    .nav-cta {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      font-size: 13px;
+      color: #0f172a;
+      background: #e0f2fe;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      background: #bae6fd;
+    }
+
+    /* Hero */
+
+    .hero {
+      background: radial-gradient(circle at top left, #1d4ed8, #020617 56%);
+      color: #e5e7eb;
+      padding: 72px 0 64px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-tagline {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a5f3fc;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 34px;
+      line-height: 1.3;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-text {
+      font-size: 14px;
+      color: #cbd5f5;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn-primary {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #0b1120;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-outline {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid #64748b;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .hero-meta-item span {
+      display: block;
+      font-size: 12px;
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .hero-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.6);
+    }
+
+    .hero-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 18px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
+    }
+
+    .hero-card-foot {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .hero-kpi-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f9fafb;
+    }
+
+    /* Service Section */
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 32px;
+    }
+
+    .data-list {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 18px 20px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+      font-size: 13px;
+    }
+
+    .data-list-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .data-list-desc {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .data-list ul {
+      list-style: none;
+      columns: 2;
+      column-gap: 24px;
+    }
+
+    .data-list li {
+      padding-left: 12px;
+      position: relative;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .data-list li::before {
+      content: "・";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .service-cards {
+      display: grid;
+      gap: 16px;
+    }
+
+    .card {
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+      font-size: 13px;
+    }
+
+    .card-label {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      display: inline-block;
+      background: var(--accent-soft);
+      color: #0369a1;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .card-link {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0284c7;
+    }
+
+    .card-link::after {
+      content: " →";
+      font-size: 11px;
+    }
+
+    /* News & Reports */
+
+    .news-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 32px;
+    }
+
+    .news-list, .report-list {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      padding: 16px 18px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+      font-size: 13px;
+    }
+
+    .list-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .list-title-row h3 {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .list-title-row a {
+      font-size: 11px;
+      color: #0284c7;
+    }
+
+    .list-title-row a::after {
+      content: " ＞";
+      font-size: 10px;
+    }
+
+    .news-items {
+      list-style: none;
+    }
+
+    .news-item {
+      border-top: 1px solid var(--border-soft);
+      padding: 10px 0;
+      font-size: 13px;
+    }
+
+    .news-date {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-right: 8px;
+    }
+
+    /* Pharma Base風 */
+
+    .pharma {
+      background: #eef2ff;
+    }
+
+    .pharma-inner {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #c7d2fe;
+      padding: 24px 22px;
+      box-shadow: 0 16px 40px rgba(79, 70, 229, 0.12);
+    }
+
+    .pharma-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .pharma-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .pharma-sub {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .pharma-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .pharma-tag {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px dashed #818cf8;
+      background: #eef2ff;
+      color: #3730a3;
+    }
+
+    .pharma-benefits {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+
+    .pharma-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .pharma-link {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #c4b5fd;
+      color: #4c1d95;
+      background: #f5f3ff;
+    }
+
+    .pharma-box {
+      font-size: 12px;
+      background: #111827;
+      color: #e5e7eb;
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .pharma-box-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .pharma-box ul {
+      list-style: none;
+    }
+
+    .pharma-box li {
+      margin-bottom: 4px;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .pharma-box li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      font-size: 9px;
+      top: 3px;
+    }
+
+    /* CTA / 資料DL */
+
+    .cta {
+      text-align: center;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: #e5e7eb;
+      border-radius: 18px;
+      padding: 32px 20px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.5);
+    }
+
+    .cta-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .cta-text {
+      font-size: 14px;
+      color: #cbd5f5;
+      margin-bottom: 20px;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cta-secondary {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #64748b;
+      color: #e5e7eb;
+    }
+
+    .cta-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+    }
+
+    /* Footer */
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0 32px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+
+    .footer-nav a {
+      color: #6b7280;
+    }
+
+    .footer-nav a:hover {
+      color: #111827;
+    }
+
+    /* Responsive（PC/スマホ共通レイアウト） */
+
+    @media (max-width: 900px) {
+      .hero-inner,
+      .service-grid,
+      .news-layout,
+      .pharma-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-inner {
+        gap: 32px;
+      }
+
+      nav ul {
+        display: none; /* シンプルなサンプルのためSPナビは非表示に */
+      }
+
+      .hero-title {
+        font-size: 26px;
+      }
+
+      .section {
+        padding: 48px 0;
+      }
+    }
+
+    /* ==========================
+       ▼ Dify チャットUI カスタム ▼
+       ========================== */
+
+    /* チャット起動バブル（閉じた状態で右下に小さく表示） */
+    #dify-chatbot-bubble-button {
+      background-color: #1C64F2 !important;
+      position: fixed !important;
+      bottom: 16px !important;
+      right: 16px !important;
+      width: 56px !important;
+      height: 56px !important;
+      border-radius: 999px !important;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35) !important;
+      z-index: 9998 !important;
+    }
+
+    /* メインのチャットウィンドウ（PC 基本サイズ） */
+    #dify-chatbot-bubble-window {
+      width: 25vw !important;      /* 画面の約1/4 */
+      max-width: 420px !important;
+      min-width: 260px !important;
+      height: 50vh !important;     /* 画面の約1/2 */
+      min-height: 320px !important;
+      position: fixed !important;
+      bottom: 88px !important;     /* バブルボタンの少し上 */
+      right: 16px !important;
+      border-radius: 16px !important;
+      overflow: hidden !important;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55) !important;
+      z-index: 9999 !important;
+    }
+
+    /* JS で付与するクラス（PC 拡大時） */
+    #dify-chatbot-bubble-window.custom-chat-window.expanded {
+      width: 32vw !important;
+      max-width: 520px !important;
+      height: 70vh !important;
+    }
+
+    /* チャットウィンドウのコントロールボタン（PC用） */
+    .chat-controls {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none; /* 子要素だけクリック可 */
+      z-index: 10000;
+    }
+
+    .chat-control-btn {
+      pointer-events: auto;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.75);
+      color: #e5e7eb;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
+    }
+
+    .chat-control-btn:hover {
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .chat-zoom-btn {
+      margin-right: auto;
+    }
+
+    .chat-close-btn {
+      margin-left: auto;
+    }
+
+    /* ▼ スマホ表示用（max-width: 900px） */
+    @media (max-width: 900px) {
+      /* チャットウィンドウは全画面表示 */
+      #dify-chatbot-bubble-window {
+        width: 100vw !important;
+        height: 100vh !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        border-radius: 0 !important;
+      }
+
+      /* 拡大クラスも全画面に揃える（PCとの差異を消す） */
+      #dify-chatbot-bubble-window.custom-chat-window.expanded {
+        width: 100vw !important;
+        height: 100vh !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        border-radius: 0 !important;
+      }
+
+      /* スマホでは独自の拡大・閉じるボタンは非表示
+         → バブルマークのタップで開閉（Dify標準のトグル）に任せる */
+      .chat-controls {
+        display: none !important;
+      }
+
+      #dify-chatbot-bubble-button {
+        bottom: 16px !important;
+        right: 16px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <div class="logo-mark">ML</div>
+        <div>MEDiDATA LINK</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">サービス概要</a></li>
+          <li><a href="#service">提供メニュー</a></li>
+          <li><a href="#news">お知らせ</a></li>
+          <li><a href="#pharma">ナレッジベース</a></li>
+          <li><a href="#download">資料ダウンロード</a></li>
+          <li><a class="nav-cta" href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="hero-tagline">REAL-WORLD DATA PLATFORM</div>
+        <h1 class="hero-title">
+          医療データをつなぎ、<br />
+          <span>意思決定のスピード</span>を変える。
+        </h1>
+        <p class="hero-text">
+          MEDiDATA LINKは、医療現場から生まれるリアルワールドデータを統合し、
+          直感的な可視化・分析でヘルスケア事業の推進を支援する、
+          サンプル用の疑似サイトです。
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary">サービス資料を請求する</button>
+          <button class="btn-outline">30分オンライン相談を予約</button>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span>対応データソース</span>
+            電子カルテ / レセプト / 健診 など
+          </div>
+          <div class="hero-meta-item">
+            <span>主なお客様</span>
+            製薬企業・アカデミア・医療機関
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div class="hero-card-title">医療機関・薬局・検査機関などのデータを一元管理</div>
+        <p class="hero-card-text">
+          施設横断のデータを1つのダッシュボードで俯瞰し、
+          ターゲット患者数の把握や治療パターンの把握をサポートします。
+        </p>
+        <div class="chip-row">
+          <div class="chip">電子カルテ</div>
+          <div class="chip">レセプト</div>
+          <div class="chip">DPC</div>
+          <div class="chip">検査結果</div>
+          <div class="chip">健診</div>
+        </div>
+        <div class="hero-card-foot">
+          <div>
+            <div class="hero-kpi-value">2,500万件</div>
+            <div>解析対象レコード（サンプル）</div>
+          </div>
+          <div>
+            <div class="hero-kpi-value">3ステップ</div>
+            <div>基本レポート作成までの流れ</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- About / Service Overview -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">About</div>
+        <h2 class="section-title">リアルワールドデータ活用を、もっと身近に。</h2>
+        <p class="section-desc">
+          認定事業者と連携し、医療現場で日々生まれるデータを、
+          研究・創薬・事業開発に活用しやすい形式でご提供するというコンセプトの疑似サイトです。
+          実在のサービスとは関係ありません。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Section -->
+  <section id="service" class="section">
+    <div class="container service-grid">
+      <div>
+        <div class="section-header">
+          <div class="section-label">Service</div>
+          <h2 class="section-title">取り扱いデータの一例</h2>
+          <p class="section-desc">
+            施設やシステムごとにバラバラなデータを統合し、
+            品質管理を行ったうえで分析基盤に搭載する、というイメージです。
+          </p>
+        </div>
+
+        <div class="data-list">
+          <div class="data-list-title">医療・ヘルスケアデータ</div>
+          <p class="data-list-desc">以下は本サンプルサイトで想定しているデータ種別の例です。</p>
+          <ul>
+            <li>電子カルテ（診療録）</li>
+            <li>レセプト（医科・DPC）</li>
+            <li>調剤レセプト</li>
+            <li>検査データ</li>
+            <li>健診・人間ドック</li>
+            <li>画像レポート　など</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-cards">
+        <article class="card">
+          <div class="card-label">製薬企業向け</div>
+          <h3 class="card-title">ダッシュボード・Webツール</h3>
+          <p class="card-text">
+            疫学指標の把握や対象患者抽出などに使えるインタラクティブなダッシュボードを想定しています。
+          </p>
+          <a href="#" class="card-link">想定機能を見る</a>
+        </article>
+
+        <article class="card">
+          <div class="card-label">アカデミア・医療機関向け</div>
+          <h3 class="card-title">カスタム解析・レポート</h3>
+          <p class="card-text">
+            研究目的・疾患領域に応じてコホート設計から解析レポート作成までを一気通貫で支援するイメージです。
+          </p>
+          <a href="#" class="card-link">解析の流れを見る</a>
+        </article>
+
+        <article class="card">
+          <div class="card-label">共通サービス</div>
+          <h3 class="card-title">データセット提供</h3>
+          <p class="card-text">
+            匿名加工処理を施したデータを、統計解析ソフト向けの形式でご提供するケースを想定しています。
+          </p>
+          <a href="#" class="card-link">提供イメージを見る</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- News & Reports -->
+  <section id="news" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Updates</div>
+        <h2 class="section-title">お知らせ・レポート</h2>
+        <p class="section-desc">
+          以下はダミーのニュース・レポートです。実在のイベントや論文とは関係ありません。
+        </p>
+      </div>
+
+      <div class="news-layout">
+        <!-- News -->
+        <div class="news-list">
+          <div class="list-title-row">
+            <h3>お知らせ</h3>
+            <a href="#">一覧を見る</a>
+          </div>
+          <ul class="news-items">
+            <li class="news-item">
+              <span class="news-date">2025.10.12</span>
+              <a href="#">リアルワールドデータ活用ウェビナー開催のご案内（オンライン）</a>
+            </li>
+            <li class="news-item">
+              <span class="news-date">2025.09.01</span>
+              <a href="#">「オンコロジー領域データパッケージ」サンプル仕様書公開</a>
+            </li>
+            <li class="news-item">
+              <span class="news-date">2025.07.18</span>
+              <a href="#">夏季休業期間中のお問い合わせ対応について</a>
+            </li>
+            <li class="news-item">
+              <span class="news-date">2025.05.30</span>
+              <a href="#">本サイト公開のお知らせ（デモ用）</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Reports -->
+        <div class="report-list">
+          <div class="list-title-row">
+            <h3>活動レポート</h3>
+            <a href="#">一覧を見る</a>
+          </div>
+          <ul class="news-items">
+            <li class="news-item">
+              <span class="news-date">2025.11.05</span>
+              <a href="#">乳がん診療を題材としたリアルワールドデータ解析デモのご紹介</a>
+            </li>
+            <li class="news-item">
+              <span class="news-date">2025.08.08</span>
+              <a href="#">希少疾患に関する電子カルテデータの解析ケーススタディ（サンプル）</a>
+            </li>
+            <li class="news-item">
+              <span class="news-date">2025.06.20</span>
+              <a href="#">医療情報利活用セミナー ダイジェストレポート（ダミー）</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pharma-like Knowledge Base -->
+  <section id="pharma" class="section pharma">
+    <div class="container pharma-inner">
+      <div class="section-label">Knowledge Base</div>
+      <h2 class="section-title">メディカルアフェアーズ向けナレッジベース（イメージ）</h2>
+
+      <div class="pharma-grid">
+        <div>
+          <h3 class="pharma-title">MEDiDATA KNOWLEDGE</h3>
+          <p class="pharma-sub">
+            メディカルアフェアーズ業務に関わる情報を体系的に整理した、
+            仮想的なナレッジベースをイメージしています。
+          </p>
+          <div class="pharma-tags">
+            <span class="pharma-tag">基礎知識</span>
+            <span class="pharma-tag">アンメットニーズ</span>
+            <span class="pharma-tag">メディカルプラン</span>
+            <span class="pharma-tag">エビデンス創出</span>
+            <span class="pharma-tag">情報提供</span>
+          </div>
+          <p class="pharma-benefits">
+            無料会員登録のイメージとして、限定コンテンツ閲覧や新着記事のお知らせなどを
+            想定しています。（すべてダミーです）
+          </p>
+          <div class="pharma-links">
+            <a href="#" class="pharma-link">基礎から学ぶMAの役割</a>
+            <a href="#" class="pharma-link">アンメットニーズ探索のポイント</a>
+            <a href="#" class="pharma-link">RWDを活用したエビデンス創出</a>
+          </div>
+        </div>
+
+        <div class="pharma-box">
+          <div class="pharma-box-title">無料メール会員（サンプル）の特典</div>
+          <ul>
+            <li>限定記事・資料の閲覧（疾患領域別 解説など）</li>
+            <li>ウェビナー・イベント情報のメール配信</li>
+            <li>新着ナレッジの月次まとめレポート</li>
+          </ul>
+          <br />
+          <button class="btn-primary" style="margin-top: 4px; font-size: 12px; padding: 8px 14px;">
+            メール会員に登録（デモ）
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Download -->
+  <section id="download" class="section cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="cta-title">サービスコンセプト資料をダウンロード（想定）</h2>
+        <p class="cta-text">
+          取り扱いデータや想定ユースケース、導入ステップの概要をまとめた
+          PDF資料をイメージしています。実際には何も送信されません。
+        </p>
+        <div class="cta-actions">
+          <button class="btn-primary">資料ダウンロードフォームへ</button>
+          <button class="btn-primary cta-secondary">お問い合わせページへ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Anchor (dummy) -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">お問い合わせ（フォーム設置イメージ）</h2>
+        <p class="section-desc">
+          実際のフォーム実装は省略し、ここに問い合わせフォームが入る想定です。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-nav">
+        <a href="#about">サービス概要</a>
+        <a href="#service">提供メニュー</a>
+        <a href="#news">お知らせ</a>
+        <a href="#pharma">ナレッジベース</a>
+        <a href="#download">資料ダウンロード</a>
+        <a href="#contact">お問い合わせ</a>
+        <a href="#">匿名加工情報の取扱い（ダミー）</a>
+        <a href="#">プライバシーポリシー（ダミー）</a>
+      </div>
+      <div>© 2025 MEDiDATA LINK（デモサイト）</div>
+    </div>
+  </footer>
+
+  <!-- ▼ Dify チャットボット埋め込みコード ▼ -->
+  <script>
+    window.difyChatbotConfig = {
+      token: 'F9AWvU5keMPp0Ogc',
+      baseUrl: 'https://bchealthcare.click',
+      inputs: {
+        // Start node 用の入力があればここに定義
+      },
+      systemVariables: {
+        // user_id や conversation_id を使う場合はここに定義
+      },
+      userVariables: {
+        // avatar_url や name を使う場合はここに定義
+      },
+    }
+  </script>
+  <script
+    src="https://bchealthcare.click/embed.min.js"
+    id="F9AWvU5keMPp0Ogc"
+    defer>
+  </script>
+
+  <!-- ▼ チャットUIの拡大・縮小ボタン＆クローズ制御用 JS（PC向け） ▼ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      function setupDifyControls() {
+        var bubbleWindow = document.getElementById('dify-chatbot-bubble-window');
+        var bubbleButton = document.getElementById('dify-chatbot-bubble-button');
+
+        if (!bubbleWindow || !bubbleButton) {
+          setTimeout(setupDifyControls, 500);
+          return;
+        }
+
+        // カスタムクラス付与
+        bubbleWindow.classList.add('custom-chat-window');
+
+        // SPでは独自コントロール使わないので PC のときだけ追加
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          return;
+        }
+
+        if (bubbleWindow.querySelector('.chat-controls')) {
+          return;
+        }
+
+        var controls = document.createElement('div');
+        controls.className = 'chat-controls';
+
+        var zoomBtn = document.createElement('button');
+        zoomBtn.className = 'chat-control-btn chat-zoom-btn';
+        zoomBtn.title = 'サイズ切り替え';
+        zoomBtn.textContent = '⤢';
+
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'chat-control-btn chat-close-btn';
+        closeBtn.title = '閉じる';
+        closeBtn.textContent = '×';
+
+        controls.appendChild(zoomBtn);
+        controls.appendChild(closeBtn);
+        bubbleWindow.appendChild(controls);
+
+        var expanded = false;
+        zoomBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          expanded = !expanded;
+          bubbleWindow.classList.toggle('expanded', expanded);
+        });
+
+        closeBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (bubbleButton) {
+            bubbleButton.click(); // Dify 側のトグルを利用して閉じる
+          }
+        });
+      }
+
+      setupDifyControls();
+    });
+  </script>
+
+</body>
+</html>
