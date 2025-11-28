@@ -659,56 +659,7 @@
       z-index: 9999 !important;
     }
 
-    /* JS で付与するクラス（PC 拡大時） */
-    #dify-chatbot-bubble-window.custom-chat-window.expanded {
-      width: 32vw !important;
-      max-width: 520px !important;
-      height: 70vh !important;
-    }
-
-    /* チャットウィンドウのコントロールボタン（PC用） */
-    .chat-controls {
-      position: absolute;
-      top: 6px;
-      left: 8px;
-      right: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      pointer-events: none; /* 子要素だけクリック可 */
-      z-index: 10000;
-    }
-
-    .chat-control-btn {
-      pointer-events: auto;
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      border: none;
-      font-size: 14px;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      background: rgba(15, 23, 42, 0.75);
-      color: #e5e7eb;
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
-    }
-
-    .chat-control-btn:hover {
-      background: rgba(15, 23, 42, 0.95);
-    }
-
-    .chat-zoom-btn {
-      margin-right: auto;
-    }
-
-    .chat-close-btn {
-      margin-left: auto;
-    }
-
-    /* ▼ スマホ表示用（max-width: 900px） */
+    /* スマホ表示用（max-width: 900px） */
     @media (max-width: 900px) {
       /* チャットウィンドウは全画面表示 */
       #dify-chatbot-bubble-window {
@@ -719,23 +670,6 @@
         top: 0 !important;
         bottom: 0 !important;
         border-radius: 0 !important;
-      }
-
-      /* 拡大クラスも全画面に揃える（PCとの差異を消す） */
-      #dify-chatbot-bubble-window.custom-chat-window.expanded {
-        width: 100vw !important;
-        height: 100vh !important;
-        left: 0 !important;
-        right: 0 !important;
-        top: 0 !important;
-        bottom: 0 !important;
-        border-radius: 0 !important;
-      }
-
-      /* スマホでは独自の拡大・閉じるボタンは非表示
-         → バブルマークのタップで開閉（Dify標準のトグル）に任せる */
-      .chat-controls {
-        display: none !important;
       }
 
       #dify-chatbot-bubble-button {
@@ -1059,15 +993,9 @@
     window.difyChatbotConfig = {
       token: 'F9AWvU5keMPp0Ogc',
       baseUrl: 'https://bchealthcare.click',
-      inputs: {
-        // Start node 用の入力があればここに定義
-      },
-      systemVariables: {
-        // user_id や conversation_id を使う場合はここに定義
-      },
-      userVariables: {
-        // avatar_url や name を使う場合はここに定義
-      },
+      inputs: {},
+      systemVariables: {},
+      userVariables: {},
     }
   </script>
   <script
@@ -1076,63 +1004,34 @@
     defer>
   </script>
 
-  <!-- ▼ チャットUIの拡大・縮小ボタン＆クローズ制御用 JS（PC向け） ▼ -->
+  <!-- ▼ PC でだけ「最初から開いておく」JS ▼ -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      function setupDifyControls() {
+      function initDify() {
         var bubbleWindow = document.getElementById('dify-chatbot-bubble-window');
         var bubbleButton = document.getElementById('dify-chatbot-bubble-button');
 
         if (!bubbleWindow || !bubbleButton) {
-          setTimeout(setupDifyControls, 500);
+          setTimeout(initDify, 500);
           return;
         }
 
-        // カスタムクラス付与
-        bubbleWindow.classList.add('custom-chat-window');
-
-        // SPでは独自コントロール使わないので PC のときだけ追加
+        // スマホ（900px以下）の場合は何もしない → ユーザーがタップして開く
         if (window.matchMedia('(max-width: 900px)').matches) {
           return;
         }
 
-        if (bubbleWindow.querySelector('.chat-controls')) {
-          return;
-        }
-
-        var controls = document.createElement('div');
-        controls.className = 'chat-controls';
-
-        var zoomBtn = document.createElement('button');
-        zoomBtn.className = 'chat-control-btn chat-zoom-btn';
-        zoomBtn.title = 'サイズ切り替え';
-        zoomBtn.textContent = '⤢';
-
-        var closeBtn = document.createElement('button');
-        closeBtn.className = 'chat-control-btn chat-close-btn';
-        closeBtn.title = '閉じる';
-        closeBtn.textContent = '×';
-
-        controls.appendChild(zoomBtn);
-        controls.appendChild(closeBtn);
-        bubbleWindow.appendChild(controls);
-
-        var expanded = false;
-        zoomBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          expanded = !expanded;
-          bubbleWindow.classList.toggle('expanded', expanded);
-        });
-
-        closeBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          if (bubbleButton) {
-            bubbleButton.click(); // Dify 側のトグルを利用して閉じる
+        // PC のときだけ、初回ロード時にチャットを開く
+        setTimeout(function () {
+          var style = window.getComputedStyle(bubbleWindow);
+          // 非表示っぽいときだけクリック（Dify 側で自動オープンしていれば何もしない）
+          if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+            bubbleButton.click();
           }
-        });
+        }, 300);
       }
 
-      setupDifyControls();
+      initDify();
     });
   </script>
 
