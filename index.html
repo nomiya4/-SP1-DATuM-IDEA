@@ -2,44 +2,670 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>テストページ｜チャットボット動作確認</title>
+  <title>MEDiDATA LINK｜医療データ活用サービス（サンプルサイト）</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --main-bg: #0b1530;
+      --accent: #35c4ff;
+      --accent-soft: #e6f7ff;
+      --text-main: #111827;
+      --text-soft: #6b7280;
+      --surface: #ffffff;
+      --border-soft: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      margin: 0;
-      padding: 40px 16px;
-      background: #f3f4f6;
-      color: #111827;
+      line-height: 1.7;
+      color: var(--text-main);
+      background-color: #f3f4f6;
     }
-    h1 {
-      font-size: 24px;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Layout Utilities */
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    /* Header / Navigation */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(11, 21, 48, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #f9fafb;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .logo-mark {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    .nav-cta {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      font-size: 13px;
+      color: #0f172a;
+      background: #e0f2fe;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      background: #bae6fd;
+    }
+
+    /* Hero */
+
+    .hero {
+      background: radial-gradient(circle at top left, #1d4ed8, #020617 56%);
+      color: #e5e7eb;
+      padding: 72px 0 64px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-tagline {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a5f3fc;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 34px;
+      line-height: 1.3;
+      font-weight: 800;
       margin-bottom: 16px;
     }
-    p {
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-text {
+      font-size: 14px;
+      color: #cbd5f5;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn-primary {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #0b1120;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-outline {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid #64748b;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .hero-meta-item span {
+      display: block;
+      font-size: 12px;
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .hero-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.6);
+    }
+
+    .hero-card-title {
+      font-size: 14px;
+      font-weight: 600;
       margin-bottom: 8px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 18px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
+    }
+
+    .hero-card-foot {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .hero-kpi-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f9fafb;
+    }
+
+    /* About section */
+    #about .section-desc {
+      max-width: 720px;
+    }
+
+    /* Simple extra section for layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 32px;
+    }
+
+    .card {
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+      font-size: 13px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    /* CTA / 資料DL */
+
+    .cta {
+      text-align: center;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: #e5e7eb;
+      border-radius: 18px;
+      padding: 32px 20px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.5);
+    }
+
+    .cta-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .cta-text {
+      font-size: 14px;
+      color: #cbd5f5;
+      margin-bottom: 20px;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cta-secondary {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #64748b;
+      color: #e5e7eb;
+    }
+
+    .cta-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+    }
+
+    /* Footer */
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0 32px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+
+    .footer-nav a {
+      color: #6b7280;
+    }
+
+    .footer-nav a:hover {
+      color: #111827;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .hero-inner,
+      .two-column {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-inner {
+        gap: 32px;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 26px;
+      }
+
+      .section {
+        padding: 48px 0;
+      }
+    }
+
+    /* ==========================
+       ▼ Dify チャットUI カスタム ▼
+       ========================== */
+
+    /* PCでは、バブルボタンの色だけ変える（位置や挙動は触らない） */
+    #dify-chatbot-bubble-button {
+      background-color: #1C64F2 !important;
+    }
+
+    /* スマホ表示用（max-width: 900px） */
+    @media (max-width: 900px) {
+      /* スマホでは Dify 標準のバブルボタンは非表示 */
+      #dify-chatbot-bubble-button {
+        display: none !important;
+      }
+    }
+
+    /* ▼ スマホ用「チャットボットはこちら」ランチャーボタン ▼ */
+    #custom-chat-launcher {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #1C64F2;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
+      z-index: 9998;
+      cursor: pointer;
+      display: none; /* デフォルトは非表示 → スマホだけ表示 */
+    }
+
+    #custom-chat-launcher span {
+      margin-left: 4px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      #custom-chat-launcher {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>チャットボット動作テストページ</h1>
-  <p>このページが表示されていれば、HTML自体は正常です。</p>
-  <p>右下に Dify のチャットボタンが表示されるか確認してください。</p>
 
-  <!-- Dify チャット埋め込み（元のコードそのまま） -->
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <div class="logo-mark">ML</div>
+        <div>MEDiDATA LINK</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">サービス概要</a></li>
+          <li><a href="#usecase">活用イメージ</a></li>
+          <li><a href="#download">資料ダウンロード</a></li>
+          <li><a class="nav-cta" href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="hero-tagline">REAL-WORLD DATA PLATFORM</div>
+        <h1 class="hero-title">
+          医療データをつなぎ、<br />
+          <span>意思決定のスピード</span>を変える。
+        </h1>
+        <p class="hero-text">
+          MEDiDATA LINKは、医療現場から生まれるリアルワールドデータを統合し、
+          直感的な可視化・分析でヘルスケア事業の推進を支援する、
+          サンプル用の疑似サイトです。
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary">サービス資料を請求する</button>
+          <button class="btn-outline">30分オンライン相談を予約</button>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span>対応データソース</span>
+            電子カルテ / レセプト / 健診 など
+          </div>
+          <div class="hero-meta-item">
+            <span>主なお客様</span>
+            製薬企業・アカデミア・医療機関
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div class="hero-card-title">医療機関・薬局・検査機関などのデータを一元管理</div>
+        <p class="hero-card-text">
+          施設横断のデータを1つのダッシュボードで俯瞰し、
+          ターゲット患者数の把握や治療パターンの把握をサポートします。
+        </p>
+        <div class="chip-row">
+          <div class="chip">電子カルテ</div>
+          <div class="chip">レセプト</div>
+          <div class="chip">DPC</div>
+          <div class="chip">検査結果</div>
+          <div class="chip">健診</div>
+        </div>
+        <div class="hero-card-foot">
+          <div>
+            <div class="hero-kpi-value">2,500万件</div>
+            <div>解析対象レコード（サンプル）</div>
+          </div>
+          <div>
+            <div class="hero-kpi-value">3ステップ</div>
+            <div>基本レポート作成までの流れ</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">About</div>
+        <h2 class="section-title">リアルワールドデータ活用を、もっと身近に。</h2>
+        <p class="section-desc">
+          認定事業者と連携し、医療現場で日々生まれるデータを、
+          研究・創薬・事業開発に活用しやすい形式でご提供するというコンセプトの疑似サイトです。
+          実在のサービスとは関係ありません。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usecase / simple two-column -->
+  <section id="usecase" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Use Case</div>
+        <h2 class="section-title">想定ユースケースの一例</h2>
+        <p class="section-desc">
+          ここでは、製薬企業・アカデミア・医療機関での利用イメージを簡単に紹介しています。
+        </p>
+      </div>
+
+      <div class="two-column">
+        <div class="card">
+          <h3 class="card-title">製薬企業での活用イメージ</h3>
+          <p class="card-text">
+            疫学指標の把握やターゲット施設の選定、RWDを用いたエビデンス創出支援などを想定しています。
+          </p>
+          <p class="card-text">
+            治療実態の可視化や患者数推計など、メディカル・マーケティングの両面での活用が可能です。
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="card-title">医療機関・アカデミアでの活用イメージ</h3>
+          <p class="card-text">
+            研究テーマに沿ったコホート設計や、院内データを用いた解析支援、
+            共同研究に向けたデータ整理などを想定しています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Download -->
+  <section id="download" class="section cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="cta-title">サービスコンセプト資料をダウンロード（想定）</h2>
+        <p class="cta-text">
+          取り扱いデータや想定ユースケース、導入ステップの概要をまとめた
+          PDF資料をイメージしています。実際には何も送信されません。
+        </p>
+        <div class="cta-actions">
+          <button class="btn-primary">資料ダウンロードフォームへ</button>
+          <button class="btn-primary cta-secondary">お問い合わせページへ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Anchor (dummy) -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">お問い合わせ（フォーム設置イメージ）</h2>
+        <p class="section-desc">
+          実際のフォーム実装は省略し、ここに問い合わせフォームが入る想定です。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-nav">
+        <a href="#about">サービス概要</a>
+        <a href="#usecase">活用イメージ</a>
+        <a href="#download">資料ダウンロード</a>
+        <a href="#contact">お問い合わせ</a>
+        <a href="#">匿名加工情報の取扱い（ダミー）</a>
+        <a href="#">プライバシーポリシー（ダミー）</a>
+      </div>
+      <div>© 2025 MEDiDATA LINK（デモサイト）</div>
+    </div>
+  </footer>
+
+  <!-- スマホ用 ランチャーボタン -->
+  <div id="custom-chat-launcher">
+    チャットボットはこちら<span>💬</span>
+  </div>
+
+  <!-- Dify 埋め込み（元のコードベース） -->
   <script>
     window.difyChatbotConfig = {
       token: 'F9AWvU5keMPp0Ogc',
       baseUrl: 'https://bchealthcare.click',
       inputs: {},
       systemVariables: {},
-      userVariables: {},
-    }
+      userVariables: {}
+    };
   </script>
   <script
     src="https://bchealthcare.click/embed.min.js"
     id="F9AWvU5keMPp0Ogc"
     defer>
   </script>
+
+  <!-- スマホ用ランチャー → バブルボタンクリック連動 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      function wireDify() {
+        var bubbleButton = document.getElementById('dify-chatbot-bubble-button');
+        var customLauncher = document.getElementById('custom-chat-launcher');
+
+        if (!bubbleButton) {
+          // Dify側のボタン生成がまだなら、少し待って再試行
+          setTimeout(wireDify, 500);
+          return;
+        }
+
+        if (customLauncher) {
+          customLauncher.addEventListener('click', function () {
+            bubbleButton.click();
+          });
+        }
+      }
+
+      wireDify();
+    });
+  </script>
+
 </body>
 </html>
