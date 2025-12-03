@@ -418,11 +418,11 @@
       position: fixed;
       bottom: 16px;
       right: 16px;
-      width: 25vw;
-      max-width: 420px;
-      min-width: 320px;
-      height: 50vh;
-      min-height: 360px;
+      width: 30vw;         /* 横を少し大きめに */
+      max-width: 520px;
+      min-width: 360px;
+      height: 60vh;        /* 縦も少し大きめに */
+      min-height: 420px;
       background: #ffffff;
       border-radius: 16px;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
@@ -431,6 +431,15 @@
       flex-direction: column;
       overflow: hidden;
       z-index: 9999;
+    }
+
+    /* 拡大状態（PCのみ有効にする想定） */
+    @media (min-width: 901px) {
+      #chatbox-container.maximized {
+        top: 0;
+        bottom: 0;
+        height: auto;     /* top/bottom指定で縦いっぱいに */
+      }
     }
 
     #chatbox-header {
@@ -461,13 +470,28 @@
       font-size: 11px;
     }
 
+    #chatbox-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    #chatbox-maximize,
     #chatbox-close {
       border: none;
       background: transparent;
       color: #e5e7eb;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
       line-height: 1;
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+    }
+
+    #chatbox-maximize:hover,
+    #chatbox-close:hover {
+      background: rgba(148, 163, 184, 0.25);
     }
 
     #chatbox-body {
@@ -521,10 +545,6 @@
       font-size: 13px;
     }
 
-    @media (min-width: 901px) {
-      /* PCでは、初期状態でチャットウィンドウを開いておきたいので
-         ロード時にJSでランチャーを隠す */
-    }
   </style>
 </head>
 <body>
@@ -703,7 +723,10 @@
         <div id="chatbox-title-icon">AI</div>
         <div>医療データ相談チャット</div>
       </div>
-      <button id="chatbox-close" aria-label="チャットを閉じる">×</button>
+      <div id="chatbox-controls">
+        <button id="chatbox-maximize" aria-label="チャットを拡大表示">▢</button>
+        <button id="chatbox-close" aria-label="チャットを閉じる">×</button>
+      </div>
     </div>
     <div id="chatbox-body">
       <iframe
@@ -719,12 +742,24 @@
     チャットボットはこちら<span>💬</span>
   </div>
 
-  <!-- チャット開閉制御スクリプト -->
+  <!-- チャット開閉＆拡大縮小制御スクリプト -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var chatbox = document.getElementById('chatbox-container');
       var launcher = document.getElementById('chat-launcher');
       var closeBtn = document.getElementById('chatbox-close');
+      var maximizeBtn = document.getElementById('chatbox-maximize');
+      var isMaximized = false;
+
+      function setMaximizeButtonLabel() {
+        if (isMaximized) {
+          maximizeBtn.textContent = '↙';
+          maximizeBtn.setAttribute('aria-label', 'チャットを元のサイズに戻す');
+        } else {
+          maximizeBtn.textContent = '▢';
+          maximizeBtn.setAttribute('aria-label', 'チャットを拡大表示');
+        }
+      }
 
       function setupLayout() {
         var isMobile = window.matchMedia('(max-width: 900px)').matches;
@@ -732,11 +767,19 @@
         if (isMobile) {
           // スマホ：最初はチャット非表示、ランチャーのみ表示
           chatbox.classList.add('hidden');
+          chatbox.classList.remove('maximized');
+          isMaximized = false;
+          setMaximizeButtonLabel();
+
           launcher.classList.remove('hidden');
           launcher.style.display = 'inline-flex';
         } else {
-          // PC：最初からチャットUIを表示、ランチャーは隠す
+          // PC：最初からチャットUIを表示（通常サイズ）、ランチャーは隠す
           chatbox.classList.remove('hidden');
+          chatbox.classList.remove('maximized');
+          isMaximized = false;
+          setMaximizeButtonLabel();
+
           launcher.classList.add('hidden');
           launcher.style.display = 'none';
         }
@@ -750,18 +793,45 @@
         chatbox.classList.remove('hidden');
         launcher.classList.add('hidden');
         launcher.style.display = 'none';
+
+        // 開くときは通常サイズからスタート
+        chatbox.classList.remove('maximized');
+        isMaximized = false;
+        setMaximizeButtonLabel();
       });
 
-      // ×ボタンでチャットを閉じる
+      // ×ボタンでチャットを閉じる（＝縮小扱い）
       closeBtn.addEventListener('click', function () {
         chatbox.classList.add('hidden');
         launcher.classList.remove('hidden');
         launcher.style.display = 'inline-flex';
+
+        // 閉じたタイミングで拡大状態は解除
+        chatbox.classList.remove('maximized');
+        isMaximized = false;
+        setMaximizeButtonLabel();
       });
 
-      // 画面サイズが変わったときにも挙動をそれなりに合わせる
+      // 拡大／元に戻すボタン
+      maximizeBtn.addEventListener('click', function () {
+        var isMobile = window.matchMedia('(max-width: 900px)').matches;
+
+        // スマホはすでにほぼ全画面なので拡大切り替えは実質なし
+        if (isMobile) {
+          return;
+        }
+
+        isMaximized = !isMaximized;
+        if (isMaximized) {
+          chatbox.classList.add('maximized');
+        } else {
+          chatbox.classList.remove('maximized');
+        }
+        setMaximizeButtonLabel();
+      });
+
+      // 画面サイズが変わったときにも挙動をそこそこ合わせる
       window.addEventListener('resize', function () {
-        // 連打でおかしくなるのを防ぐため、少し遅延させて再判定
         clearTimeout(window.__chat_resize_timer);
         window.__chat_resize_timer = setTimeout(setupLayout, 300);
       });
