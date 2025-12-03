@@ -406,24 +406,99 @@
     }
 
     /* ==========================
-       ▼ Dify チャットUI カスタム ▼
+       ▼ チャットボット(iframe) UI ▼
        ========================== */
 
-    /* PCでは、バブルボタンの色だけ変える（位置や挙動は触らない） */
-    #dify-chatbot-bubble-button {
-      background-color: #1C64F2 !important;
+    .hidden {
+      display: none !important;
     }
 
-    /* スマホ表示用（max-width: 900px） */
+    /* 共通チャットボックス枠（PCでは右下、スマホでは全画面） */
+    #chatbox-container {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      width: 25vw;
+      max-width: 420px;
+      min-width: 320px;
+      height: 50vh;
+      min-height: 360px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    #chatbox-header {
+      height: 40px;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0b1530;
+      color: #e5e7eb;
+      font-size: 13px;
+    }
+
+    #chatbox-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #chatbox-title-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    #chatbox-close {
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 16px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    #chatbox-body {
+      flex: 1;
+      background: #f9fafb;
+    }
+
+    #chatbox-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* スマホ時は全画面にする */
     @media (max-width: 900px) {
-      /* スマホでは Dify 標準のバブルボタンは非表示 */
-      #dify-chatbot-bubble-button {
-        display: none !important;
+      #chatbox-container {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        max-width: none;
+        min-width: 0;
+        min-height: 0;
+        border-radius: 0;
       }
     }
 
-    /* ▼ スマホ用「チャットボットはこちら」ランチャーボタン ▼ */
-    #custom-chat-launcher {
+    /* ▼ スマホ＆PC共通のランチャーボタン ▼ */
+    #chat-launcher {
       position: fixed;
       right: 16px;
       bottom: 16px;
@@ -436,20 +511,19 @@
       box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
       z-index: 9998;
       cursor: pointer;
-      display: none; /* デフォルトは非表示 → スマホだけ表示 */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
     }
 
-    #custom-chat-launcher span {
-      margin-left: 4px;
+    #chat-launcher span {
       font-size: 13px;
     }
 
-    @media (max-width: 900px) {
-      #custom-chat-launcher {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
+    @media (min-width: 901px) {
+      /* PCでは、初期状態でチャットウィンドウを開いておきたいので
+         ロード時にJSでランチャーを隠す */
     }
   </style>
 </head>
@@ -622,62 +696,75 @@
     </div>
   </footer>
 
-  <!-- スマホ用 ランチャーボタン -->
-  <div id="custom-chat-launcher">
+  <!-- ▼ チャットボットUI（iframe） ▼ -->
+  <div id="chatbox-container">
+    <div id="chatbox-header">
+      <div id="chatbox-title">
+        <div id="chatbox-title-icon">AI</div>
+        <div>医療データ相談チャット</div>
+      </div>
+      <button id="chatbox-close" aria-label="チャットを閉じる">×</button>
+    </div>
+    <div id="chatbox-body">
+      <iframe
+        src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
+        frameborder="0"
+        allow="microphone">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- ランチャーボタン（PCで閉じた後＆スマホ初期表示で使う） -->
+  <div id="chat-launcher">
     チャットボットはこちら<span>💬</span>
   </div>
 
-  <!-- Dify 埋め込み（元のコードベース） -->
-  <script>
-    window.difyChatbotConfig = {
-      token: 'F9AWvU5keMPp0Ogc',
-      baseUrl: 'https://bchealthcare.click',
-      inputs: {},
-      systemVariables: {},
-      userVariables: {}
-    };
-  </script>
-  <script
-    src="https://bchealthcare.click/embed.min.js"
-    id="F9AWvU5keMPp0Ogc"
-    defer>
-  </script>
-
-  <!-- PC: 自動オープン / スマホ: ランチャー → バブルボタンクリック連動 -->
+  <!-- チャット開閉制御スクリプト -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      function wireDify() {
-        var bubbleButton = document.getElementById('dify-chatbot-bubble-button');
-        var customLauncher = document.getElementById('custom-chat-launcher');
+      var chatbox = document.getElementById('chatbox-container');
+      var launcher = document.getElementById('chat-launcher');
+      var closeBtn = document.getElementById('chatbox-close');
 
-        if (!bubbleButton) {
-          // Dify側のボタン生成がまだなら、少し待って再試行
-          setTimeout(wireDify, 500);
-          return;
-        }
-
+      function setupLayout() {
         var isMobile = window.matchMedia('(max-width: 900px)').matches;
 
-        // PC：初回ロード時に自動でチャットUIを開く
-        if (!isMobile) {
-          setTimeout(function () {
-            // 念のため要素がまだ存在するか確認
-            var btn = document.getElementById('dify-chatbot-bubble-button');
-            if (btn) {
-              btn.click();
-            }
-          }, 500);
-        }
-
-        // スマホ：ランチャー → Difyのバブルボタンをclickして開閉
-        if (isMobile && customLauncher) {
-          customLauncher.addEventListener('click', function () {
-            bubbleButton.click();
-          });
+        if (isMobile) {
+          // スマホ：最初はチャット非表示、ランチャーのみ表示
+          chatbox.classList.add('hidden');
+          launcher.classList.remove('hidden');
+          launcher.style.display = 'inline-flex';
+        } else {
+          // PC：最初からチャットUIを表示、ランチャーは隠す
+          chatbox.classList.remove('hidden');
+          launcher.classList.add('hidden');
+          launcher.style.display = 'none';
         }
       }
 
-      wireDify();
+      // 初期設定
+      setupLayout();
+
+      // ランチャーボタンでチャットを開く
+      launcher.addEventListener('click', function () {
+        chatbox.classList.remove('hidden');
+        launcher.classList.add('hidden');
+        launcher.style.display = 'none';
+      });
+
+      // ×ボタンでチャットを閉じる
+      closeBtn.addEventListener('click', function () {
+        chatbox.classList.add('hidden');
+        launcher.classList.remove('hidden');
+        launcher.style.display = 'inline-flex';
+      });
+
+      // 画面サイズが変わったときにも挙動をそれなりに合わせる
+      window.addEventListener('resize', function () {
+        // 連打でおかしくなるのを防ぐため、少し遅延させて再判定
+        clearTimeout(window.__chat_resize_timer);
+        window.__chat_resize_timer = setTimeout(setupLayout, 300);
+      });
     });
   </script>
 
