@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>資料ダウンロード（デモ）| MEDiDATA IDEA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --brand-blue: #2563eb;
+      --text-main: #111827;
+      --text-soft: #6b7280;
+      --surface: #ffffff;
+      --border-soft: #e5e7eb;
+      --bg-page: #f3f4f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      color: var(--text-main);
+      background: var(--bg-page);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 18, 39, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      color: #f9fafb; font-weight: 700; font-size: 18px;
+    }
+    .logo-mark {
+      width: 26px; height: 26px; border-radius: 8px;
+      border: 2px solid var(--brand-blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800;
+    }
+    nav ul {
+      display: flex; align-items: center; gap: 20px;
+      list-style: none; font-size: 13px;
+    }
+    nav a { color: #e5e7eb; }
+    nav a:hover { color: #ffffff; }
+    .nav-cta {
+      padding: 7px 14px; border-radius: 999px;
+      border: 1px solid var(--brand-blue);
+      background: #dbeafe; color: #1e293b; font-weight: 600;
+    }
+
+    .section { padding: 60px 0; }
+    .section-header { margin-bottom: 24px; }
+    .section-label {
+      font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--brand-blue); font-weight: 600; margin-bottom: 6px;
+    }
+    .section-title { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .section-desc { font-size: 14px; color: var(--text-soft); max-width: 720px; }
+
+    .breadcrumb {
+      font-size: 12px; color: #6b7280; margin-bottom: 12px;
+    }
+    .breadcrumb a { color: #6b7280; }
+    .breadcrumb a:hover { color: #111827; }
+
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+      padding: 18px 18px 16px;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .card-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+    .meta {
+      font-size: 11px;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #1d4ed8;
+      color: #f9fafb;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn:hover { opacity: 0.95; }
+
+    .note {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0 32px;
+      font-size: 11px;
+      color: #9ca3af;
+      background: #020617;
+    }
+    .footer-nav {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-bottom: 8px;
+    }
+    .footer-nav a { color: #9ca3af; }
+    .footer-nav a:hover { color: #e5e7eb; }
+
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .section { padding: 48px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">DI</div>
+        <div>MEDiDATA IDEA</div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="about.html">DATuM IDEAについて</a></li>
+          <li><a href="service.html">提供サービス一覧</a></li>
+          <li><a href="pharmabase.html">ファーマベース</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="download.html">資料ダウンロード</a></li>
+          <li><a href="faq.html">よくあるご質問</a></li>
+          <li><a class="nav-cta" href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html">TOP</a> &gt; 資料ダウンロード
+        </div>
+
+        <div class="section-header">
+          <div class="section-label">Download</div>
+          <h1 class="section-title">資料ダウンロード</h1>
+          <p class="section-desc">
+            本ページは、サービスパンフレットやデータベース概要資料などをダウンロードできるページを想定したデモです。
+            実際のファイルはダウンロードされませんが、コンテンツ構成のイメージとしてご覧ください。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">MEDiDATA IDEA サービス概要資料（ダミー）</div>
+          <p class="card-text">
+            サービスのコンセプト、対象データ、ユースケース例、導入の流れなどをまとめた全体概要資料のイメージです。
+          </p>
+          <p class="meta">形式：PDF想定 / ページ数：12〜16ページ程度（イメージ）</p>
+          <button class="btn">ダウンロード（ダミー）</button>
+          <p class="note">※クリックしても実際のファイルはダウンロードされません。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">医療データベース概要資料（ダミー）</div>
+          <p class="card-text">
+            データソースの構成、収録対象期間、主なデータ項目、匿名加工・品質管理のプロセスなどをまとめた資料のイメージです。
+          </p>
+          <p class="meta">形式：PDF想定 / ページ数：8ページ程度（イメージ）</p>
+          <button class="btn">ダウンロード（ダミー）</button>
+          <p class="note">※実際の医療情報・個人情報は一切含まれていません。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">ファーマベース紹介資料（ダミー）</div>
+          <p class="card-text">
+            メディカルアフェアーズ向けナレッジ・ベース「ファーマベース」の背景や特徴、
+            記事カテゴリ構成などを紹介する資料のイメージです。
+          </p>
+          <p class="meta">形式：PDF想定 / ページ数：6ページ程度（イメージ）</p>
+          <button class="btn">ダウンロード（ダミー）</button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-nav">
+        <a href="index.html">TOP</a>
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="pharmabase.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html">お問い合わせ</a>
+      </div>
+      <div>© 2025 MEDiDATA IDEA Demo.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
