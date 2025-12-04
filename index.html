@@ -15,11 +15,7 @@
       --border-soft: #e5e7eb;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -28,18 +24,8 @@
       background-color: #f3f4f6;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Layout Utilities */
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
 
     .container {
       width: 100%;
@@ -48,14 +34,8 @@
       padding: 0 16px;
     }
 
-    .section {
-      padding: 64px 0;
-    }
-
-    .section-header {
-      margin-bottom: 32px;
-    }
-
+    .section { padding: 64px 0; }
+    .section-header { margin-bottom: 32px; }
     .section-label {
       font-size: 12px;
       letter-spacing: 0.12em;
@@ -64,19 +44,8 @@
       font-weight: 600;
       margin-bottom: 8px;
     }
-
-    .section-title {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .section-desc {
-      color: var(--text-soft);
-      font-size: 14px;
-    }
-
-    /* Header / Navigation */
+    .section-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .section-desc { color: var(--text-soft); font-size: 14px; }
 
     header {
       position: sticky;
@@ -86,14 +55,12 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(148, 163, 184, 0.3);
     }
-
     .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 64px;
     }
-
     .logo {
       display: flex;
       align-items: center;
@@ -102,35 +69,21 @@
       font-weight: 700;
       font-size: 18px;
     }
-
     .logo-mark {
-      width: 24px;
-      height: 24px;
+      width: 24px; height: 24px;
       border-radius: 8px;
       border: 2px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800;
     }
-
     nav ul {
       display: flex;
       align-items: center;
       gap: 20px;
       list-style: none;
     }
-
-    nav a {
-      font-size: 13px;
-      color: #e5e7eb;
-    }
-
-    nav a:hover {
-      color: #ffffff;
-    }
-
+    nav a { font-size: 13px; color: #e5e7eb; }
+    nav a:hover { color: #ffffff; }
     .nav-cta {
       padding: 8px 14px;
       border-radius: 999px;
@@ -140,26 +93,19 @@
       background: #e0f2fe;
       font-weight: 600;
     }
-
-    .nav-cta:hover {
-      background: #bae6fd;
-    }
-
-    /* Hero */
+    .nav-cta:hover { background: #bae6fd; }
 
     .hero {
       background: radial-gradient(circle at top left, #1d4ed8, #020617 56%);
       color: #e5e7eb;
       padding: 72px 0 64px;
     }
-
     .hero-inner {
       display: grid;
       grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
       gap: 40px;
       align-items: center;
     }
-
     .hero-tagline {
       font-size: 13px;
       letter-spacing: 0.12em;
@@ -167,31 +113,20 @@
       color: #a5f3fc;
       margin-bottom: 12px;
     }
-
     .hero-title {
       font-size: 34px;
       line-height: 1.3;
       font-weight: 800;
       margin-bottom: 16px;
     }
-
-    .hero-title span {
-      color: var(--accent);
-    }
-
-    .hero-text {
-      font-size: 14px;
-      color: #cbd5f5;
-      margin-bottom: 24px;
-    }
-
+    .hero-title span { color: var(--accent); }
+    .hero-text { font-size: 14px; color: #cbd5f5; margin-bottom: 24px; }
     .hero-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
       margin-bottom: 24px;
     }
-
     .btn-primary {
       padding: 10px 18px;
       border-radius: 999px;
@@ -202,11 +137,7 @@
       border: none;
       cursor: pointer;
     }
-
-    .btn-primary:hover {
-      opacity: 0.9;
-    }
-
+    .btn-primary:hover { opacity: 0.9; }
     .btn-outline {
       padding: 10px 18px;
       border-radius: 999px;
@@ -216,11 +147,7 @@
       font-size: 14px;
       cursor: pointer;
     }
-
-    .btn-outline:hover {
-      background: rgba(15, 23, 42, 0.8);
-    }
-
+    .btn-outline:hover { background: rgba(15, 23, 42, 0.8); }
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
@@ -228,7 +155,6 @@
       font-size: 11px;
       color: #9ca3af;
     }
-
     .hero-meta-item span {
       display: block;
       font-size: 12px;
@@ -243,20 +169,17 @@
       border: 1px solid rgba(148, 163, 184, 0.4);
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.6);
     }
-
     .hero-card-title {
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 8px;
     }
-
     .chip-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin: 12px 0 18px;
     }
-
     .chip {
       font-size: 11px;
       padding: 5px 10px;
@@ -264,7 +187,6 @@
       border: 1px solid rgba(148, 163, 184, 0.5);
       color: #e5e7eb;
     }
-
     .hero-card-foot {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -272,25 +194,19 @@
       font-size: 11px;
       color: #9ca3af;
     }
-
     .hero-kpi-value {
       font-size: 18px;
       font-weight: 700;
       color: #f9fafb;
     }
 
-    /* About section */
-    #about .section-desc {
-      max-width: 720px;
-    }
+    #about .section-desc { max-width: 720px; }
 
-    /* Simple extra section for layout */
     .two-column {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
       gap: 32px;
     }
-
     .card {
       border-radius: 16px;
       padding: 18px 18px 16px;
@@ -299,25 +215,16 @@
       box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
       font-size: 13px;
     }
-
-    .card-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .card-text {
+    .card-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .card-text { font-size: 13px; color: var(--text-soft); margin-bottom: 12px; }
+    .card-link {
       font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 12px;
+      font-weight: 600;
+      color: #0284c7;
     }
+    .card-link::after { content: " →"; font-size: 11px; }
 
-    /* CTA / 資料DL */
-
-    .cta {
-      text-align: center;
-    }
-
+    .cta { text-align: center; }
     .cta-box {
       background: linear-gradient(135deg, #0f172a, #1d4ed8);
       color: #e5e7eb;
@@ -325,37 +232,20 @@
       padding: 32px 20px;
       box-shadow: 0 20px 45px rgba(15, 23, 42, 0.5);
     }
-
-    .cta-title {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .cta-text {
-      font-size: 14px;
-      color: #cbd5f5;
-      margin-bottom: 20px;
-    }
-
+    .cta-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .cta-text { font-size: 14px; color: #cbd5f5; margin-bottom: 20px; }
     .cta-actions {
       display: flex;
       justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
     }
-
     .cta-secondary {
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid #64748b;
       color: #e5e7eb;
     }
-
-    .cta-secondary:hover {
-      background: rgba(15, 23, 42, 1);
-    }
-
-    /* Footer */
+    .cta-secondary:hover { background: rgba(15, 23, 42, 1); }
 
     footer {
       margin-top: 40px;
@@ -363,7 +253,6 @@
       font-size: 11px;
       color: #9ca3af;
     }
-
     .footer-nav {
       display: flex;
       flex-wrap: wrap;
@@ -371,180 +260,18 @@
       margin-bottom: 10px;
       font-size: 11px;
     }
-
-    .footer-nav a {
-      color: #6b7280;
-    }
-
-    .footer-nav a:hover {
-      color: #111827;
-    }
-
-    /* Responsive */
+    .footer-nav a { color: #6b7280; }
+    .footer-nav a:hover { color: #111827; }
 
     @media (max-width: 900px) {
-      .hero-inner,
-      .two-column {
+      .hero-inner, .two-column {
         grid-template-columns: minmax(0, 1fr);
       }
-
-      .hero-inner {
-        gap: 32px;
-      }
-
-      nav ul {
-        display: none;
-      }
-
-      .hero-title {
-        font-size: 26px;
-      }
-
-      .section {
-        padding: 48px 0;
-      }
+      .hero-inner { gap: 32px; }
+      nav ul { display: none; }
+      .hero-title { font-size: 26px; }
+      .section { padding: 48px 0; }
     }
-
-    /* ==========================
-       ▼ チャットボット(iframe) UI ▼
-       ========================== */
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* 共通チャットボックス枠（PCでは右下、スマホでは全画面） */
-    #chatbox-container {
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      width: 30vw;         /* 横を少し大きめに */
-      max-width: 520px;
-      min-width: 360px;
-      height: 60vh;        /* 縦も少し大きめに */
-      min-height: 420px;
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
-      border: 1px solid #e5e7eb;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 9999;
-    }
-
-    /* 拡大状態（PCのみ有効にする想定） */
-    @media (min-width: 901px) {
-      #chatbox-container.maximized {
-        top: 0;
-        bottom: 0;
-        height: auto;     /* top/bottom指定で縦いっぱいに */
-      }
-    }
-
-    #chatbox-header {
-      height: 40px;
-      padding: 0 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #0b1530;
-      color: #e5e7eb;
-      font-size: 13px;
-    }
-
-    #chatbox-title {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    #chatbox-title-icon {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: #1d4ed8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-    }
-
-    #chatbox-controls {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    #chatbox-maximize,
-    #chatbox-close {
-      border: none;
-      background: transparent;
-      color: #e5e7eb;
-      font-size: 15px;
-      cursor: pointer;
-      line-height: 1;
-      width: 22px;
-      height: 22px;
-      border-radius: 4px;
-    }
-
-    #chatbox-maximize:hover,
-    #chatbox-close:hover {
-      background: rgba(148, 163, 184, 0.25);
-    }
-
-    #chatbox-body {
-      flex: 1;
-      background: #f9fafb;
-    }
-
-    #chatbox-body iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* スマホ時は全画面にする */
-    @media (max-width: 900px) {
-      #chatbox-container {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: auto;
-        max-width: none;
-        min-width: 0;
-        min-height: 0;
-        border-radius: 0;
-      }
-    }
-
-    /* ▼ スマホ＆PC共通のランチャーボタン ▼ */
-    #chat-launcher {
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: #1C64F2;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 600;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
-      z-index: 9998;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-    }
-
-    #chat-launcher span {
-      font-size: 13px;
-    }
-
   </style>
 </head>
 <body>
@@ -552,15 +279,15 @@
   <!-- Header -->
   <header>
     <div class="container header-inner">
-      <div class="logo">
+      <a href="/index.html" class="logo">
         <div class="logo-mark">ML</div>
         <div>MEDiDATA LINK</div>
-      </div>
+      </a>
       <nav>
         <ul>
-          <li><a href="#about">サービス概要</a></li>
-          <li><a href="#usecase">活用イメージ</a></li>
-          <li><a href="#download">資料ダウンロード</a></li>
+          <li><a href="/index.html">ホーム</a></li>
+          <li><a href="/service/index.html">提供サービス一覧</a></li>
+          <li><a href="#about">会社概要（イメージ）</a></li>
           <li><a class="nav-cta" href="#contact">お問い合わせ</a></li>
         </ul>
       </nav>
@@ -578,12 +305,15 @@
         </h1>
         <p class="hero-text">
           MEDiDATA LINKは、医療現場から生まれるリアルワールドデータを統合し、
-          直感的な可視化・分析でヘルスケア事業の推進を支援する、
-          サンプル用の疑似サイトです。
+          直感的な可視化・分析でヘルスケア事業の推進を支援するサンプル用の疑似サイトです。
         </p>
         <div class="hero-actions">
-          <button class="btn-primary">サービス資料を請求する</button>
-          <button class="btn-outline">30分オンライン相談を予約</button>
+          <a href="/service/index.html">
+            <button class="btn-primary">提供サービス一覧を見る</button>
+          </a>
+          <a href="#contact">
+            <button class="btn-outline">お問い合わせ（デモ）</button>
+          </a>
         </div>
         <div class="hero-meta">
           <div class="hero-meta-item">
@@ -601,7 +331,7 @@
         <div class="hero-card-title">医療機関・薬局・検査機関などのデータを一元管理</div>
         <p class="hero-card-text">
           施設横断のデータを1つのダッシュボードで俯瞰し、
-          ターゲット患者数の把握や治療パターンの把握をサポートします。
+          ターゲット患者数の把握や治療パターンの把握をサポートします。（全てダミーです）
         </p>
         <div class="chip-row">
           <div class="chip">電子カルテ</div>
@@ -613,11 +343,11 @@
         <div class="hero-card-foot">
           <div>
             <div class="hero-kpi-value">2,500万件</div>
-            <div>解析対象レコード（サンプル）</div>
+            <div>解析対象レコード（イメージ）</div>
           </div>
           <div>
             <div class="hero-kpi-value">3ステップ</div>
-            <div>基本レポート作成までの流れ</div>
+            <div>導入〜活用までの流れ</div>
           </div>
         </div>
       </aside>
@@ -631,40 +361,37 @@
         <div class="section-label">About</div>
         <h2 class="section-title">リアルワールドデータ活用を、もっと身近に。</h2>
         <p class="section-desc">
-          認定事業者と連携し、医療現場で日々生まれるデータを、
-          研究・創薬・事業開発に活用しやすい形式でご提供するというコンセプトの疑似サイトです。
-          実在のサービスとは関係ありません。
+          医療現場で日々生まれるデータを、研究・創薬・事業開発に活用しやすい形で届ける――
+          というコンセプトを持った仮想企業「MEDiDATA LINK」のサイトを想定しています。
+          実在の企業・サービスとは関係ありません。
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Usecase / simple two-column -->
+  <!-- Simple Use Case section -->
   <section id="usecase" class="section">
     <div class="container">
       <div class="section-header">
         <div class="section-label">Use Case</div>
         <h2 class="section-title">想定ユースケースの一例</h2>
         <p class="section-desc">
-          ここでは、製薬企業・アカデミア・医療機関での利用イメージを簡単に紹介しています。
+          提供サービスの詳細は「提供サービス一覧」ページからご覧いただけます。
         </p>
       </div>
-
       <div class="two-column">
         <div class="card">
           <h3 class="card-title">製薬企業での活用イメージ</h3>
           <p class="card-text">
             疫学指標の把握やターゲット施設の選定、RWDを用いたエビデンス創出支援などを想定しています。
           </p>
-          <p class="card-text">
-            治療実態の可視化や患者数推計など、メディカル・マーケティングの両面での活用が可能です。
-          </p>
+          <a href="/service/index.html" class="card-link">提供サービス一覧へ</a>
         </div>
         <div class="card">
           <h3 class="card-title">医療機関・アカデミアでの活用イメージ</h3>
           <p class="card-text">
-            研究テーマに沿ったコホート設計や、院内データを用いた解析支援、
-            共同研究に向けたデータ整理などを想定しています。
+            研究テーマに沿ったコホート設計や院内データを用いた解析支援など、
+            共同研究に向けたデータ整理を行うイメージです。
           </p>
         </div>
       </div>
@@ -675,14 +402,14 @@
   <section id="download" class="section cta">
     <div class="container">
       <div class="cta-box">
-        <h2 class="cta-title">サービスコンセプト資料をダウンロード（想定）</h2>
+        <h2 class="cta-title">サービスコンセプト資料（イメージ）</h2>
         <p class="cta-text">
-          取り扱いデータや想定ユースケース、導入ステップの概要をまとめた
-          PDF資料をイメージしています。実際には何も送信されません。
+          取り扱いデータやユースケース、導入ステップの概要をまとめた資料を想定しています。
+          実際には何もダウンロードされません。
         </p>
         <div class="cta-actions">
-          <button class="btn-primary">資料ダウンロードフォームへ</button>
-          <button class="btn-primary cta-secondary">お問い合わせページへ</button>
+          <button class="btn-primary">資料ダウンロードフォーム（ダミー）</button>
+          <button class="btn-primary cta-secondary">オンライン相談のご予約（ダミー）</button>
         </div>
       </div>
     </div>
@@ -695,7 +422,7 @@
         <div class="section-label">Contact</div>
         <h2 class="section-title">お問い合わせ（フォーム設置イメージ）</h2>
         <p class="section-desc">
-          実際のフォーム実装は省略し、ここに問い合わせフォームが入る想定です。
+          実際のフォーム実装は省略し、「ここにフォームが入る」というイメージのみのセクションです。
         </p>
       </div>
     </div>
@@ -705,138 +432,14 @@
   <footer>
     <div class="container">
       <div class="footer-nav">
-        <a href="#about">サービス概要</a>
-        <a href="#usecase">活用イメージ</a>
-        <a href="#download">資料ダウンロード</a>
+        <a href="/index.html">ホーム</a>
+        <a href="/service/index.html">提供サービス一覧</a>
+        <a href="#about">会社概要（イメージ）</a>
         <a href="#contact">お問い合わせ</a>
-        <a href="#">匿名加工情報の取扱い（ダミー）</a>
-        <a href="#">プライバシーポリシー（ダミー）</a>
       </div>
       <div>© 2025 MEDiDATA LINK（デモサイト）</div>
     </div>
   </footer>
-
-  <!-- ▼ チャットボットUI（iframe） ▼ -->
-  <div id="chatbox-container">
-    <div id="chatbox-header">
-      <div id="chatbox-title">
-        <div id="chatbox-title-icon">AI</div>
-        <div>医療データ相談チャット</div>
-      </div>
-      <div id="chatbox-controls">
-        <button id="chatbox-maximize" aria-label="チャットを拡大表示">▢</button>
-        <button id="chatbox-close" aria-label="チャットを閉じる">×</button>
-      </div>
-    </div>
-    <div id="chatbox-body">
-      <iframe
-        src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
-        frameborder="0"
-        allow="microphone">
-      </iframe>
-    </div>
-  </div>
-
-  <!-- ランチャーボタン（PCで閉じた後＆スマホ初期表示で使う） -->
-  <div id="chat-launcher">
-    チャットボットはこちら<span>💬</span>
-  </div>
-
-  <!-- チャット開閉＆拡大縮小制御スクリプト -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var chatbox = document.getElementById('chatbox-container');
-      var launcher = document.getElementById('chat-launcher');
-      var closeBtn = document.getElementById('chatbox-close');
-      var maximizeBtn = document.getElementById('chatbox-maximize');
-      var isMaximized = false;
-
-      function setMaximizeButtonLabel() {
-        if (isMaximized) {
-          maximizeBtn.textContent = '↙';
-          maximizeBtn.setAttribute('aria-label', 'チャットを元のサイズに戻す');
-        } else {
-          maximizeBtn.textContent = '▢';
-          maximizeBtn.setAttribute('aria-label', 'チャットを拡大表示');
-        }
-      }
-
-      function setupLayout() {
-        var isMobile = window.matchMedia('(max-width: 900px)').matches;
-
-        if (isMobile) {
-          // スマホ：最初はチャット非表示、ランチャーのみ表示
-          chatbox.classList.add('hidden');
-          chatbox.classList.remove('maximized');
-          isMaximized = false;
-          setMaximizeButtonLabel();
-
-          launcher.classList.remove('hidden');
-          launcher.style.display = 'inline-flex';
-        } else {
-          // PC：最初からチャットUIを表示（通常サイズ）、ランチャーは隠す
-          chatbox.classList.remove('hidden');
-          chatbox.classList.remove('maximized');
-          isMaximized = false;
-          setMaximizeButtonLabel();
-
-          launcher.classList.add('hidden');
-          launcher.style.display = 'none';
-        }
-      }
-
-      // 初期設定
-      setupLayout();
-
-      // ランチャーボタンでチャットを開く
-      launcher.addEventListener('click', function () {
-        chatbox.classList.remove('hidden');
-        launcher.classList.add('hidden');
-        launcher.style.display = 'none';
-
-        // 開くときは通常サイズからスタート
-        chatbox.classList.remove('maximized');
-        isMaximized = false;
-        setMaximizeButtonLabel();
-      });
-
-      // ×ボタンでチャットを閉じる（＝縮小扱い）
-      closeBtn.addEventListener('click', function () {
-        chatbox.classList.add('hidden');
-        launcher.classList.remove('hidden');
-        launcher.style.display = 'inline-flex';
-
-        // 閉じたタイミングで拡大状態は解除
-        chatbox.classList.remove('maximized');
-        isMaximized = false;
-        setMaximizeButtonLabel();
-      });
-
-      // 拡大／元に戻すボタン
-      maximizeBtn.addEventListener('click', function () {
-        var isMobile = window.matchMedia('(max-width: 900px)').matches;
-
-        // スマホはすでにほぼ全画面なので拡大切り替えは実質なし
-        if (isMobile) {
-          return;
-        }
-
-        isMaximized = !isMaximized;
-        if (isMaximized) {
-          chatbox.classList.add('maximized');
-        } else {
-          chatbox.classList.remove('maximized');
-        }
-        setMaximizeButtonLabel();
-      });
-
-      // 画面サイズが変わったときにも挙動をそこそこ合わせる
-      window.addEventListener('resize', function () {
-        clearTimeout(window.__chat_resize_timer);
-        window.__chat_resize_timer = setTimeout(setupLayout, 300);
-      });
-    });
-  </script>
 
 </body>
 </html>
