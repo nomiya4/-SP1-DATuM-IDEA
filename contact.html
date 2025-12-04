@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>お問い合わせ（デモ）| MEDiDATA IDEA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --brand-blue: #2563eb;
+      --text-main: #111827;
+      --text-soft: #6b7280;
+      --surface: #ffffff;
+      --border-soft: #e5e7eb;
+      --bg-page: #f3f4f6;
+      --error: #dc2626;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      color: var(--text-main);
+      background: var(--bg-page);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 18, 39, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      color: #f9fafb; font-weight: 700; font-size: 18px;
+    }
+    .logo-mark {
+      width: 26px; height: 26px; border-radius: 8px;
+      border: 2px solid var(--brand-blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800;
+    }
+    nav ul {
+      display: flex; align-items: center; gap: 20px;
+      list-style: none; font-size: 13px;
+    }
+    nav a { color: #e5e7eb; }
+    nav a:hover { color: #ffffff; }
+    .nav-cta {
+      padding: 7px 14px; border-radius: 999px;
+      border: 1px solid var(--brand-blue);
+      background: #dbeafe; color: #1e293b; font-weight: 600;
+    }
+
+    .section { padding: 60px 0; }
+    .section-header { margin-bottom: 24px; }
+    .section-label {
+      font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--brand-blue); font-weight: 600; margin-bottom: 6px;
+    }
+    .section-title { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .section-desc { font-size: 14px; color: var(--text-soft); max-width: 720px; }
+
+    .breadcrumb {
+      font-size: 12px; color: #6b7280; margin-bottom: 12px;
+    }
+    .breadcrumb a { color: #6b7280; }
+    .breadcrumb a:hover { color: #111827; }
+
+    .form-card {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+      padding: 20px 20px 18px;
+      margin-top: 12px;
+    }
+
+    .form-row {
+      margin-bottom: 14px;
+      font-size: 13px;
+    }
+    label {
+      display: inline-block;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .required {
+      color: var(--error);
+      font-size: 11px;
+      margin-left: 4px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+      font-size: 13px;
+      font-family: inherit;
+    }
+    textarea { min-height: 140px; resize: vertical; }
+
+    .helper {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 3px;
+    }
+
+    .btn-submit {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: none;
+      background: #1d4ed8;
+      color: #f9fafb;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-submit:hover { opacity: 0.96; }
+
+    .note {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 10px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0 32px;
+      font-size: 11px;
+      color: #9ca3af;
+      background: #020617;
+    }
+    .footer-nav {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-bottom: 8px;
+    }
+    .footer-nav a { color: #9ca3af; }
+    .footer-nav a:hover { color: #e5e7eb; }
+
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .section { padding: 48px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">DI</div>
+        <div>MEDiDATA IDEA</div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="about.html">DATuM IDEAについて</a></li>
+          <li><a href="service.html">提供サービス一覧</a></li>
+          <li><a href="pharmabase.html">ファーマベース</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="download.html">資料ダウンロード</a></li>
+          <li><a href="faq.html">よくあるご質問</a></li>
+          <li><a class="nav-cta" href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html">TOP</a> &gt; お問い合わせ
+        </div>
+
+        <div class="section-header">
+          <div class="section-label">Contact</div>
+          <h1 class="section-title">お問い合わせ</h1>
+          <p class="section-desc">
+            MEDiDATA IDEA（デモ）のコンテンツに関するご意見・ご要望や、
+            医療データ活用に関するご相談イメージをお送りいただくためのフォームを模したページです。
+            実際には送信されません。
+          </p>
+        </div>
+
+        <div class="form-card">
+          <form>
+            <div class="form-row">
+              <label>お問い合わせ種別<span class="required">必須</span></label>
+              <select>
+                <option value="">選択してください</option>
+                <option value="service">サービス内容について</option>
+                <option value="data">データベースについて</option>
+                <option value="pharmabase">ファーマベースについて</option>
+                <option value="other">その他</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label>会社名・ご所属<span class="required">必須</span></label>
+              <input type="text" />
+            </div>
+
+            <div class="form-row">
+              <label>お名前<span class="required">必須</span></label>
+              <input type="text" />
+            </div>
+
+            <div class="form-row">
+              <label>メールアドレス<span class="required">必須</span></label>
+              <input type="email" />
+              <p class="helper">※ご連絡可能なメールアドレスをご入力ください（実際には送信されません）。</p>
+            </div>
+
+            <div class="form-row">
+              <label>お問い合わせ内容<span class="required">必須</span></label>
+              <textarea></textarea>
+            </div>
+
+            <div class="form-row">
+              <label>個人情報の取り扱いについて<span class="required">必須</span></label>
+              <p class="helper">
+                本デモサイトでは実際の個人情報は保存されませんが、
+                実サービスではプライバシーポリシーに基づき適切に取り扱われることを想定しています。
+              </p>
+            </div>
+
+            <div class="form-row">
+              <button type="button" class="btn-submit">入力内容を確認する（デモ）</button>
+              <p class="note">
+                ※ボタンを押しても送信・保存は行われません。フォームレイアウトのイメージのみご確認いただけます。
+              </p>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-nav">
+        <a href="index.html">TOP</a>
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="pharmabase.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html">お問い合わせ</a>
+      </div>
+      <div>© 2025 MEDiDATA IDEA Demo.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
