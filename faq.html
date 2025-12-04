@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>よくあるご質問（デモ）| MEDiDATA IDEA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --brand-blue: #2563eb;
+      --text-main: #111827;
+      --text-soft: #6b7280;
+      --surface: #ffffff;
+      --border-soft: #e5e7eb;
+      --bg-page: #f3f4f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      color: var(--text-main);
+      background: var(--bg-page);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 18, 39, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      color: #f9fafb; font-weight: 700; font-size: 18px;
+    }
+    .logo-mark {
+      width: 26px; height: 26px; border-radius: 8px;
+      border: 2px solid var(--brand-blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800;
+    }
+    nav ul {
+      display: flex; align-items: center; gap: 20px;
+      list-style: none; font-size: 13px;
+    }
+    nav a { color: #e5e7eb; }
+    nav a:hover { color: #ffffff; }
+    .nav-cta {
+      padding: 7px 14px; border-radius: 999px;
+      border: 1px solid var(--brand-blue);
+      background: #dbeafe; color: #1e293b; font-weight: 600;
+    }
+
+    .section { padding: 60px 0; }
+    .section-header { margin-bottom: 24px; }
+    .section-label {
+      font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--brand-blue); font-weight: 600; margin-bottom: 6px;
+    }
+    .section-title { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .section-desc { font-size: 14px; color: var(--text-soft); max-width: 720px; }
+
+    .breadcrumb {
+      font-size: 12px; color: #6b7280; margin-bottom: 12px;
+    }
+    .breadcrumb a { color: #6b7280; }
+    .breadcrumb a:hover { color: #111827; }
+
+    .faq-group-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 24px 0 8px;
+    }
+
+    .faq-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .faq-item {
+      background: var(--surface);
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+      padding: 14px 16px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .faq-q {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .faq-a {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .note {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 20px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0 32px;
+      font-size: 11px;
+      color: #9ca3af;
+      background: #020617;
+    }
+    .footer-nav {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-bottom: 8px;
+    }
+    .footer-nav a { color: #9ca3af; }
+    .footer-nav a:hover { color: #e5e7eb; }
+
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .section { padding: 48px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">DI</div>
+        <div>MEDiDATA IDEA</div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="about.html">DATuM IDEAについて</a></li>
+          <li><a href="service.html">提供サービス一覧</a></li>
+          <li><a href="pharmabase.html">ファーマベース</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="download.html">資料ダウンロード</a></li>
+          <li><a href="faq.html">よくあるご質問</a></li>
+          <li><a class="nav-cta" href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html">TOP</a> &gt; よくあるご質問
+        </div>
+
+        <div class="section-header">
+          <div class="section-label">FAQ</div>
+          <h1 class="section-title">よくあるご質問</h1>
+          <p class="section-desc">
+            MEDiDATA IDEA（デモ）のサービス構成をイメージするうえで、よくいただきそうなご質問をQ&amp;A形式でまとめています。
+            実際の契約・利用条件とは異なる点にご注意ください。
+          </p>
+        </div>
+
+        <h2 class="faq-group-title">サービス全般について</h2>
+        <ul class="faq-list">
+          <li class="faq-item">
+            <div class="faq-q">Q. 実際に医療データを提供しているサービスなのですか？</div>
+            <div class="faq-a">
+              A. いいえ。本サイトはDATuM IDEA公式サイトを参考にした学習・検証用のデモサイトであり、実際のデータ提供や契約は行っていません。
+              実在するサービス内容については公式サイトをご確認ください。
+            </div>
+          </li>
+          <li class="faq-item">
+            <div class="faq-q">Q. どのような医療データを想定しているのですか？</div>
+            <div class="faq-a">
+              A. 電子カルテデータやレセプトデータ、DPCデータ、健診データなど、
+              医療現場から生まれるリアルワールドデータを統合したデータベースを想定しています（あくまでイメージです）。
+            </div>
+          </li>
+        </ul>
+
+        <h2 class="faq-group-title">利用イメージ・ユースケースについて</h2>
+        <ul class="faq-list">
+          <li class="faq-item">
+            <div class="faq-q">Q. 製薬企業ではどのような場面で活用される想定ですか？</div>
+            <div class="faq-a">
+              A. 疾患別の患者数推計や治療実態の把握、メディカルプラン策定、エビデンス創出など、
+              RWDを活用した意思決定の場面で利用されることを想定しています。
+            </div>
+          </li>
+          <li class="faq-item">
+            <div class="faq-q">Q. アカデミア・医療機関での活用イメージは？</div>
+            <div class="faq-a">
+              A. 研究テーマの仮説立案、対象患者集団の把握、共同研究に向けたデータ整理など、
+              研究活動を支援する用途を想定しています。
+            </div>
+          </li>
+        </ul>
+
+        <h2 class="faq-group-title">セキュリティ・個人情報保護について</h2>
+        <ul class="faq-list">
+          <li class="faq-item">
+            <div class="faq-q">Q. 個人が特定されるような情報は含まれていますか？</div>
+            <div class="faq-a">
+              A. デモサイトのため、実際の医療情報・個人情報は一切扱っていません。
+              本家サービスでは、法令に基づいた匿名加工やセキュリティ対策が講じられていると想定されます。
+            </div>
+          </li>
+        </ul>
+
+        <p class="note">
+          ここに掲載しているQ&amp;Aは、実在のサービスに関する公式な回答ではなく、あくまでコンテンツ構成のイメージです。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-nav">
+        <a href="index.html">TOP</a>
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="pharmabase.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html">お問い合わせ</a>
+      </div>
+      <div>© 2025 MEDiDATA IDEA Demo.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
