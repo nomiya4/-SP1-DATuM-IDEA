@@ -382,8 +382,9 @@
       }
     }
 
-    /* ▼▼▼ ここからカスタム・ポップアップチャット ▼▼▼ */
+    /* ▼▼▼ カスタム・ポップアップチャット ▼▼▼ */
 
+    /* ランチャーは JS で制御するので初期は非表示 */
     .chatbot-launcher {
       position: fixed;
       right: 20px;
@@ -397,7 +398,7 @@
       box-shadow: 0 10px 30px rgba(15, 23, 42, 0.4);
       cursor: pointer;
       z-index: 9998;
-      display: inline-flex;
+      display: none; /* ← 初期非表示 */
       align-items: center;
       gap: 6px;
     }
@@ -425,15 +426,10 @@
     .chatbot-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end; /* ← タイトルなしで右寄せ */
       padding: 8px 10px 6px;
       background: linear-gradient(to right, #1e293b, #0f172a);
       color: #e5e7eb;
-      font-size: 13px;
-    }
-
-    .chatbot-title {
-      font-weight: 600;
       font-size: 13px;
     }
 
@@ -471,11 +467,12 @@
       border: none;
     }
 
+    /* 拡大時：横幅はそのまま、高さだけほぼフルに */
     .chatbot-panel.fullscreen {
-      right: 2vw;
+      right: 20px;
       bottom: 2vh;
-      width: 96vw;
-      height: 96vh;
+      width: min(420px, 90vw);  /* 通常と同じ幅 */
+      height: 96vh;             /* 高さだけ伸ばす */
       border-radius: 18px;
     }
 
@@ -496,6 +493,7 @@
         top: 0;
         width: 100vw;
         height: 100vh;
+        border-radius: 0;
       }
       .chatbot-launcher {
         right: 16px;
@@ -781,15 +779,15 @@
 
   <!-- ▼▼▼ カスタム・ポップアップチャット（iframe版） ▼▼▼ -->
 
-  <!-- ランチャーボタン（PCもスマホも共通） -->
+  <!-- ランチャーボタン（開いていないときだけ表示） -->
   <div id="chatbot-launcher" class="chatbot-launcher">
-    チャットボットはこちら 💬
+    AIチャットボットはこちら 💬
   </div>
 
   <!-- ポップアップチャット本体 -->
   <div id="chatbot-panel" class="chatbot-panel">
     <div class="chatbot-header">
-      <div class="chatbot-title">医療データ相談チャット（デモ）</div>
+      <!-- タイトルは削除 / ボタンのみ -->
       <div class="chatbot-header-actions">
         <!-- 拡大ボタン（PC向け） -->
         <button id="chatbot-expand" class="chatbot-icon-btn" title="拡大 / 縮小">
@@ -822,14 +820,15 @@
 
       function openPanel() {
         panel.classList.add('open');
+        if (launcher) launcher.style.display = 'none';
       }
 
       function closePanel() {
         panel.classList.remove('open');
+        if (launcher) launcher.style.display = 'inline-flex';
       }
 
       function toggleFullscreen() {
-        // モバイルは常にフルスクリーンなので、拡大ボタンはPCメイン想定
         panel.classList.toggle('fullscreen');
       }
 
@@ -842,11 +841,14 @@
       // 拡大ボタン
       expandBtn.addEventListener('click', toggleFullscreen);
 
-      // PCでは初期表示から開いておく
+      // 初期状態
       if (isDesktop) {
+        // PCは最初から開いた状態＋ランチャー非表示
         openPanel();
+      } else {
+        // モバイルは閉じた状態＋ランチャー表示
+        launcher.style.display = 'inline-flex';
       }
-      // モバイルは閉じた状態スタート（ランチャーのみ表示）
     });
   </script>
 
