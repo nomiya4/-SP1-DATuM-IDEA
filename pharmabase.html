@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>ファーマベース（デモ）| MEDiDATA IDEA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --brand-navy: #081227;
+      --brand-blue: #2563eb;
+      --text-main: #111827;
+      --text-soft: #6b7280;
+      --surface: #ffffff;
+      --border-soft: #e5e7eb;
+      --bg-page: #f3f4f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      color: var(--text-main);
+      background: var(--bg-page);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 18, 39, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #f9fafb;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      border: 2px solid var(--brand-blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800;
+    }
+    nav ul {
+      display: flex; align-items: center; gap: 20px;
+      list-style: none; font-size: 13px;
+    }
+    nav a { color: #e5e7eb; }
+    nav a:hover { color: #ffffff; }
+    .nav-cta {
+      padding: 7px 14px; border-radius: 999px;
+      border: 1px solid var(--brand-blue);
+      background: #dbeafe; color: #1e293b; font-weight: 600;
+    }
+
+    .section { padding: 60px 0; }
+    .section-header { margin-bottom: 24px; }
+    .section-label {
+      font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--brand-blue); font-weight: 600; margin-bottom: 6px;
+    }
+    .section-title { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .section-desc { font-size: 14px; color: var(--text-soft); max-width: 760px; }
+
+    .breadcrumb {
+      font-size: 12px; color: #6b7280; margin-bottom: 12px;
+    }
+    .breadcrumb a { color: #6b7280; }
+    .breadcrumb a:hover { color: #111827; }
+
+    .hero-card {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.05);
+      padding: 20px 20px 18px;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .hero-card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      margin-bottom: 8px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #f9fafb;
+      color: var(--text-soft);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
+      padding: 18px 18px 16px;
+      font-size: 13px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .card-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+    .card-list {
+      margin-left: 18px;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+    .card-list li { margin-bottom: 4px; }
+
+    .link-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #2563eb;
+      margin-top: 6px;
+    }
+    .link-more::after { content: "→"; font-size: 11px; }
+
+    .section-subtitle {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 40px 0 10px;
+    }
+
+    .article-list {
+      list-style: none;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .article-item + .article-item { margin-top: 6px; }
+    .article-tag {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      margin-right: 6px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0 32px;
+      font-size: 11px;
+      color: #9ca3af;
+      background: #020617;
+    }
+    .footer-nav {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-bottom: 8px;
+    }
+    .footer-nav a { color: #9ca3af; }
+    .footer-nav a:hover { color: #e5e7eb; }
+
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .section { padding: 48px 0; }
+      .two-column { grid-template-columns: minmax(0, 1fr); }
+      .section-title { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">DI</div>
+        <div>MEDiDATA IDEA</div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="about.html">DATuM IDEAについて</a></li>
+          <li><a href="service.html">提供サービス一覧</a></li>
+          <li><a href="pharmabase.html">ファーマベース</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="download.html">資料ダウンロード</a></li>
+          <li><a href="faq.html">よくあるご質問</a></li>
+          <li><a class="nav-cta" href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html">TOP</a> &gt; ファーマベース
+        </div>
+
+        <div class="section-header">
+          <div class="section-label">Pharma Base</div>
+          <h1 class="section-title">ファーマベース</h1>
+          <p class="section-desc">
+            「ファーマベース」は、製薬企業メディカルアフェアーズ部門の業務を題材に、
+            実務で使えるナレッジを体系的に整理したメディカル・ナレッジ・ベースをイメージしたコンテンツです。
+            本ページはその世界観を再現したデモです。
+          </p>
+        </div>
+
+        <div class="hero-card">
+          <span class="badge">Concept</span>
+          <h2>メディカルアフェアーズの「知恵袋」として</h2>
+          <p>
+            メディカルプランの立案からエビデンス創出、情報提供・エンゲージメントまで、
+            メディカルアフェアーズの活動を支える視点やノウハウを、
+            記事やケーススタディの形で整理したナレッジ・ベースを想定しています。
+          </p>
+          <div class="pill-row">
+            <span class="pill">メディカルプラン</span>
+            <span class="pill">アンメットニーズ</span>
+            <span class="pill">エビデンス創出</span>
+            <span class="pill">KOLエンゲージメント</span>
+            <span class="pill">科学情報提供</span>
+          </div>
+        </div>
+
+        <div class="two-column" id="member">
+          <div class="card">
+            <div class="card-title">メール会員登録のイメージ</div>
+            <p class="card-text">
+              本家サイトでは、メール会員登録により新着記事やイベント情報、
+              資料ダウンロードの案内などが配信されています。本デモでは、
+              実際の登録は行われませんが、会員向けコンテンツの構成イメージのみを紹介します。
+            </p>
+            <ul class="card-list">
+              <li>新着記事・更新情報のメール配信</li>
+              <li>会員限定のコラム・ダウンロード資料</li>
+              <li>セミナーやウェビナーの開催案内</li>
+            </ul>
+            <a href="download.html" class="link-more">資料ダウンロード（デモ）ページへ</a>
+          </div>
+
+          <div class="card">
+            <div class="card-title">記事カテゴリのイメージ</div>
+            <p class="card-text">
+              ファーマベースでは、メディカルアフェアーズ業務の流れに沿って、
+              複数のカテゴリで記事が整理されている想定です。
+            </p>
+            <ul class="card-list">
+              <li>メディカルアフェアーズの基礎</li>
+              <li>アンメットニーズの把握とプランニング</li>
+              <li>エビデンス創出・データ活用</li>
+              <li>メディカルコミュニケーション・情報提供</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="articles" class="section-subtitle">記事一覧（サンプル）</h2>
+        <p class="section-desc" style="margin-bottom:12px;">
+          実際のファーマベースには、実務に役立つ具体的な記事が多数掲載されています。
+          ここでは、テーマ例のみをダミーとして掲載しています。
+        </p>
+
+        <ul class="article-list">
+          <li class="article-item">
+            <span class="article-tag">基礎編</span>
+            メディカルアフェアーズの役割を整理する ― 医薬品ライフサイクルとの関係【ダミー】
+          </li>
+          <li class="article-item">
+            <span class="article-tag">アンメットニーズ</span>
+            RWDを用いたアンメットメディカルニーズの可視化アプローチ【ダミー】
+          </li>
+          <li class="article-item">
+            <span class="article-tag">エビデンス創出</span>
+            観察研究デザインの選び方と注意点 ― 電子カルテデータ活用の視点【ダミー】
+          </li>
+          <li class="article-item">
+            <span class="article-tag">コミュニケーション</span>
+            科学情報提供におけるチャネル設計とKOLエンゲージメント【ダミー】
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-nav">
+        <a href="index.html">TOP</a>
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="pharmabase.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html">お問い合わせ</a>
+      </div>
+      <div>© 2025 MEDiDATA IDEA Demo.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
