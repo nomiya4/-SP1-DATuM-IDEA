@@ -656,6 +656,97 @@
       </div>
     </div>
   </footer>
+<!-- ▼▼▼ 右下ポップアップ型 Dify チャットボット ▼▼▼ -->
+
+<style>
+  /* PCでもスマホでもバブル色固定 */
+  #dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+  }
+
+  /* 「Powered by Dify」消す */
+  #dify-chatbot-bubble-window .dify-powered {
+    display: none !important;
+  }
+
+  /* スマホ専用ランチャー */
+  #custom-chat-launcher {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    padding: 12px 16px;
+    background: #1C64F2;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 999px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .25);
+    display: none;
+    cursor: pointer;
+    z-index: 9999;
+  }
+
+  @media (max-width: 900px) {
+    /* スマホではデフォルトバブルは非表示 */
+    #dify-chatbot-bubble-button {
+      display: none !important;
+    }
+    #custom-chat-launcher {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>
+
+<!-- スマホ用ランチャー -->
+<div id="custom-chat-launcher">チャットボットはこちら 💬</div>
+
+<!-- Dify Script -->
+<script>
+  window.difyChatbotConfig = {
+    token: 'F9AWvU5keMPp0Ogc',
+    baseUrl: 'https://bchealthcare.click'
+  };
+</script>
+<script src="https://bchealthcare.click/embed.min.js" id="F9AWvU5keMPp0Ogc" defer></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  function setupBot() {
+    const bubbleButton = document.getElementById('dify-chatbot-bubble-button');
+    const launcher = document.getElementById('custom-chat-launcher');
+
+    if (!bubbleButton) {
+      setTimeout(setupBot, 500);
+      return;
+    }
+
+    const isMobile = window.matchMedia('(max-width: 900px)').matches;
+
+    /* ▼ PC：ページアクセス時に自動で開く ▼ */
+    if (!isMobile) {
+      setTimeout(() => {
+        const btn = document.getElementById('dify-chatbot-bubble-button');
+        if (btn) btn.click();
+      }, 600);
+    }
+
+    /* ▼ スマホ：ランチャー → Difyバブル動作連動 ▼ */
+    if (isMobile && launcher) {
+      launcher.addEventListener('click', () => {
+        bubbleButton.click();
+      });
+    }
+  }
+
+  setupBot();
+});
+</script>
+
+<!-- ▲▲▲ ポップアップ型チャットボットここまで ▲▲▲ -->
 
 </body>
 </html>
+
