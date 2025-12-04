@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>DATuM IDEAについて（デモ）| MEDiDATA IDEA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* 共通っぽいスタイルを簡略版で再利用 */
+    :root {
+      --brand-navy: #081227;
+      --brand-blue: #2563eb;
+      --brand-light: #e0f2fe;
+      --text-main: #111827;
+      --text-soft: #6b7280;
+      --surface: #ffffff;
+      --border-soft: #e5e7eb;
+      --bg-page: #f3f4f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      color: var(--text-main);
+      background: var(--bg-page);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 18, 39, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #f9fafb;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      border: 2px solid var(--brand-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+      font-size: 13px;
+    }
+    nav a { color: #e5e7eb; }
+    nav a:hover { color: #ffffff; }
+    .nav-cta {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--brand-blue);
+      background: #dbeafe;
+      color: #1e293b;
+      font-weight: 600;
+    }
+
+    .section {
+      padding: 60px 0;
+      background: var(--bg-page);
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .lead {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .body-text {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+    .highlight {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 32px 0 12px;
+    }
+
+    .image-placeholder {
+      margin: 32px 0;
+      border-radius: 16px;
+      border: 1px dashed var(--border-soft);
+      background: #ffffff;
+      padding: 24px;
+      font-size: 13px;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    .cta-box {
+      margin-top: 40px;
+      padding: 24px 20px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: #e5e7eb;
+      font-size: 14px;
+    }
+    .cta-box-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #bfdbfe;
+    }
+    .cta-link::after { content: "→"; font-size: 11px; }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+    .breadcrumb a { color: #6b7280; }
+    .breadcrumb a:hover { color: #111827; }
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0 32px;
+      font-size: 11px;
+      color: #9ca3af;
+      background: #020617;
+    }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .footer-nav a { color: #9ca3af; }
+    .footer-nav a:hover { color: #e5e7eb; }
+    .footer-note {
+      font-size: 10px;
+      color: #6b7280;
+    }
+
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .section { padding: 48px 0; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">DI</div>
+        <div>MEDiDATA IDEA</div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="about.html">DATuM IDEAについて</a></li>
+          <li><a href="service.html">提供サービス一覧</a></li>
+          <li><a href="pharmabase.html">ファーマベース</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="download.html">資料ダウンロード</a></li>
+          <li><a href="faq.html">よくあるご質問</a></li>
+          <li><a class="nav-cta" href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html">TOP</a> &gt; DATuM IDEAについて
+        </div>
+
+        <h1>DATuM IDEAについて</h1>
+        <p class="lead">医療データをつなぎ、社会と人へ新しい価値を届ける。</p>
+
+        <p class="body-text">
+          TOPPANグループが長年培ってきた情報処理・セキュリティの技術を、
+          医療データというセンシティブな領域に応用することで生まれたと想定されるサービスが「DATuM IDEA」です。
+          本デモサイトでは、その世界観やコンセプトをイメージベースで再現しています。
+        </p>
+
+        <p class="body-text">
+          印刷・情報コミュニケーションの分野で培われたノウハウは、
+          医療データの取得・蓄積・活用においても大きな役割を果たし得ます。
+          その橋渡し役として、医療現場と産業界、そして生活者をつなぐプラットフォームをめざしている――
+          そんなストーリーを想像しながら構成しています。
+        </p>
+
+        <p class="body-text">
+          ライフコースヘルスケアの実現や、データに基づいた個別化医療の推進など、
+          医療データ活用の可能性は広がり続けています。
+          DATuM IDEAは、その実現に向けてリアルワールドデータを活かすための仕組みを提供する、
+          というコンセプトのサービスです。
+        </p>
+
+        <h2 class="highlight">データと人、社会をなめらかにつなぐ存在へ</h2>
+        <p class="body-text">
+          さまざまな医療機関から収集されたデータを安全に扱いながら、研究者や製薬企業、医療従事者の手元へと届ける。
+          そのプロセス全体をデザインすることで、よりよい医療・研究・サービスの実現に貢献することが期待されています。
+        </p>
+        <p class="body-text">
+          印刷から始まった技術が枠を超えて、人と情報を結び付けていく。
+          DATuM IDEAは、そうした流れの延長線上にある医療情報分析・提供サービスとして位置づけられています。
+          本サイトのコンテンツはすべてデモ用であり、実際のサービス仕様とは異なります。
+        </p>
+
+        <div class="image-placeholder">
+          ここに本家サイトのビジュアルに近いイメージ図（ロゴや世界観イラストなど）が入る想定です。<br>
+          ※デモサイトのため画像は仮置きです。
+        </div>
+
+        <div class="cta-box">
+          <div class="cta-box-title">サービスの詳細イメージを知りたい方へ</div>
+          <p>
+            提供サービスのラインナップや、製薬企業・アカデミア向けのユースケースなどは<br>
+            「提供サービス一覧」ページでより具体的に紹介しています。
+          </p>
+          <a href="service.html" class="cta-link">提供サービス一覧を見る</a>
+          <br />
+          <a href="download.html" class="cta-link">資料ダウンロード（デモ）ページへ</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-nav">
+        <a href="index.html">TOP</a>
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="pharmabase.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html">お問い合わせ</a>
+      </div>
+      <div>© 2025 MEDiDATA IDEA Demo.</div>
+      <div class="footer-note">
+        ※本ページはDATuM IDEA公式サイトを参考にした疑似コンテンツです。実在のサービス内容とは異なります。
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
