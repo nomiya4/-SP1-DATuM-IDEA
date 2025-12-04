@@ -2,28 +2,27 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>MEDiDATA LINK｜医療データ活用サービス（サンプルサイト）</title>
+  <title>医療情報分析・提供サービス | MEDiDATA IDEA（デモサイト）</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --main-bg: #0b1530;
-      --accent: #35c4ff;
-      --accent-soft: #e6f7ff;
+      --brand-navy: #081227;
+      --brand-blue: #2563eb;
+      --brand-light: #e0f2fe;
       --text-main: #111827;
       --text-soft: #6b7280;
       --surface: #ffffff;
       --border-soft: #e5e7eb;
+      --bg-page: #f3f4f6;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.7;
       color: var(--text-main);
-      background-color: #f3f4f6;
+      background: var(--bg-page);
     }
-
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; height: auto; display: block; }
 
@@ -34,26 +33,14 @@
       padding: 0 16px;
     }
 
-    .section { padding: 64px 0; }
-    .section-header { margin-bottom: 32px; }
-    .section-label {
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .section-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-    .section-desc { color: var(--text-soft); font-size: 14px; }
-
+    /* Header */
     header {
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(11, 21, 48, 0.9);
+      background: rgba(8, 18, 39, 0.95);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
     }
     .header-inner {
       display: flex;
@@ -64,51 +51,55 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       color: #f9fafb;
       font-weight: 700;
       font-size: 18px;
     }
     .logo-mark {
-      width: 24px; height: 24px;
+      width: 26px;
+      height: 26px;
       border-radius: 8px;
-      border: 2px solid var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 800;
+      border: 2px solid var(--brand-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
     }
     nav ul {
       display: flex;
       align-items: center;
       gap: 20px;
       list-style: none;
+      font-size: 13px;
     }
-    nav a { font-size: 13px; color: #e5e7eb; }
+    nav a { color: #e5e7eb; }
     nav a:hover { color: #ffffff; }
     .nav-cta {
-      padding: 8px 14px;
+      padding: 7px 14px;
       border-radius: 999px;
-      border: 1px solid var(--accent);
-      font-size: 13px;
-      color: #0f172a;
-      background: #e0f2fe;
+      border: 1px solid var(--brand-blue);
+      background: #dbeafe;
+      color: #1e293b;
       font-weight: 600;
     }
-    .nav-cta:hover { background: #bae6fd; }
 
+    /* Hero */
     .hero {
-      background: radial-gradient(circle at top left, #1d4ed8, #020617 56%);
+      background: radial-gradient(circle at top left, #1d4ed8, #020617 60%);
       color: #e5e7eb;
-      padding: 72px 0 64px;
+      padding: 80px 0 72px;
     }
     .hero-inner {
       display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
       gap: 40px;
       align-items: center;
     }
-    .hero-tagline {
+    .hero-tag {
       font-size: 13px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: #a5f3fc;
       margin-bottom: 12px;
@@ -119,75 +110,84 @@
       font-weight: 800;
       margin-bottom: 16px;
     }
-    .hero-title span { color: var(--accent); }
-    .hero-text { font-size: 14px; color: #cbd5f5; margin-bottom: 24px; }
+    .hero-title span { color: #bfdbfe; }
+    .hero-text {
+      font-size: 14px;
+      color: #cbd5f5;
+      margin-bottom: 24px;
+    }
     .hero-actions {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
+      gap: 12px;
       margin-bottom: 24px;
     }
     .btn-primary {
       padding: 10px 18px;
       border-radius: 999px;
-      background: var(--accent);
-      color: #0b1120;
+      border: none;
+      background: #f97316;
+      color: #0f172a;
       font-size: 14px;
       font-weight: 600;
-      border: none;
       cursor: pointer;
     }
-    .btn-primary:hover { opacity: 0.9; }
+    .btn-primary:hover { opacity: 0.92; }
     .btn-outline {
       padding: 10px 18px;
       border-radius: 999px;
-      border: 1px solid #64748b;
+      border: 1px solid #94a3b8;
       background: transparent;
       color: #e5e7eb;
       font-size: 14px;
       cursor: pointer;
     }
-    .btn-outline:hover { background: rgba(15, 23, 42, 0.8); }
+    .btn-outline:hover { background: rgba(15, 23, 42, 0.9); }
+
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 18px;
       font-size: 11px;
       color: #9ca3af;
     }
-    .hero-meta-item span {
+    .hero-meta span {
       display: block;
       font-size: 12px;
-      color: #e5e7eb;
       font-weight: 600;
+      color: #e5e7eb;
     }
 
     .hero-card {
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 18px;
       padding: 20px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 24px 55px rgba(15, 23, 42, 0.75);
     }
     .hero-card-title {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       margin-bottom: 8px;
     }
-    .chip-row {
+    .hero-card-text {
+      font-size: 13px;
+      color: #cbd5f5;
+      margin-bottom: 14px;
+    }
+    .hero-chip-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 12px 0 18px;
+      margin-bottom: 18px;
     }
-    .chip {
+    .hero-chip {
       font-size: 11px;
-      padding: 5px 10px;
+      padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.7);
     }
-    .hero-card-foot {
+    .hero-card-kpi {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
@@ -200,77 +200,186 @@
       color: #f9fafb;
     }
 
-    #about .section-desc { max-width: 720px; }
+    /* Sections */
+    .section {
+      padding: 64px 0;
+      background: var(--bg-page);
+    }
+    .section.alt {
+      background: #ffffff;
+    }
+    .section-header {
+      margin-bottom: 32px;
+    }
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 720px;
+    }
 
     .two-column {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
       gap: 32px;
     }
+
     .card {
-      border-radius: 16px;
-      padding: 18px 18px 16px;
       background: var(--surface);
+      border-radius: 16px;
       border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.04);
+      padding: 18px 18px 16px;
       font-size: 13px;
     }
-    .card-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-    .card-text { font-size: 13px; color: var(--text-soft); margin-bottom: 12px; }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .card-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
     .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       font-size: 13px;
       font-weight: 600;
-      color: #0284c7;
+      color: #2563eb;
+      margin-top: 4px;
     }
-    .card-link::after { content: " →"; font-size: 11px; }
+    .card-link::after {
+      content: "→";
+      font-size: 11px;
+    }
 
-    .cta { text-align: center; }
-    .cta-box {
-      background: linear-gradient(135deg, #0f172a, #1d4ed8);
-      color: #e5e7eb;
-      border-radius: 18px;
-      padding: 32px 20px;
-      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.5);
-    }
-    .cta-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-    .cta-text { font-size: 14px; color: #cbd5f5; margin-bottom: 20px; }
-    .cta-actions {
+    /* Service list on top */
+    .service-source-list {
       display: flex;
-      justify-content: center;
-      gap: 12px;
       flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+      margin-top: 10px;
     }
-    .cta-secondary {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid #64748b;
-      color: #e5e7eb;
+    .service-source-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1e40af;
     }
-    .cta-secondary:hover { background: rgba(15, 23, 42, 1); }
+
+    /* News & reports */
+    .news-list, .report-list {
+      list-style: none;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+    .news-item + .news-item,
+    .report-item + .report-item {
+      margin-top: 6px;
+    }
+    .news-date {
+      font-size: 11px;
+      color: #6b7280;
+      margin-right: 6px;
+    }
+    .news-tag {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      margin-right: 6px;
+    }
+
+    /* PharmaBase promo */
+    .pharmabase-block {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 28px;
+      align-items: center;
+    }
+    .pb-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    .pb-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+    }
+
+    .cta-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .cta-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
 
     footer {
-      margin-top: 40px;
       padding: 24px 0 32px;
       font-size: 11px;
       color: #9ca3af;
+      background: #020617;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
     .footer-nav {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 10px;
-      font-size: 11px;
     }
-    .footer-nav a { color: #6b7280; }
-    .footer-nav a:hover { color: #111827; }
+    .footer-nav a { color: #9ca3af; }
+    .footer-nav a:hover { color: #e5e7eb; }
+
+    .footer-note {
+      font-size: 10px;
+      color: #6b7280;
+    }
 
     @media (max-width: 900px) {
-      .hero-inner, .two-column {
+      nav ul { display: none; }
+      .hero-inner,
+      .two-column,
+      .pharmabase-block {
         grid-template-columns: minmax(0, 1fr);
       }
-      .hero-inner { gap: 32px; }
-      nav ul { display: none; }
-      .hero-title { font-size: 26px; }
-      .section { padding: 48px 0; }
+      .hero {
+        padding: 64px 0 56px;
+      }
+      .section {
+        padding: 52px 0;
+      }
+      .hero-title {
+        font-size: 28px;
+      }
     }
   </style>
 </head>
@@ -280,15 +389,18 @@
   <header>
     <div class="container header-inner">
       <a href="index.html" class="logo">
-        <div class="logo-mark">ML</div>
-        <div>MEDiDATA LINK</div>
+        <div class="logo-mark">DI</div>
+        <div>MEDiDATA IDEA</div>
       </a>
       <nav>
         <ul>
-          <li><a href="index.html">ホーム</a></li>
+          <li><a href="about.html">DATuM IDEAについて</a></li>
           <li><a href="service.html">提供サービス一覧</a></li>
-          <li><a href="#about">会社概要（イメージ）</a></li>
-          <li><a class="nav-cta" href="#contact">お問い合わせ</a></li>
+          <li><a href="pharmabase.html">ファーマベース</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="download.html">資料ダウンロード</a></li>
+          <li><a href="faq.html">よくあるご質問</a></li>
+          <li><a class="nav-cta" href="contact.html">お問い合わせ</a></li>
         </ul>
       </nav>
     </div>
@@ -298,146 +410,250 @@
   <section class="hero">
     <div class="container hero-inner">
       <div>
-        <div class="hero-tagline">REAL-WORLD DATA PLATFORM</div>
+        <div class="hero-tag">MEDICAL REAL WORLD DATA PLATFORM</div>
         <h1 class="hero-title">
           医療データをつなぎ、<br />
-          <span>意思決定のスピード</span>を変える。
+          <span>明日のヘルスケアのカタチ</span>をつくる。
         </h1>
         <p class="hero-text">
-          MEDiDATA LINKは、医療現場から生まれるリアルワールドデータを統合し、
-          直感的な可視化・分析でヘルスケア事業の推進を支援するサンプル用の疑似サイトです。
+          MEDiDATA IDEA（本サイトはデモです）は、医療現場から生まれるリアルワールドデータをつなぎ、
+          直感的に分析・活用できる形で提供する医療情報分析・提供サービスをイメージしています。
         </p>
         <div class="hero-actions">
-          <a href="service.html">
-            <button class="btn-primary">提供サービス一覧を見る</button>
-          </a>
-          <a href="#contact">
-            <button class="btn-outline">お問い合わせ（デモ）</button>
-          </a>
+          <a href="service.html"><button class="btn-primary">提供サービス一覧を見る</button></a>
+          <a href="download.html"><button class="btn-outline">資料ダウンロード（デモ）</button></a>
         </div>
         <div class="hero-meta">
-          <div class="hero-meta-item">
-            <span>対応データソース</span>
-            電子カルテ / レセプト / 健診 など
+          <div>
+            <span>想定データソース</span>
+            電子カルテ / レセプト / DPC / 健診データ など
           </div>
-          <div class="hero-meta-item">
-            <span>主なお客様</span>
-            製薬企業・アカデミア・医療機関
+          <div>
+            <span>主なご利用イメージ</span>
+            製薬企業・アカデミア・医療機関のRWD活用支援
           </div>
         </div>
       </div>
 
       <aside class="hero-card">
-        <div class="hero-card-title">医療機関・薬局・検査機関などのデータを一元管理</div>
+        <div class="hero-card-title">医療現場由来のリアルワールドデータを、分析しやすいかたちで。</div>
         <p class="hero-card-text">
-          施設横断のデータを1つのダッシュボードで俯瞰し、
-          ターゲット患者数の把握や治療パターンの把握をサポートします。（全てダミーです）
+          認定事業者から収集された医療情報を基に、疾患横断での患者像把握や、
+          治療実態の可視化に活用できるデータベースとツール群をイメージしています。
         </p>
-        <div class="chip-row">
-          <div class="chip">電子カルテ</div>
-          <div class="chip">レセプト</div>
-          <div class="chip">DPC</div>
-          <div class="chip">検査結果</div>
-          <div class="chip">健診</div>
+        <div class="hero-chip-row">
+          <span class="hero-chip">電子カルテ</span>
+          <span class="hero-chip">医科レセプト</span>
+          <span class="hero-chip">調剤レセプト</span>
+          <span class="hero-chip">健診 / 検査</span>
         </div>
-        <div class="hero-card-foot">
+        <div class="hero-card-kpi">
           <div>
-            <div class="hero-kpi-value">2,500万件</div>
-            <div>解析対象レコード（イメージ）</div>
+            <div class="hero-kpi-value">約 ● 万人</div>
+            <div>解析対象患者数（イメージ）</div>
           </div>
           <div>
-            <div class="hero-kpi-value">3ステップ</div>
-            <div>導入〜活用までの流れ</div>
+            <div class="hero-kpi-value">全国 ● 施設</div>
+            <div>参加医療機関（イメージ）</div>
           </div>
         </div>
       </aside>
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="section">
+  <!-- Service section -->
+  <section class="section alt">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">About</div>
-        <h2 class="section-title">リアルワールドデータ活用を、もっと身近に。</h2>
+        <div class="section-label">Service</div>
+        <h2 class="section-title">サービス</h2>
         <p class="section-desc">
-          医療現場で日々生まれるデータを、研究・創薬・事業開発に活用しやすい形で届ける――
-          というコンセプトを持った仮想企業「MEDiDATA LINK」のサイトを想定しています。
-          実在の企業・サービスとは関係ありません。
+          病院・クリニック・薬局・検査機関・健診機関などから収集されたデータを統合し、
+          リアルワールドデータに基づく医療・ヘルスケアの意思決定を支えることをめざしたサービス群です。
         </p>
+      </div>
+
+      <div class="two-column">
+        <div>
+          <div class="card">
+            <h3 class="card-title">医療データの収集・統合イメージ</h3>
+            <p class="card-text">
+              認定事業者と連携し、さまざまな医療機関から得られた匿名加工データを共通フォーマットに整理したうえで、
+              分析や可視化に活用できる基盤を想定しています。
+            </p>
+            <div class="service-source-list">
+              <span class="service-source-pill">電子カルテ</span>
+              <span class="service-source-pill">医科レセプト</span>
+              <span class="service-source-pill">DPCデータ</span>
+              <span class="service-source-pill">健診データ</span>
+              <span class="service-source-pill">調剤レセプト など</span>
+            </div>
+            <p class="card-text" style="margin-top:12px;font-size:11px;">
+              ※ 実際のデータは一切保持しておらず、本サイトはコンセプト紹介用の疑似サイトです。
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3 class="card-title">リアルワールドデータ活用をトータルにサポート</h3>
+            <p class="card-text">
+              Webダッシュボード、オーダーメイド解析、データセット提供など、
+              利用目的に応じて選択できるメニュー構成をイメージしています。
+            </p>
+            <a href="service.html" class="card-link">提供サービス一覧へ</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Use Case -->
-  <section id="usecase" class="section">
+  <!-- Target services -->
+  <section class="section">
     <div class="container">
-      <div class="section-header">
-        <div class="section-label">Use Case</div>
-        <h2 class="section-title">想定ユースケースの一例</h2>
-        <p class="section-desc">
-          提供サービスの詳細は「提供サービス一覧」ページからご覧いただけます。
-        </p>
-      </div>
       <div class="two-column">
         <div class="card">
-          <h3 class="card-title">製薬企業での活用イメージ</h3>
+          <h3 class="card-title">製薬企業向け 提供サービス</h3>
           <p class="card-text">
-            疫学指標の把握やターゲット施設の選定、RWDを用いたエビデンス創出支援などを想定しています。
+            電子カルテを中心とした高粒度な診療情報を活用し、
+            疫学調査やエビデンス創出、メディカルアフェアーズ活動などに役立つサービスを想定しています。
           </p>
-          <a href="service.html" class="card-link">提供サービス一覧へ</a>
+          <a href="service.html#for-pharma" class="card-link">もっと詳しく</a>
         </div>
         <div class="card">
-          <h3 class="card-title">医療機関・アカデミアでの活用イメージ</h3>
+          <h3 class="card-title">アカデミア・医療機関向け 提供サービス</h3>
           <p class="card-text">
-            研究テーマに沿ったコホート設計や院内データを用いた解析支援など、
-            共同研究に向けたデータ整理を行うイメージです。
+            研究対象となる患者集団を見つけ出し、研究シーズの探索や共同研究を進めるための
+            データ活用支援サービスをイメージしています。
           </p>
+          <a href="service.html#for-academia" class="card-link">もっと詳しく</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section id="download" class="section cta">
-    <div class="container">
-      <div class="cta-box">
-        <h2 class="cta-title">サービスコンセプト資料（イメージ）</h2>
-        <p class="cta-text">
-          取り扱いデータやユースケース、導入ステップの概要をまとめた資料を想定しています。
-          実際には何もダウンロードされません。
-        </p>
-        <div class="cta-actions">
-          <button class="btn-primary">資料ダウンロードフォーム（ダミー）</button>
-          <button class="btn-primary cta-secondary">オンライン相談のご予約（ダミー）</button>
+  <!-- News / Reports -->
+  <section class="section alt">
+    <div class="container two-column">
+      <div>
+        <div class="section-header">
+          <div class="section-label">News</div>
+          <h2 class="section-title">お知らせ</h2>
         </div>
+        <ul class="news-list">
+          <li class="news-item">
+            <span class="news-date">2025.11.10</span>
+            <span class="news-tag">イベント</span>
+            DATuM IDEA® ウェビナー開催レポート（乳がん領域・データベース研究）【ダミー】
+          </li>
+          <li class="news-item">
+            <span class="news-date">2025.09.24</span>
+            <span class="news-tag">お知らせ</span>
+            データベース調査に関する記事広告掲載のご案内【ダミー】
+          </li>
+          <li class="news-item">
+            <span class="news-date">2025.08.19</span>
+            <span class="news-tag">イベント</span>
+            医療情報利活用セミナー開催のご案内【ダミー】
+          </li>
+        </ul>
+        <a href="news.html" class="card-link" style="margin-top:12px;">お知らせ一覧へ</a>
+      </div>
+
+      <div>
+        <div class="section-header">
+          <div class="section-label">Reports</div>
+          <h2 class="section-title">活動レポート</h2>
+        </div>
+        <ul class="report-list">
+          <li class="report-item">
+            <span class="news-date">2024.08.06</span>
+            電子カルテデータを用いた指定難病に関する研究レポート【ダミー】
+          </li>
+          <li class="report-item">
+            <span class="news-date">2024.05.29</span>
+            医療情報利活用セミナー講演ダイジェスト動画公開【ダミー】
+          </li>
+        </ul>
+        <a href="news.html#reports" class="card-link" style="margin-top:12px;">活動レポート一覧へ</a>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="section">
+  <!-- PharmaBase -->
+  <section class="section">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title">お問い合わせ（フォーム設置イメージ）</h2>
+        <div class="section-label">Pharma Base</div>
+        <h2 class="section-title">ファーマベース</h2>
         <p class="section-desc">
-          実際のフォーム実装は省略し、「ここにフォームが入る」というイメージのみのセクションです。
+          製薬企業メディカルアフェアーズ部門の業務を題材に、
+          実務で使えるナレッジを体系的に整理した「メディカル・ナレッジ・ベース」をイメージしたコンテンツです。
         </p>
+      </div>
+
+      <div class="pharmabase-block">
+        <div>
+          <p class="card-text" style="margin-bottom:12px;">
+            メディカルプラン策定、アンメットメディカルニーズの把握、エビデンス創出、情報提供などのプロセスを
+            テーマ別に整理し、記事形式で紹介する構成を想定しています。
+          </p>
+          <div class="pb-pill-row">
+            <span class="pb-pill">基礎知識</span>
+            <span class="pb-pill">アンメットニーズの把握</span>
+            <span class="pb-pill">メディカルプラン作成</span>
+            <span class="pb-pill">エビデンス創出</span>
+            <span class="pb-pill">情報発信・提供</span>
+          </div>
+          <a href="pharmabase.html" class="card-link" style="margin-top:16px;">ファーマベースの詳細へ</a>
+        </div>
+        <div class="card">
+          <div class="cta-card-title">メール会員（デモ）登録イメージ</div>
+          <p class="card-text">
+            本家サイトでは、メール会員登録により限定コンテンツの閲覧や
+            新着記事・イベント情報の案内が行われています。<br>
+            本デモサイトでは実際の登録は発生しませんが、その導線イメージを再現しています。
+          </p>
+          <a href="pharmabase.html#member" class="card-link">メール会員登録のイメージを見る</a>
+        </div>
+      </div>
+
+      <div class="cta-cards">
+        <div class="card">
+          <div class="cta-card-title">ファーマベース 記事一覧（イメージ）</div>
+          <p class="card-text">
+            メディカルアフェアーズ担当者に向けたコラム・解説記事などを
+            一覧で表示するページのイメージです。
+          </p>
+          <a href="pharmabase.html#articles" class="card-link">記事一覧へ</a>
+        </div>
+        <div class="card">
+          <div class="cta-card-title">資料ダウンロード</div>
+          <p class="card-text">
+            サービス紹介パンフレットやデータベース概要資料などをダウンロードできるページを模したコンテンツです。
+          </p>
+          <a href="download.html" class="card-link">資料ダウンロードへ</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <div class="container">
+    <div class="container footer-inner">
       <div class="footer-nav">
-        <a href="index.html">ホーム</a>
+        <a href="about.html">DATuM IDEAについて</a>
         <a href="service.html">提供サービス一覧</a>
-        <a href="#about">会社概要（イメージ）</a>
-        <a href="#contact">お問い合わせ</a>
+        <a href="pharmabase.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html">お問い合わせ</a>
       </div>
-      <div>© 2025 MEDiDATA LINK（デモサイト）</div>
+      <div>© 2025 MEDiDATA IDEA Demo. This site is an unofficial mock inspired by DATuM IDEA.</div>
+      <div class="footer-note">
+        ※本サイトは学習・検証用に作成した疑似サイトであり、TOPPANグループおよびDATuM IDEA公式サイトとは一切関係ありません。
+      </div>
     </div>
   </footer>
 
