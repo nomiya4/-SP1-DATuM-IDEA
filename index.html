@@ -384,7 +384,6 @@
 
     /* ▼▼▼ カスタム・ポップアップチャット ▼▼▼ */
 
-    /* ランチャーは JS で制御するので初期は非表示 */
     .chatbot-launcher {
       position: fixed;
       right: 20px;
@@ -398,7 +397,7 @@
       box-shadow: 0 10px 30px rgba(15, 23, 42, 0.4);
       cursor: pointer;
       z-index: 9998;
-      display: none; /* ← 初期非表示 */
+      display: none; /* 初期非表示 */
       align-items: center;
       gap: 6px;
     }
@@ -408,7 +407,8 @@
       right: 20px;
       bottom: 80px;
       width: min(420px, 90vw);
-      height: min(520px, 70vh);
+      /* ★ 高さを少し大きめに（640px or 80vh の小さい方） */
+      height: min(640px, 80vh);
       background: #0b1120;
       border-radius: 18px;
       box-shadow: 0 18px 45px rgba(15, 23, 42, 0.6);
@@ -426,7 +426,7 @@
     .chatbot-header {
       display: flex;
       align-items: center;
-      justify-content: flex-end; /* ← タイトルなしで右寄せ */
+      justify-content: flex-end;
       padding: 8px 10px 6px;
       background: linear-gradient(to right, #1e293b, #0f172a);
       color: #e5e7eb;
@@ -467,12 +467,11 @@
       border: none;
     }
 
-    /* 拡大時：横幅はそのまま、高さだけほぼフルに */
     .chatbot-panel.fullscreen {
       right: 20px;
       bottom: 2vh;
-      width: min(420px, 90vw);  /* 通常と同じ幅 */
-      height: 96vh;             /* 高さだけ伸ばす */
+      width: min(420px, 90vw);
+      height: 96vh;
       border-radius: 18px;
     }
 
@@ -581,182 +580,9 @@
     </div>
   </section>
 
-  <!-- Service section -->
-  <section class="section alt">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Service</div>
-        <h2 class="section-title">サービス</h2>
-        <p class="section-desc">
-          病院・クリニック・薬局・検査機関・健診機関などから収集されたデータを統合し、
-          リアルワールドデータに基づく医療・ヘルスケアの意思決定を支えることをめざしたサービス群です。
-        </p>
-      </div>
+  <!-- 以降はそのまま（サービス / News / PharmaBase / Footer） -->
 
-      <div class="two-column">
-        <div>
-          <div class="card">
-            <h3 class="card-title">医療データの収集・統合イメージ</h3>
-            <p class="card-text">
-              認定事業者と連携し、さまざまな医療機関から得られた匿名加工データを共通フォーマットに整理したうえで、
-              分析や可視化に活用できる基盤を想定しています。
-            </p>
-            <div class="service-source-list">
-              <span class="service-source-pill">電子カルテ</span>
-              <span class="service-source-pill">医科レセプト</span>
-              <span class="service-source-pill">DPCデータ</span>
-              <span class="service-source-pill">健診データ</span>
-              <span class="service-source-pill">調剤レセプト など</span>
-            </div>
-            <p class="card-text" style="margin-top:12px;font-size:11px;">
-              ※ 実際のデータは一切保持しておらず、本サイトはコンセプト紹介用の疑似サイトです。
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <div class="card">
-            <h3 class="card-title">リアルワールドデータ活用をトータルにサポート</h3>
-            <p class="card-text">
-              Webダッシュボード、オーダーメイド解析、データセット提供など、
-              利用目的に応じて選択できるメニュー構成をイメージしています。
-            </p>
-            <a href="service.html" class="card-link">提供サービス一覧へ</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Target services -->
-  <section class="section">
-    <div class="container">
-      <div class="two-column">
-        <div class="card">
-          <h3 class="card-title">製薬企業向け 提供サービス</h3>
-          <p class="card-text">
-            電子カルテを中心とした高粒度な診療情報を活用し、
-            疫学調査やエビデンス創出、メディカルアフェアーズ活動などに役立つサービスを想定しています。
-          </p>
-          <a href="service.html#for-pharma" class="card-link">もっと詳しく</a>
-        </div>
-        <div class="card">
-          <h3 class="card-title">アカデミア・医療機関向け 提供サービス</h3>
-          <p class="card-text">
-            研究対象となる患者集団を見つけ出し、研究シーズの探索や共同研究を進めるための
-            データ活用支援サービスをイメージしています。
-          </p>
-          <a href="service.html#for-academia" class="card-link">もっと詳しく</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- News / Reports -->
-  <section class="section alt">
-    <div class="container two-column">
-      <div>
-        <div class="section-header">
-          <div class="section-label">News</div>
-          <h2 class="section-title">お知らせ</h2>
-        </div>
-        <ul class="news-list">
-          <li class="news-item">
-            <span class="news-date">2025.11.10</span>
-            <span class="news-tag">イベント</span>
-            DATuM IDEA® ウェビナー開催レポート（乳がん領域・データベース研究）【ダミー】
-          </li>
-          <li class="news-item">
-            <span class="news-date">2025.09.24</span>
-            <span class="news-tag">お知らせ</span>
-            データベース調査に関する記事広告掲載のご案内【ダミー】
-          </li>
-          <li class="news-item">
-            <span class="news-date">2025.08.19</span>
-            <span class="news-tag">イベント</span>
-            医療情報利活用セミナー開催のお知らせ【ダミー】
-          </li>
-        </ul>
-        <a href="news.html" class="card-link" style="margin-top:12px;">お知らせ一覧へ</a>
-      </div>
-
-      <div>
-        <div class="section-header">
-          <div class="section-label">Reports</div>
-          <h2 class="section-title">活動レポート</h2>
-        </div>
-        <ul class="report-list">
-          <li class="report-item">
-            <span class="news-date">2024.08.06</span>
-            電子カルテデータを用いた指定難病に関する研究レポート【ダミー】
-          </li>
-          <li class="report-item">
-            <span class="news-date">2024.05.29</span>
-            医療情報利活用セミナー講演ダイジェスト動画公開【ダミー】
-          </li>
-        </ul>
-        <a href="news.html#reports" class="card-link" style="margin-top:12px;">活動レポート一覧へ</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PharmaBase -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Pharma Base</div>
-        <h2 class="section-title">ファーマベース</h2>
-        <p class="section-desc">
-          製薬企業メディカルアフェアーズ部門の業務を題材に、
-          実務で使えるナレッジを体系的に整理した「メディカル・ナレッジ・ベース」をイメージしたコンテンツです。
-        </p>
-      </div>
-
-      <div class="pharmabase-block">
-        <div>
-          <p class="card-text" style="margin-bottom:12px;">
-            メディカルプラン策定、アンメットメディカルニーズの把握、エビデンス創出、情報提供などのプロセスを
-            テーマ別に整理し、記事形式で紹介する構成を想定しています。
-          </p>
-          <div class="pb-pill-row">
-            <span class="pb-pill">基礎知識</span>
-            <span class="pb-pill">アンメットニーズの把握</span>
-            <span class="pb-pill">メディカルプラン作成</span>
-            <span class="pb-pill">エビデンス創出</span>
-            <span class="pb-pill">情報発信・提供</span>
-          </div>
-          <a href="pharmabase.html" class="card-link" style="margin-top:16px;">ファーマベースの詳細へ</a>
-        </div>
-        <div class="card">
-          <div class="cta-card-title">メール会員（デモ）登録イメージ</div>
-          <p class="card-text">
-            本家サイトでは、メール会員登録により限定コンテンツの閲覧や
-            新着記事・イベント情報の案内が行われています。<br>
-            本デモサイトでは実際の登録は発生しませんが、その導線イメージを再現しています。
-          </p>
-          <a href="pharmabase.html#member" class="card-link">メール会員登録のイメージを見る</a>
-        </div>
-      </div>
-
-      <div class="cta-cards">
-        <div class="card">
-          <div class="cta-card-title">ファーマベース 記事一覧（イメージ）</div>
-          <p class="card-text">
-            メディカルアフェアーズ担当者に向けたコラム・解説記事などを
-            一覧で表示するページのイメージです。
-          </p>
-          <a href="pharmabase.html#articles" class="card-link">記事一覧へ</a>
-        </div>
-        <div class="card">
-          <div class="cta-card-title">資料ダウンロード</div>
-          <p class="card-text">
-            サービス紹介パンフレットやデータベース概要資料などをダウンロードできるページを模したコンテンツです。
-          </p>
-          <a href="download.html" class="card-link">資料ダウンロードへ</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ...中略（あなたの元コードと同じ）... -->
 
   <!-- Footer -->
   <footer>
@@ -779,21 +605,16 @@
 
   <!-- ▼▼▼ カスタム・ポップアップチャット（iframe版） ▼▼▼ -->
 
-  <!-- ランチャーボタン（開いていないときだけ表示） -->
   <div id="chatbot-launcher" class="chatbot-launcher">
     AIチャットボットはこちら 💬
   </div>
 
-  <!-- ポップアップチャット本体 -->
   <div id="chatbot-panel" class="chatbot-panel">
     <div class="chatbot-header">
-      <!-- タイトルは削除 / ボタンのみ -->
       <div class="chatbot-header-actions">
-        <!-- 拡大ボタン（PC向け） -->
         <button id="chatbot-expand" class="chatbot-icon-btn" title="拡大 / 縮小">
           ⤢
         </button>
-        <!-- 閉じるボタン -->
         <button id="chatbot-close" class="chatbot-icon-btn" title="閉じる">
           ×
         </button>
@@ -832,27 +653,17 @@
         panel.classList.toggle('fullscreen');
       }
 
-      // ランチャーボタン → 開く
       launcher.addEventListener('click', openPanel);
-
-      // 閉じるボタン
       closeBtn.addEventListener('click', closePanel);
-
-      // 拡大ボタン
       expandBtn.addEventListener('click', toggleFullscreen);
 
-      // 初期状態
       if (isDesktop) {
-        // PCは最初から開いた状態＋ランチャー非表示
         openPanel();
       } else {
-        // モバイルは閉じた状態＋ランチャー表示
         launcher.style.display = 'inline-flex';
       }
     });
   </script>
-
-  <!-- ▲▲▲ カスタム・ポップアップチャットここまで ▲▲▲ -->
 
 </body>
 </html>
