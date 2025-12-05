@@ -151,6 +151,40 @@
       }
     }
 
+    /* ▼▼▼ 埋め込みチャットカード ▼▼▼ */
+    .chat-embed-card {
+      margin-top: 24px;
+      padding: 18px 18px 16px;
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.04);
+    }
+    .chat-embed-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .chat-embed-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+    .chat-embed-wrapper {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: #020617;
+    }
+    .chat-embed-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 450px;
+      border: none;
+      display: block;
+    }
+    /* ▲▲▲ 埋め込みチャットカードここまで ▲▲▲ */
+
     /* ▼▼▼ ポップアップ型チャット共通CSS ▼▼▼ */
 
     .chatbot-launcher {
@@ -321,6 +355,22 @@
             <li>統計解析ソフト向けのデータ提供（例：CSV, Parquet など）</li>
           </ul>
         </div>
+
+        <!-- ▼ ここに埋め込み型Difyを追加 ▼ -->
+        <div class="chat-embed-card">
+          <div class="chat-embed-title">データベース活用についてAIに相談してみる（デモ）</div>
+          <p class="chat-embed-text">
+            「こんなデータは取得できる？」「このユースケースは対応可能？」など、
+            データベース提供サービスに関する質問をAIに投げてみるデモです。
+          </p>
+          <div class="chat-embed-wrapper">
+            <iframe
+              src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
+              allow="microphone">
+            </iframe>
+          </div>
+        </div>
+        <!-- ▲ 埋め込みここまで ▲ -->
 
         <div class="two-column">
           <div class="section-block">
