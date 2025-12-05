@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>解析・レポート（製薬企業向け）| MEDiDATA IDEA デモ</title>
+  <title>解析・レポート | MEDiDATA IDEA デモ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -15,185 +15,56 @@
       --border-soft: #e5e7eb;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.7;
-      color: var(--text-main);
-      background: var(--bg-page);
-    }
-    a { text-decoration: none; color: inherit; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg-page); }
 
-    .container {
-      width: 100%;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 16px;
-    }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
 
     header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(8, 18, 39, 0.95);
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(8,18,39,0.95);
+      border-bottom: 1px solid rgba(148,163,184,0.4);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
     }
     .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       height: 64px;
     }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #f9fafb;
-      font-weight: 700;
-      font-size: 18px;
-    }
+    .logo { color:#fff; font-size:18px; font-weight:700; display:flex; align-items:center; gap:10px; }
     .logo-mark {
-      width: 26px;
-      height: 26px;
-      border-radius: 8px;
-      border: 2px solid var(--brand-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 800;
-    }
-    nav ul {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      list-style: none;
-      font-size: 13px;
-    }
-    nav a { color: #e5e7eb; }
-    nav a:hover { color: #ffffff; }
-    .nav-cta {
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--brand-blue);
-      background: #dbeafe;
-      color: #1e293b;
-      font-weight: 600;
+      width:26px; height:26px; border-radius:8px; border:2px solid var(--brand-blue);
+      display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800;
     }
 
-    .section {
-      padding: 60px 0;
-    }
-    .breadcrumb {
-      font-size: 12px;
-      color: #6b7280;
-      margin-bottom: 12px;
-    }
-    .breadcrumb a { color: #6b7280; }
-    .breadcrumb a:hover { color: #111827; }
+    nav ul { list-style:none; display:flex; gap:20px; }
+    nav a { color:#e5e7eb; font-size:13px; }
 
-    .section-label {
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--brand-blue);
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .section-title {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .section-sub {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .section-desc {
-      font-size: 14px;
-      color: var(--text-soft);
-      max-width: 760px;
-      margin-bottom: 20px;
-    }
+    .section { padding: 56px 0; }
+    .breadcrumb { font-size:12px; color:#6b7280; margin-bottom:12px; }
+
+    .section-title { font-size:26px; font-weight:700; margin-bottom:6px; }
+    .section-desc { font-size:14px; color:#6b7280; max-width:760px; margin-bottom:20px; }
 
     .card {
-      background: var(--surface);
-      border-radius: 16px;
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.04);
-      padding: 18px 18px 16px;
-      font-size: 13px;
-      margin-bottom: 20px;
+      background:#fff; border-radius:16px; padding:18px; margin-bottom:20px;
+      border:1px solid #e5e7eb; box-shadow:0 12px 26px rgba(0,0,0,0.04);
     }
-    .card-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .card-text {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-    .card-list {
-      margin-left: 18px;
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 6px;
-    }
-    .card-list li { margin-bottom: 4px; }
+    .card-title { font-size:16px; font-weight:600; margin-bottom:6px; }
+    .card-text { font-size:13px; color:#6b7280; margin-bottom:8px; }
+    .card-list { margin-left:18px; font-size:13px; color:#6b7280; }
 
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-      margin-bottom: 6px;
+    /* ▼ Dify埋め込み ▼ */
+    .chat-embed-card { background:#fff; border-radius:16px; padding:18px; margin-bottom:20px; border:1px solid #e5e7eb; }
+    .chat-embed-title { font-size:15px; font-weight:600; margin-bottom:6px; }
+    .chat-embed-text { font-size:13px; color:#6b7280; margin-bottom:10px; }
+
+    .chat-embed-wrapper {
+      border-radius:12px; overflow:hidden; border:1px solid #e5e7eb; background:#020617;
     }
-    .pill {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: #f9fafb;
-      font-size: 11px;
-      color: #4b5563;
+    .chat-embed-wrapper iframe {
+      width:100%; height:100%; min-height:450px; border:none; display:block;
     }
 
-    .link-more {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #2563eb;
-      margin-top: 10px;
-    }
-    .link-more::after {
-      content: "→";
-      font-size: 11px;
-    }
-
-    footer {
-      margin-top: 40px;
-      padding: 24px 0 32px;
-      font-size: 11px;
-      color: #9ca3af;
-      background: #020617;
-    }
-    .footer-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-    .footer-nav a { color: #9ca3af; }
-    .footer-nav a:hover { color: #e5e7eb; }
-
-    @media (max-width: 900px) {
-      nav ul { display: none; }
-      .section { padding: 48px 0; }
-    }
   </style>
 </head>
 <body>
@@ -210,103 +81,76 @@
         <li><a href="service.html">提供サービス一覧</a></li>
         <li><a href="pharmabase.html">ファーマベース</a></li>
         <li><a href="news.html">お知らせ</a></li>
-        <li><a href="download.html">資料ダウンロード</a></li>
-        <li><a href="faq.html">よくあるご質問</a></li>
-        <li><a class="nav-cta" href="contact.html">お問い合わせ</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <main>
-  <section class="section">
-    <div class="container">
-      <div class="breadcrumb">
-        <a href="index.html">TOP</a> &gt;
-        <a href="service.html">提供サービス一覧</a> &gt;
-        <a href="database.html">データベースについて</a> &gt;
-        解析・レポート
-      </div>
-
-      <div class="section-label">Service Detail - For Pharma</div>
-      <h1 class="section-title">解析・レポート</h1>
-      <p class="section-desc">
-        Webツールでの仮説出しを踏まえて、より詳細な検証やエビデンス創出につなげるための
-        オーダーメイド解析・レポート提供をイメージしたサービスです。
-        疾患領域・目的に合わせて個別の解析計画を設計する想定です。
-      </p>
-
-      <div class="card">
-        <div class="card-title">サービスの概要</div>
-        <p class="card-text">
-          リアルワールドデータを用いた後ろ向きコホート解析や、治療パターン分析、予後解析など、
-          目的に応じた統計解析・レポート作成までをワンストップで支援することを想定しています。
-        </p>
-        <div class="pill-row">
-          <span class="pill">疫学・アウトカム研究</span>
-          <span class="pill">治療実態の可視化</span>
-          <span class="pill">安全性プロファイルの把握</span>
-          <span class="pill">メディカルプランの検証</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">主な実施ステップ（イメージ）</div>
-        <ul class="card-list">
-          <li>ご要望のヒアリング・解析目的の整理</li>
-          <li>対象患者集団・評価指標の定義 / 解析計画案の作成</li>
-          <li>データ抽出・前処理・統計解析の実施</li>
-          <li>結果の可視化・スライド／レポートへの整理</li>
-          <li>メディカル・マーケティングメンバーとのディスカッション支援</li>
-        </ul>
-        <p class="card-text">
-          実際には、社内のステークホルダーや外部有識者とのディスカッションを踏まえ、
-          解析デザインのブラッシュアップや感度分析などが行われるケースが一般的です。
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-title">アウトプットイメージ</div>
-        <ul class="card-list">
-          <li>スライド形式での解析結果サマリー</li>
-          <li>統計解析の詳細条件を明記した技術レポート</li>
-          <li>内部検討用メモ・Q&A集 など</li>
-        </ul>
-        <p class="card-text">
-          学会発表や論文化までを見据えた解析をご希望の場合には、
-          研究計画書や投稿論文案の作成支援なども組み合わせて検討されることが想定されます。
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="section-sub">関連サービス</div>
-        <p class="card-text">
-          継続的なモニタリングや、社内の自走的な分析を行いたい場合には、
-          Webツールやデータセット提供と組み合わせてご活用いただくイメージです。
-        </p>
-        <a href="webtool.html" class="link-more">Webツールの詳細へ</a><br />
-        <a href="dataset.html" class="link-more">データセット提供の詳細へ</a>
-      </div>
-
-    </div>
-  </section>
-</main>
-
-<footer>
+<section class="section">
   <div class="container">
-    <div class="footer-nav">
-      <a href="index.html">TOP</a>
-      <a href="about.html">DATuM IDEAについて</a>
-      <a href="service.html">提供サービス一覧</a>
-      <a href="pharmabase.html">ファーマベース</a>
-      <a href="news.html">お知らせ</a>
-      <a href="download.html">資料ダウンロード</a>
-      <a href="faq.html">よくあるご質問</a>
-      <a href="contact.html">お問い合わせ</a>
+
+    <div class="breadcrumb">
+      <a href="index.html">TOP</a> &gt;
+      <a href="service.html">提供サービス一覧</a> &gt;
+      <a href="database.html">データベース</a> &gt; 解析・レポート
     </div>
-    <div>© 2025 MEDiDATA IDEA Demo.</div>
+
+    <h1 class="section-title">解析・レポート</h1>
+    <p class="section-desc">
+      RWD（リアルワールドデータ）を用いて、疾患・治療ごとの状況を深く理解し、
+      課題探索から示唆出しまでをサポートする解析サービスをイメージしています。
+    </p>
+
+    <!-- ▼ サービス概要 -->
+    <div class="card">
+      <div class="card-title">サービスの概要</div>
+      <p class="card-text">
+        データベースを用いた定量解析を実施し、疾患構造や治療実態、患者遷移などの把握を支援します。
+      </p>
+    </div>
+
+    <!-- ▼ 1つ目のチャット埋め込み（概要の下） -->
+    <div class="chat-embed-card">
+      <div class="chat-embed-title">解析内容についてAIに聞いてみる（デモ）</div>
+      <p class="chat-embed-text">「どんな解析ができる？」「このケースは分析可能？」など AI に質問できます。</p>
+      <div class="chat-embed-wrapper">
+        <iframe src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI" allow="microphone"></iframe>
+      </div>
+    </div>
+
+    <!-- ▼ 主なステップ -->
+    <div class="card">
+      <div class="card-title">主な実施ステップ（イメージ）</div>
+      <ul class="card-list">
+        <li>① 課題ヒアリング・仮説整理</li>
+        <li>② データ抽出条件の設計</li>
+        <li>③ 解析用データセット作成</li>
+        <li>④ 統計解析の実施</li>
+        <li>⑤ レポート納品・示唆出し</li>
+      </ul>
+    </div>
+
+    <!-- ▼ 関連サービス -->
+    <div class="card">
+      <div class="card-title">関連サービス</div>
+      <p class="card-text">Webツールやデータセット提供と組み合わせて利用できます。</p>
+      <a href="webtool.html" class="link-more">Webツールへ</a><br>
+      <a href="dataset.html" class="link-more">データセット提供へ</a>
+    </div>
+
+    <!-- ▼ 2つ目チャット埋め込み（関連サービスの下） -->
+    <div class="chat-embed-card">
+      <div class="chat-embed-title">どのサービスが最適か相談（デモ）</div>
+      <p class="chat-embed-text">用途に応じて AI がおすすめを提示します。</p>
+      <div class="chat-embed-wrapper">
+        <iframe src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI" allow="microphone"></iframe>
+      </div>
+    </div>
+
   </div>
-</footer>
+</section>
+</main>
 
 </body>
 </html>
