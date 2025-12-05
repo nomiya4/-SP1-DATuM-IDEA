@@ -114,6 +114,24 @@
     .back-link a { color: #0284c7; }
     .back-link a::before { content: "← "; }
 
+    /* ▼ 追加：詳細サービスリンク用 ▼ */
+    .detail-links {
+      margin-top: 8px;
+      padding-left: 18px;
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+    .detail-links li {
+      margin-bottom: 6px;
+    }
+    .detail-links a {
+      color: #0284c7;
+      font-weight: 600;
+    }
+    .detail-links a:hover {
+      text-decoration: underline;
+    }
+
     footer {
       margin-top: 40px; padding: 24px 0 32px;
       font-size: 11px; color: #9ca3af;
@@ -221,6 +239,35 @@
             ※上記はあくまでデモ用のイメージであり、実際の業務フローとは異なります。
           </p>
         </div>
+
+        <!-- ▼ 追加：3つの詳細サービスへの導線 ▼ -->
+        <div class="section-block">
+          <span class="label">詳細な提供サービス（製薬企業向け・イメージ）</span>
+          <h2>データベースを活用した具体的なメニュー</h2>
+          <p>
+            データベース提供サービスを軸に、目的に応じて
+            Webツール・オーダーメイド解析・データセット提供といった
+            3つのメニューに展開するイメージです。
+          </p>
+          <ul class="detail-links">
+            <li>
+              <a href="webtool.html">Webツール</a>：
+              ブラウザ上で主要指標を素早く把握できるダッシュボードのイメージ
+            </li>
+            <li>
+              <a href="analysis-report.html">解析・レポート</a>：
+              疾患別・治療別の詳細解析やレポート作成を行うオーダーメイド解析のイメージ
+            </li>
+            <li>
+              <a href="dataset.html">データセット提供</a>：
+              社内環境で柔軟な分析が行えるようにするデータ提供メニューのイメージ
+            </li>
+          </ul>
+          <p class="small-text">
+            ※いずれも実在するサービスではなく、本デモサイト内での構成イメージです。
+          </p>
+        </div>
+        <!-- ▲ 追加ここまで ▲ -->
 
         <p class="back-link">
           <a href="service.html">提供サービス一覧に戻る</a>
