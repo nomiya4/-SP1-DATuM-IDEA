@@ -174,6 +174,40 @@
       font-size: 11px;
     }
 
+    /* ▼ Dify埋め込み用のラッパー ▼ */
+    .chat-embed-card {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.04);
+      padding: 18px 18px 16px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .chat-embed-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .chat-embed-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+    .chat-embed-wrapper {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      background: #020617;
+    }
+    .chat-embed-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 700px;
+      border: none;
+      display: block;
+    }
+
     footer {
       margin-top: 40px;
       padding: 24px 0 32px;
@@ -235,6 +269,7 @@
         Webダッシュボードをイメージしたサービスです。市場把握や仮説出しのファーストステップとしてご活用いただくことを想定しています。
       </p>
 
+      <!-- Webツールのコンセプト -->
       <div class="card">
         <div class="card-title">Webツールのコンセプト</div>
         <p class="card-text">
@@ -250,6 +285,24 @@
         </div>
       </div>
 
+      <!-- ▼ 1つ目のDify埋め込み（コンテンツ中） ▼ -->
+      <div class="chat-embed-card">
+        <div class="chat-embed-title">WebツールについてAIに相談してみる（デモ）</div>
+        <p class="chat-embed-text">
+          「どんな指標が見られるの？」「こういう用途でも使えそう？」など、Webツールの使い方イメージを
+          チャットボットに聞いてみるためのデモコンテンツです。
+        </p>
+        <div class="chat-embed-wrapper">
+          <iframe
+            src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
+            frameborder="0"
+            allow="microphone">
+          </iframe>
+        </div>
+      </div>
+      <!-- ▲ 1つ目ここまで ▲ -->
+
+      <!-- 主な機能イメージ -->
       <div class="card">
         <div class="card-title">主な機能イメージ</div>
         <ul class="card-list">
@@ -264,6 +317,7 @@
         </p>
       </div>
 
+      <!-- 活用シーンの例 -->
       <div class="card">
         <div class="card-title">活用シーンの例</div>
         <ul class="card-list">
@@ -274,6 +328,7 @@
         </ul>
       </div>
 
+      <!-- 関連サービス -->
       <div class="card">
         <div class="section-sub">関連サービス</div>
         <p class="card-text">
@@ -283,6 +338,23 @@
         <a href="analysis-report.html" class="link-more">解析・レポートの詳細へ</a><br />
         <a href="dataset.html" class="link-more">データセット提供の詳細へ</a>
       </div>
+
+      <!-- ▼ 2つ目のDify埋め込み（関連サービスの下） ▼ -->
+      <div class="chat-embed-card">
+        <div class="chat-embed-title">どのメニューが合いそうかAIに聞いてみる（デモ）</div>
+        <p class="chat-embed-text">
+          「自社ではどのメニューから検討するのが良さそうか？」といった相談イメージを、
+          チャットボットに投げかけてみるためのデモコンテンツです。
+        </p>
+        <div class="chat-embed-wrapper">
+          <iframe
+            src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
+            frameborder="0"
+            allow="microphone">
+          </iframe>
+        </div>
+      </div>
+      <!-- ▲ 2つ目ここまで ▲ -->
 
     </div>
   </section>
