@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Webツール（製薬企業向け）| MEDiDATA IDEA デモ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --brand-navy: #081227;
+      --brand-blue: #2563eb;
+      --bg-page: #f3f4f6;
+      --surface: #ffffff;
+      --text-main: #111827;
+      --text-soft: #6b7280;
+      --border-soft: #e5e7eb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      color: var(--text-main);
+      background: var(--bg-page);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 18, 39, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #f9fafb;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      border: 2px solid var(--brand-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+      font-size: 13px;
+    }
+    nav a { color: #e5e7eb; }
+    nav a:hover { color: #ffffff; }
+    .nav-cta {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--brand-blue);
+      background: #dbeafe;
+      color: #1e293b;
+      font-weight: 600;
+    }
+
+    .section {
+      padding: 60px 0;
+    }
+    .breadcrumb {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+    .breadcrumb a { color: #6b7280; }
+    .breadcrumb a:hover { color: #111827; }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 760px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.04);
+      padding: 18px 18px 16px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .card-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+    .card-list {
+      margin-left: 18px;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+    .card-list li { margin-bottom: 4px; }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #f9fafb;
+      font-size: 11px;
+      color: #4b5563;
+    }
+
+    .link-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #2563eb;
+      margin-top: 10px;
+    }
+    .link-more::after {
+      content: "→";
+      font-size: 11px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0 32px;
+      font-size: 11px;
+      color: #9ca3af;
+      background: #020617;
+    }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .footer-nav a { color: #9ca3af; }
+    .footer-nav a:hover { color: #e5e7eb; }
+
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .section { padding: 48px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">DI</div>
+      <div>MEDiDATA IDEA</div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="about.html">DATuM IDEAについて</a></li>
+        <li><a href="service.html">提供サービス一覧</a></li>
+        <li><a href="pharmabase.html">ファーマベース</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="download.html">資料ダウンロード</a></li>
+        <li><a href="faq.html">よくあるご質問</a></li>
+        <li><a class="nav-cta" href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">TOP</a> &gt;
+        <a href="service.html">提供サービス一覧</a> &gt;
+        <a href="database.html">データベースについて</a> &gt;
+        Webツール
+      </div>
+
+      <div class="section-label">Service Detail - For Pharma</div>
+      <h1 class="section-title">Webツール</h1>
+      <p class="section-desc">
+        製薬企業のご担当者が、自席のPCからリアルワールドデータの「いま」を素早く確認できるようにするための
+        Webダッシュボードをイメージしたサービスです。市場把握や仮説出しのファーストステップとしてご活用いただくことを想定しています。
+      </p>
+
+      <div class="card">
+        <div class="card-title">Webツールのコンセプト</div>
+        <p class="card-text">
+          疾患別・薬剤別の患者数推移、属性分布、治療ライン、検査値の推移などを、
+          ブラウザ上から直感的なUIで確認できることを目指したツールです。
+          本デモサイトでは画面構成イメージのみのご紹介となります。
+        </p>
+        <div class="pill-row">
+          <span class="pill">ダッシュボード形式</span>
+          <span class="pill">フィルタリング / 絞り込み</span>
+          <span class="pill">グラフ・テーブル表示</span>
+          <span class="pill">エクスポート機能（想定）</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">主な機能イメージ</div>
+        <ul class="card-list">
+          <li>疾患別・薬剤別の患者数推移の可視化</li>
+          <li>年齢・性別・地域など、患者属性での絞り込み</li>
+          <li>処方ラインや前治療・併用薬のパターンの把握</li>
+          <li>検査値やバイタルの経時変化グラフ表示</li>
+          <li>図表をPowerPoint / Excel形式でダウンロード（イメージ）</li>
+        </ul>
+        <p class="card-text">
+          実際には、対象となる疾患領域や利用目的に応じて、カスタマイズされた画面設計・指標定義が行われます。
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">活用シーンの例</div>
+        <ul class="card-list">
+          <li>メディカルプラン策定時のターゲット患者数・施設規模の把握</li>
+          <li>アンメットメディカルニーズの探索に向けた治療実態の確認</li>
+          <li>販売戦略・マーケティング活動における疾患市場のモニタリング</li>
+          <li>メディカルアフェアーズ活動でのKOLディスカッションの材料整理</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="section-sub">関連サービス</div>
+        <p class="card-text">
+          Webツールで得られた示唆をより深掘りするために、オーダーメイド型の解析・レポートや、
+          研究・企画部門向けのデータセット提供と組み合わせてご利用いただくことをイメージしています。
+        </p>
+        <a href="analysis-report.html" class="link-more">解析・レポートの詳細へ</a><br />
+        <a href="dataset.html" class="link-more">データセット提供の詳細へ</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-nav">
+      <a href="index.html">TOP</a>
+      <a href="about.html">DATuM IDEAについて</a>
+      <a href="service.html">提供サービス一覧</a>
+      <a href="pharmabase.html">ファーマベース</a>
+      <a href="news.html">お知らせ</a>
+      <a href="download.html">資料ダウンロード</a>
+      <a href="faq.html">よくあるご質問</a>
+      <a href="contact.html">お問い合わせ</a>
+    </div>
+    <div>© 2025 MEDiDATA IDEA Demo.</div>
+  </div>
+</footer>
+
+</body>
+</html>
