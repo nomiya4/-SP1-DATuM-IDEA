@@ -150,6 +150,126 @@
         grid-template-columns: minmax(0, 1fr);
       }
     }
+
+    /* ▼▼▼ ポップアップ型チャット共通CSS ▼▼▼ */
+
+    .chatbot-launcher {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      padding: 12px 16px;
+      background: #1C64F2;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.4);
+      cursor: pointer;
+      z-index: 9998;
+      display: none; /* JSで表示制御 */
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chatbot-panel {
+      position: fixed;
+      right: 20px;
+      bottom: 80px;
+      width: min(420px, 90vw);
+      height: min(520px, 70vh);
+      background: #0b1120;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    .chatbot-panel.open {
+      display: flex;
+    }
+
+    .chatbot-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end; /* タイトルなしでボタンだけ右寄せ */
+      padding: 8px 10px 6px;
+      background: linear-gradient(to right, #1e293b, #0f172a);
+      color: #e5e7eb;
+      font-size: 13px;
+    }
+
+    .chatbot-header-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .chatbot-icon-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(15, 23, 42, 0.8);
+      color: #e5e7eb;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chatbot-icon-btn:hover {
+      background: rgba(30, 64, 175, 0.9);
+    }
+
+    .chatbot-frame-wrapper {
+      flex: 1;
+      background: #020617;
+    }
+
+    .chatbot-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* 拡大時：横幅はそのまま・高さだけフルに近づける */
+    .chatbot-panel.fullscreen {
+      right: 20px;
+      bottom: 2vh;
+      width: min(420px, 90vw);
+      height: 96vh;
+      border-radius: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .chatbot-panel {
+        right: 0;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+      }
+      .chatbot-panel.fullscreen {
+        right: 0;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+      }
+      .chatbot-launcher {
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+
+    /* ▲▲▲ ポップアップ型チャット共通CSS ここまで ▲▲▲ */
   </style>
 </head>
 <body>
@@ -287,6 +407,85 @@
       <div>© 2025 MEDiDATA LINK（デモサイト）</div>
     </div>
   </footer>
+
+  <!-- ▼▼▼ ポップアップ型チャット：ランチャー & 本体 ▼▼▼ -->
+
+  <!-- ランチャーボタン（閉じているときだけ表示） -->
+  <div id="chatbot-launcher" class="chatbot-launcher">
+    AIチャットボットはこちら 💬
+  </div>
+
+  <!-- ポップアップチャット本体 -->
+  <div id="chatbot-panel" class="chatbot-panel">
+    <div class="chatbot-header">
+      <div class="chatbot-header-actions">
+        <!-- 拡大ボタン -->
+        <button id="chatbot-expand" class="chatbot-icon-btn" title="拡大 / 縮小">
+          ⤢
+        </button>
+        <!-- 閉じるボタン -->
+        <button id="chatbot-close" class="chatbot-icon-btn" title="閉じる">
+          ×
+        </button>
+      </div>
+    </div>
+    <div class="chatbot-frame-wrapper">
+      <iframe
+        class="chatbot-frame"
+        src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
+        allow="microphone"
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- ▲▲▲ ポップアップ型チャット：ランチャー & 本体 ここまで ▲▲▲ -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const launcher = document.getElementById('chatbot-launcher');
+      const panel = document.getElementById('chatbot-panel');
+      const closeBtn = document.getElementById('chatbot-close');
+      const expandBtn = document.getElementById('chatbot-expand');
+
+      if (!launcher || !panel || !closeBtn || !expandBtn) return;
+
+      const isDesktop = window.matchMedia('(min-width: 901px)').matches;
+
+      function openPanel() {
+        panel.classList.add('open');
+        if (launcher) launcher.style.display = 'none';
+      }
+
+      function closePanel() {
+        panel.classList.remove('open');
+        panel.classList.remove('fullscreen'); // 閉じたら拡大状態も解除
+        if (launcher) launcher.style.display = 'inline-flex';
+      }
+
+      function toggleFullscreen() {
+        panel.classList.toggle('fullscreen');
+      }
+
+      // ランチャーボタン → 開く
+      launcher.addEventListener('click', openPanel);
+
+      // 閉じるボタン
+      closeBtn.addEventListener('click', closePanel);
+
+      // 拡大ボタン
+      expandBtn.addEventListener('click', toggleFullscreen);
+
+      // 初期表示：
+      // PC：最初から開く
+      // スマホ：閉じていて「AIチャットボットはこちら」ボタンのみ表示
+      if (isDesktop) {
+        openPanel();
+      } else {
+        launcher.style.display = 'inline-flex';
+      }
+    });
+  </script>
 
 </body>
 </html>
