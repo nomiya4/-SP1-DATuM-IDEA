@@ -2,142 +2,407 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>データセット提供 | MEDiDATA IDEA デモ</title>
+  <title>データセット提供サービス | MEDiDATA IDEA デモ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
-      --brand-blue:#2563eb;
-      --text-main:#111827;
-      --text-soft:#6b7280;
-      --surface:#ffffff;
-      --bg-page:#f3f4f6;
-      --border-soft:#e5e7eb;
-    }
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-page);}
-
-    .container{max-width:1120px;margin:0 auto;padding:0 16px;}
-    a{text-decoration:none;color:inherit;}
-
-    header{
-      position:sticky;top:0;background:rgba(8,18,39,0.95);
-      border-bottom:1px solid rgba(148,163,184,0.4);
-      backdrop-filter:blur(10px);
-    }
-    .header-inner{
-      height:64px;display:flex;align-items:center;justify-content:space-between;
-    }
-    nav ul{display:flex;gap:20px;list-style:none;}
-    nav a{color:#e5e7eb;font-size:13px;}
-
-    .section{padding:56px 0;}
-    .breadcrumb{font-size:12px;color:#6b7280;margin-bottom:10px;}
-    .section-title{font-size:26px;font-weight:700;margin-bottom:8px;}
-    .section-desc{font-size:14px;color:#6b7280;margin-bottom:20px;max-width:760px;}
-
-    .card{
-      background:#fff;border-radius:16px;padding:18px;margin-bottom:20px;
-      border:1px solid #e5e7eb;box-shadow:0 12px 26px rgba(0,0,0,0.04);
-    }
-    .card-title{font-size:16px;font-weight:600;margin-bottom:6px;}
-    .card-text{font-size:13px;color:#6b7280;margin-bottom:8px;}
-    .card-list{margin-left:18px;color:#6b7280;font-size:13px;}
-
-    /* ▼ Dify埋め込み ▼ */
-    .chat-embed-card{
-      background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:18px;margin-bottom:20px;
-    }
-    .chat-embed-title{font-size:15px;font-weight:600;margin-bottom:6px;}
-    .chat-embed-text{font-size:13px;color:#6b7280;margin-bottom:10px;}
-
-    .chat-embed-wrapper{
-      border-radius:12px;border:1px solid #e5e7eb;overflow:hidden;background:#020617;
-    }
-    .chat-embed-wrapper iframe{
-      width:100%;height:100%;min-height:450px;border:none;display:block;
+      --brand-navy: #081227;
+      --brand-blue: #2563eb;
+      --bg-page: #f3f4f6;
+      --surface: #ffffff;
+      --text-main: #111827;
+      --text-soft: #6b7280;
+      --border-soft: #e5e7eb;
     }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 18, 39, 0.95);
+      border-bottom: 1px solid rgba(148,163,184,0.4);
+      backdrop-filter: blur(10px);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1120px;
+      height: 64px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #f9fafb;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      border: 2px solid var(--brand-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 11px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+    }
+    nav a { color: #e5e7eb; }
+
+    /* Layout */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 48px 16px;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      margin-bottom: 12px;
+      color: var(--text-soft);
+    }
+
+    .section-block {
+      background: var(--surface);
+      padding: 24px 20px;
+      margin-bottom: 24px;
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 22px rgba(15,23,42,0.04);
+    }
+    .section-block h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section-block p,
+    .section-block li {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+    .section-block ul {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .label {
+      font-size: 11px;
+      background: #e0f2fe;
+      padding: 3px 8px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #0369a1;
+      font-weight: 600;
+    }
+
+    .iframe-wrap {
+      margin: 20px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+    }
+
+    footer {
+      margin-top: 40px;
+      background: #020617;
+      color: #9ca3af;
+      padding: 32px 0;
+      font-size: 12px;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    /* ------------------------------------------- */
+    /* ▼▼▼ ポップアップチャット 共通CSS ▼▼▼ */
+    /* ------------------------------------------- */
+
+    .chatbot-launcher {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      padding: 12px 16px;
+      background: #1C64F2;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      display: none;
+      z-index: 9998;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.4);
+    }
+
+    .chatbot-panel {
+      position: fixed;
+      right: 20px;
+      bottom: 80px;
+      width: min(420px, 90vw);
+      height: min(520px, 70vh);
+      background: #0b1120;
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.8);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+      box-shadow: 0 18px 45px rgba(15,23,42,0.6);
+    }
+    .chatbot-panel.open { display: flex; }
+
+    .chatbot-header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 6px 10px;
+      background: linear-gradient(to right, #1e293b, #0f172a);
+    }
+
+    .chatbot-icon-btn {
+      width: 24px;
+      height: 24px;
+      background: rgba(30,41,59,0.8);
+      border: none;
+      color: #e5e7eb;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .chatbot-icon-btn:hover {
+      background: rgba(59,130,246,0.9);
+    }
+
+    .chatbot-panel.fullscreen {
+      height: 96vh;
+      width: min(420px, 95vw);
+      right: 20px;
+      bottom: 2vh;
+    }
+
+    .chatbot-frame-wrapper {
+      flex: 1;
+      background: #020617;
+    }
+    .chatbot-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 900px) {
+      .chatbot-panel,
+      .chatbot-panel.fullscreen {
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+    }
   </style>
+
 </head>
+
 <body>
 
 <header>
-  <div class="container header-inner">
-    <div style="color:white;font-weight:700;font-size:18px;">MEDiDATA IDEA</div>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">DI</div>
+      MEDiDATA IDEA
+    </a>
+
     <nav>
       <ul>
-        <li><a href="index.html">TOP</a></li>
+        <li><a href="about.html">DATuM IDEAについて</a></li>
         <li><a href="service.html">提供サービス一覧</a></li>
-        <li><a href="analysis-report.html">解析・レポート</a></li>
+        <li><a href="pharmabase.html">ファーマベース</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="download.html">資料ダウンロード</a></li>
+        <li><a href="faq.html">よくあるご質問</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <main>
-<section class="section">
   <div class="container">
 
     <div class="breadcrumb">
       <a href="index.html">TOP</a> →
       <a href="service.html">提供サービス一覧</a> →
-      データセット提供
+      データセット提供サービス
     </div>
 
-    <h1 class="section-title">データセット提供</h1>
-    <p class="section-desc">
-      社内分析や研究活動向けに、匿名加工済みのデータセットを安全に提供するサービスをイメージしています。
-    </p>
+    <h1>データセット提供サービス</h1>
 
-    <!-- ▼ 提供形態 -->
-    <div class="card">
-      <div class="card-title">提供形態のイメージ</div>
-      <ul class="card-list">
-        <li>CSV / Parquet 形式でのデータ提供</li>
-        <li>匿名加工済み／共通フォーマット整備済み</li>
-        <li>利用目的に応じたカスタム抽出</li>
+    <!-- 1. 提供形態 -->
+    <div class="section-block">
+      <span class="label">提供形態</span>
+      <h2>提供形態のイメージ</h2>
+      <p>
+        研究・分析用途にあわせて、匿名加工済みのデータセットを提供するデモイメージです。
+        実際のデータ提供は行っていません。
+      </p>
+      <ul>
+        <li>匿名加工データの提供（CSV / Parquet）</li>
+        <li>特定疾患・特定コホートのサブセット提供</li>
+        <li>条件抽出・特徴量付与のオプション加工</li>
       </ul>
     </div>
 
-    <!-- ▼ 1つ目チャット埋め込み -->
-    <div class="chat-embed-card">
-      <div class="chat-embed-title">データ提供についてAIに相談（デモ）</div>
-      <p class="chat-embed-text">「この形式で提供できる？」「こういう抽出は可能？」などをAIに質問できます。</p>
-      <div class="chat-embed-wrapper">
-        <iframe src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI" allow="microphone"></iframe>
-      </div>
+    <!-- ◉ Dify埋込① -->
+    <div class="iframe-wrap">
+      <iframe
+        src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
+        style="width: 100%; height: 450px;"
+        frameborder="0"
+        allow="microphone"></iframe>
     </div>
 
-    <!-- ▼ データ項目 -->
-    <div class="card">
-      <div class="card-title">データ項目の例（イメージ）</div>
-      <ul class="card-list">
-        <li>患者属性：年齢、性別、地域 など</li>
-        <li>診療情報：診断、処方、実施検査</li>
-        <li>治療歴：治療ライン、前治療、併用薬</li>
+    <!-- 2. データ項目例 -->
+    <div class="section-block">
+      <span class="label">データ項目</span>
+      <h2>データ項目の例（イメージ）</h2>
+      <ul>
+        <li>基本属性（年齢・性別など）</li>
+        <li>診療情報（傷病名・診療行為）</li>
+        <li>検査結果（HbA1c・血液検査など）</li>
+        <li>処方情報（薬剤・用量・日数）</li>
       </ul>
     </div>
 
-    <!-- ▼ 関連サービス -->
-    <div class="card">
-      <div class="card-title">関連サービス</div>
-      <p class="card-text">解析・レポートやWebツールと併用可能です。</p>
-      <a href="analysis-report.html" class="link-more">解析・レポートへ</a><br>
-      <a href="webtool.html" class="link-more">Webツールへ</a>
+    <!-- ◉ Dify埋込② -->
+    <div class="iframe-wrap">
+      <iframe
+        src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
+        style="width: 100%; height: 450px;"
+        frameborder="0"
+        allow="microphone"></iframe>
     </div>
 
-    <!-- ▼ 2つ目チャット埋め込み -->
-    <div class="chat-embed-card">
-      <div class="chat-embed-title">最適な利用方法をAIに相談（デモ）</div>
-      <p class="chat-embed-text">「どの形式が最適？」「活用イメージを教えて」など相談できます。</p>
-      <div class="chat-embed-wrapper">
-        <iframe src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI" allow="microphone"></iframe>
-      </div>
+    <!-- 3. 関連サービス -->
+    <div class="section-block">
+      <span class="label">関連サービス</span>
+      <h2>関連サービス</h2>
+      <ul>
+        <li><a href="webtool.html">Webツール</a></li>
+        <li><a href="analysis-report.html">解析・レポート</a></li>
+        <li><a href="dataset.html">データセット提供</a></li>
+      </ul>
     </div>
 
   </div>
-</section>
 </main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-nav">
+      <a href="about.html">DATuM IDEAについて</a>
+      <a href="service.html">提供サービス一覧</a>
+      <a href="pharmabase.html">ファーマベース</a>
+      <a href="news.html">お知らせ</a>
+      <a href="download.html">資料ダウンロード</a>
+      <a href="faq.html">よくあるご質問</a>
+      <a href="contact.html">お問い合わせ</a>
+    </div>
+    <p>© 2025 MEDiDATA IDEA Demo.</p>
+  </div>
+</footer>
+
+
+<!-- ▼▼▼ ポップアップチャット（共通） ▼▼▼ -->
+
+<div id="chatbot-launcher" class="chatbot-launcher">AIチャットボットはこちら 💬</div>
+
+<div id="chatbot-panel" class="chatbot-panel">
+  <div class="chatbot-header">
+    <button id="chatbot-expand" class="chatbot-icon-btn">⤢</button>
+    <button id="chatbot-close" class="chatbot-icon-btn">×</button>
+  </div>
+  <div class="chatbot-frame-wrapper">
+    <iframe class="chatbot-frame"
+      src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
+      allow="microphone"></iframe>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const launcher = document.getElementById("chatbot-launcher");
+  const panel = document.getElementById("chatbot-panel");
+  const closeBtn = document.getElementById("chatbot-close");
+  const expandBtn = document.getElementById("chatbot-expand");
+
+  const isDesktop = window.matchMedia("(min-width: 901px)").matches;
+
+  function openPanel() {
+    panel.classList.add("open");
+    launcher.style.display = "none";
+  }
+  function closePanel() {
+    panel.classList.remove("open");
+    panel.classList.remove("fullscreen");
+    launcher.style.display = "inline-flex";
+  }
+  function toggleFullscreen() {
+    panel.classList.toggle("fullscreen");
+  }
+
+  launcher.addEventListener("click", openPanel);
+  closeBtn.addEventListener("click", closePanel);
+  expandBtn.addEventListener("click", toggleFullscreen);
+
+  if (isDesktop) {
+    openPanel();
+  } else {
+    launcher.style.display = "inline-flex";
+  }
+
+});
+</script>
 
 </body>
 </html>
