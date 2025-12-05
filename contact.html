@@ -2,272 +2,393 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>お問い合わせ（デモ）| MEDiDATA IDEA</title>
+  <title>お問い合わせ | MEDiDATA IDEA デモ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
+      --brand-navy: #081227;
       --brand-blue: #2563eb;
+      --bg-page: #f3f4f6;
+      --surface: #ffffff;
       --text-main: #111827;
       --text-soft: #6b7280;
-      --surface: #ffffff;
       --border-soft: #e5e7eb;
-      --bg-page: #f3f4f6;
-      --error: #dc2626;
+      --border-strong: #d1d5db;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.7;
-      color: var(--text-main);
       background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.7;
     }
     a { text-decoration: none; color: inherit; }
 
-    .container {
-      width: 100%;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 16px;
-    }
-
+    /* Header */
     header {
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(8, 18, 39, 0.95);
+      background: rgba(8,18,39,0.95);
+      border-bottom: 1px solid rgba(148,163,184,0.4);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
     }
     .header-inner {
-      display: flex; align-items: center; justify-content: space-between; height: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
     }
     .logo {
-      display: flex; align-items: center; gap: 10px;
-      color: #f9fafb; font-weight: 700; font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #f9fafb;
+      font-weight: 700;
+      font-size: 18px;
     }
     .logo-mark {
-      width: 26px; height: 26px; border-radius: 8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
       border: 2px solid var(--brand-blue);
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 800;
+      color: #fff; font-weight: 800; font-size: 11px;
     }
     nav ul {
-      display: flex; align-items: center; gap: 20px;
-      list-style: none; font-size: 13px;
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      font-size: 13px;
     }
     nav a { color: #e5e7eb; }
-    nav a:hover { color: #ffffff; }
-    .nav-cta {
-      padding: 7px 14px; border-radius: 999px;
-      border: 1px solid var(--brand-blue);
-      background: #dbeafe; color: #1e293b; font-weight: 600;
-    }
 
-    .section { padding: 60px 0; }
-    .section-header { margin-bottom: 24px; }
-    .section-label {
-      font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--brand-blue); font-weight: 600; margin-bottom: 6px;
+    /* Page Layout */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 48px 16px;
     }
-    .section-title { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
-    .section-desc { font-size: 14px; color: var(--text-soft); max-width: 720px; }
 
     .breadcrumb {
-      font-size: 12px; color: #6b7280; margin-bottom: 12px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      color: var(--text-soft);
     }
-    .breadcrumb a { color: #6b7280; }
-    .breadcrumb a:hover { color: #111827; }
 
-    .form-card {
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .lead {
+      font-size: 15px;
+      margin-bottom: 28px;
+      color: var(--text-soft);
+      max-width: 700px;
+    }
+
+    /* Form */
+    .form-box {
       background: var(--surface);
+      padding: 28px 24px;
       border-radius: 16px;
       border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
-      padding: 20px 20px 18px;
-      margin-top: 12px;
+      box-shadow: 0 14px 30px rgba(15,23,42,0.05);
+      max-width: 680px;
     }
 
-    .form-row {
-      margin-bottom: 14px;
-      font-size: 13px;
-    }
+    .form-group { margin-bottom: 20px; }
+
     label {
-      display: inline-block;
-      margin-bottom: 4px;
-      font-weight: 600;
-    }
-    .required {
-      color: var(--error);
-      font-size: 11px;
-      margin-left: 4px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    textarea,
-    select {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid var(--border-soft);
-      font-size: 13px;
-      font-family: inherit;
-    }
-    textarea { min-height: 140px; resize: vertical; }
-
-    .helper {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-top: 3px;
-    }
-
-    .btn-submit {
-      padding: 9px 18px;
-      border-radius: 999px;
-      border: none;
-      background: #1d4ed8;
-      color: #f9fafb;
       font-size: 14px;
       font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 14px;
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      background: #fff;
+    }
+    textarea { height: 140px; resize: vertical; }
+
+    .submit-btn {
+      margin-top: 12px;
+      padding: 10px 20px;
+      background: var(--brand-blue);
+      color: #fff;
+      font-size: 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      border: none;
       cursor: pointer;
     }
-    .btn-submit:hover { opacity: 0.96; }
+    .submit-btn:hover { background: #1e4fd3; }
 
-    .note {
-      font-size: 11px;
-      color: #6b7280;
-      margin-top: 10px;
+    /* Footer */
+    footer {
+      background: #020617;
+      color: #9ca3af;
+      padding: 32px 0;
+      font-size: 12px;
+      margin-top: 40px;
+    }
+    footer .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    footer .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    footer .footer-nav a { color: #9ca3af; }
+
+    /* ------------------------------------------- */
+    /* ▼▼▼ ポップアップチャット 共通CSS ▼▼▼ */
+    /* ------------------------------------------- */
+
+    .chatbot-launcher {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      padding: 12px 16px;
+      background: #1C64F2;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.4);
+      cursor: pointer;
+      z-index: 9998;
+      display: none;
     }
 
-    footer {
-      margin-top: 40px;
-      padding: 24px 0 32px;
-      font-size: 11px;
-      color: #9ca3af;
+    .chatbot-panel {
+      position: fixed;
+      right: 20px;
+      bottom: 80px;
+      width: min(420px, 90vw);
+      height: min(520px, 70vh);
+      background: #0b1120;
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.8);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.6);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+    }
+    .chatbot-panel.open { display: flex; }
+
+    .chatbot-header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 6px 10px;
+      background: linear-gradient(to right, #1e293b, #0f172a);
+    }
+
+    .chatbot-header-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .chatbot-icon-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(15,23,42,0.8);
+      color: #e5e7eb;
+      cursor: pointer;
+    }
+    .chatbot-icon-btn:hover {
+      background: rgba(30,64,175,0.9);
+    }
+
+    .chatbot-panel.fullscreen {
+      height: 96vh;
+      width: min(420px, 90vw);
+      right: 20px;
+      bottom: 2vh;
+    }
+
+    .chatbot-frame-wrapper {
+      flex: 1;
       background: #020617;
     }
-    .footer-nav {
-      display: flex; flex-wrap: wrap; gap: 12px;
-      margin-bottom: 8px;
+    .chatbot-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
-    .footer-nav a { color: #9ca3af; }
-    .footer-nav a:hover { color: #e5e7eb; }
 
     @media (max-width: 900px) {
-      nav ul { display: none; }
-      .section { padding: 48px 0; }
+      .chatbot-panel,
+      .chatbot-panel.fullscreen {
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+      }
+      .chatbot-launcher {
+        right: 16px;
+        bottom: 16px;
+      }
     }
   </style>
+
 </head>
+
 <body>
 
-  <header>
-    <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <div class="logo-mark">DI</div>
-        <div>MEDiDATA IDEA</div>
-      </a>
-      <nav>
-        <ul>
-          <li><a href="about.html">DATuM IDEAについて</a></li>
-          <li><a href="service.html">提供サービス一覧</a></li>
-          <li><a href="pharmabase.html">ファーマベース</a></li>
-          <li><a href="news.html">お知らせ</a></li>
-          <li><a href="download.html">資料ダウンロード</a></li>
-          <li><a href="faq.html">よくあるご質問</a></li>
-          <li><a class="nav-cta" href="contact.html">お問い合わせ</a></li>
-        </ul>
-      </nav>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">DI</div>
+      MEDiDATA IDEA
+    </a>
+    <nav>
+      <ul>
+        <li><a href="about.html">DATuM IDEAについて</a></li>
+        <li><a href="service.html">提供サービス一覧</a></li>
+        <li><a href="pharmabase.html">ファーマベース</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="download.html">資料ダウンロード</a></li>
+        <li><a href="faq.html">よくあるご質問</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="index.html">TOP</a> → お問い合わせ
     </div>
-  </header>
 
-  <main>
-    <section class="section">
-      <div class="container">
-        <div class="breadcrumb">
-          <a href="index.html">TOP</a> &gt; お問い合わせ
-        </div>
+    <h1>お問い合わせ</h1>
 
-        <div class="section-header">
-          <div class="section-label">Contact</div>
-          <h1 class="section-title">お問い合わせ</h1>
-          <p class="section-desc">
-            MEDiDATA IDEA（デモ）のコンテンツに関するご意見・ご要望や、
-            医療データ活用に関するご相談イメージをお送りいただくためのフォームを模したページです。
-            実際には送信されません。
-          </p>
-        </div>
+    <p class="lead">
+      本フォームはデモ用です。実際の送信は行われません。<br>
+      サービス内容について質問したい場合は、右下のAIチャットボットもご利用いただけます。
+    </p>
 
-        <div class="form-card">
-          <form>
-            <div class="form-row">
-              <label>お問い合わせ種別<span class="required">必須</span></label>
-              <select>
-                <option value="">選択してください</option>
-                <option value="service">サービス内容について</option>
-                <option value="data">データベースについて</option>
-                <option value="pharmabase">ファーマベースについて</option>
-                <option value="other">その他</option>
-              </select>
-            </div>
-
-            <div class="form-row">
-              <label>会社名・ご所属<span class="required">必須</span></label>
-              <input type="text" />
-            </div>
-
-            <div class="form-row">
-              <label>お名前<span class="required">必須</span></label>
-              <input type="text" />
-            </div>
-
-            <div class="form-row">
-              <label>メールアドレス<span class="required">必須</span></label>
-              <input type="email" />
-              <p class="helper">※ご連絡可能なメールアドレスをご入力ください（実際には送信されません）。</p>
-            </div>
-
-            <div class="form-row">
-              <label>お問い合わせ内容<span class="required">必須</span></label>
-              <textarea></textarea>
-            </div>
-
-            <div class="form-row">
-              <label>個人情報の取り扱いについて<span class="required">必須</span></label>
-              <p class="helper">
-                本デモサイトでは実際の個人情報は保存されませんが、
-                実サービスではプライバシーポリシーに基づき適切に取り扱われることを想定しています。
-              </p>
-            </div>
-
-            <div class="form-row">
-              <button type="button" class="btn-submit">入力内容を確認する（デモ）</button>
-              <p class="note">
-                ※ボタンを押しても送信・保存は行われません。フォームレイアウトのイメージのみご確認いただけます。
-              </p>
-            </div>
-          </form>
-        </div>
-
+    <div class="form-box">
+      <div class="form-group">
+        <label>お名前</label>
+        <input type="text" placeholder="例：山田 太郎" />
       </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-nav">
-        <a href="index.html">TOP</a>
-        <a href="about.html">DATuM IDEAについて</a>
-        <a href="service.html">提供サービス一覧</a>
-        <a href="pharmabase.html">ファーマベース</a>
-        <a href="news.html">お知らせ</a>
-        <a href="download.html">資料ダウンロード</a>
-        <a href="faq.html">よくあるご質問</a>
-        <a href="contact.html">お問い合わせ</a>
+      <div class="form-group">
+        <label>メールアドレス</label>
+        <input type="email" placeholder="例：example@example.com" />
       </div>
-      <div>© 2025 MEDiDATA IDEA Demo.</div>
+
+      <div class="form-group">
+        <label>お問い合わせ内容</label>
+        <textarea placeholder="ご質問・ご相談内容をご記入ください。"></textarea>
+      </div>
+
+      <button class="submit-btn">送信（デモ）</button>
     </div>
-  </footer>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-nav">
+      <a href="about.html">DATuM IDEAについて</a>
+      <a href="service.html">提供サービス一覧</a>
+      <a href="pharmabase.html">ファーマベース</a>
+      <a href="news.html">お知らせ</a>
+      <a href="download.html">資料ダウンロード</a>
+      <a href="faq.html">よくあるご質問</a>
+      <a href="contact.html">お問い合わせ</a>
+    </div>
+    <p>© 2025 MEDiDATA IDEA Demo.</p>
+  </div>
+</footer>
+
+
+<!-- ▼▼▼ ポップアップチャット（全ページ共通） ▼▼▼ -->
+
+<div id="chatbot-launcher" class="chatbot-launcher">
+  AIチャットボットはこちら 💬
+</div>
+
+<div id="chatbot-panel" class="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-header-actions">
+      <button id="chatbot-expand" class="chatbot-icon-btn">⤢</button>
+      <button id="chatbot-close" class="chatbot-icon-btn">×</button>
+    </div>
+  </div>
+
+  <div class="chatbot-frame-wrapper">
+    <iframe
+      class="chatbot-frame"
+      src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
+      allow="microphone">
+    </iframe>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const launcher = document.getElementById("chatbot-launcher");
+  const panel = document.getElementById("chatbot-panel");
+  const closeBtn = document.getElementById("chatbot-close");
+  const expandBtn = document.getElementById("chatbot-expand");
+
+  if (!launcher || !panel) return;
+
+  const isDesktop = window.matchMedia("(min-width: 901px)").matches;
+
+  function openPanel() {
+    panel.classList.add("open");
+    launcher.style.display = "none";
+  }
+  function closePanel() {
+    panel.classList.remove("open");
+    panel.classList.remove("fullscreen");
+    launcher.style.display = "inline-flex";
+  }
+  function toggleFullscreen() {
+    panel.classList.toggle("fullscreen");
+  }
+
+  launcher.addEventListener("click", openPanel);
+  closeBtn.addEventListener("click", closePanel);
+  expandBtn.addEventListener("click", toggleFullscreen);
+
+  // 初期動作
+  if (isDesktop) {
+    openPanel(); 
+  } else {
+    launcher.style.display = "inline-flex";
+  }
+});
+</script>
 
 </body>
 </html>
