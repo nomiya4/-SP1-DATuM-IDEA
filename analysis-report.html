@@ -30,7 +30,10 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 64px;
     }
-    .logo { color:#fff; font-size:18px; font-weight:700; display:flex; align-items:center; gap:10px; }
+    .logo {
+      color:#fff; font-size:18px; font-weight:700;
+      display:flex; align-items:center; gap:10px;
+    }
     .logo-mark {
       width:26px; height:26px; border-radius:8px; border:2px solid var(--brand-blue);
       display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800;
@@ -54,7 +57,10 @@
     .card-list { margin-left:18px; font-size:13px; color:#6b7280; }
 
     /* ▼ Dify埋め込み ▼ */
-    .chat-embed-card { background:#fff; border-radius:16px; padding:18px; margin-bottom:20px; border:1px solid #e5e7eb; }
+    .chat-embed-card {
+      background:#fff; border-radius:16px; padding:18px; margin-bottom:20px;
+      border:1px solid #e5e7eb;
+    }
     .chat-embed-title { font-size:15px; font-weight:600; margin-bottom:6px; }
     .chat-embed-text { font-size:13px; color:#6b7280; margin-bottom:10px; }
 
@@ -65,6 +71,108 @@
       width:100%; height:100%; min-height:450px; border:none; display:block;
     }
 
+    /* 関連サービスのリンクボタン（他ページと統一） */
+    .link-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #2563eb;
+      margin-top: 10px;
+    }
+    .link-more::after {
+      content: "→";
+      font-size: 11px;
+    }
+
+    /* ------------------------------------------- */
+    /* ▼▼▼ ポップアップチャット 共通CSS ▼▼▼ */
+    /* ------------------------------------------- */
+
+    .chatbot-launcher {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      padding: 12px 16px;
+      background: #1C64F2;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.4);
+      cursor: pointer;
+      z-index: 9998;
+      display: none;
+    }
+
+    .chatbot-panel {
+      position: fixed;
+      right: 20px;
+      bottom: 80px;
+      width: min(420px, 90vw);
+      height: min(520px, 70vh);
+      background: #0b1120;
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.8);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.6);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+    }
+    .chatbot-panel.open { display: flex; }
+
+    .chatbot-header {
+      display: flex;
+      justify-content: flex-end;
+      background: linear-gradient(to right, #1e293b, #0f172a);
+      padding: 6px 10px;
+    }
+
+    .chatbot-header-actions { display: flex; gap: 6px; }
+
+    .chatbot-icon-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(15,23,42,0.8);
+      color: #e5e7eb;
+      cursor: pointer;
+    }
+    .chatbot-icon-btn:hover { background: rgba(30,64,175,0.9); }
+
+    .chatbot-panel.fullscreen {
+      height: 96vh;
+      width: min(420px, 90vw);
+      right: 20px;
+      bottom: 2vh;
+    }
+
+    .chatbot-frame-wrapper { flex: 1; background: #020617; }
+    .chatbot-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 900px) {
+      .chatbot-panel,
+      .chatbot-panel.fullscreen {
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+      }
+      .chatbot-launcher {
+        right: 16px;
+        bottom: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -87,70 +195,127 @@
 </header>
 
 <main>
-<section class="section">
-  <div class="container">
+  <section class="section">
+    <div class="container">
 
-    <div class="breadcrumb">
-      <a href="index.html">TOP</a> &gt;
-      <a href="service.html">提供サービス一覧</a> &gt;
-      <a href="database.html">データベース</a> &gt; 解析・レポート
-    </div>
+      <div class="breadcrumb">
+        <a href="index.html">TOP</a> &gt;
+        <a href="service.html">提供サービス一覧</a> &gt;
+        <a href="database.html">データベース</a> &gt; 解析・レポート
+      </div>
 
-    <h1 class="section-title">解析・レポート</h1>
-    <p class="section-desc">
-      RWD（リアルワールドデータ）を用いて、疾患・治療ごとの状況を深く理解し、
-      課題探索から示唆出しまでをサポートする解析サービスをイメージしています。
-    </p>
-
-    <!-- ▼ サービス概要 -->
-    <div class="card">
-      <div class="card-title">サービスの概要</div>
-      <p class="card-text">
-        データベースを用いた定量解析を実施し、疾患構造や治療実態、患者遷移などの把握を支援します。
+      <h1 class="section-title">解析・レポート</h1>
+      <p class="section-desc">
+        RWD（リアルワールドデータ）を用いて、疾患・治療ごとの状況を深く理解し、
+        課題探索から示唆出しまでをサポートする解析サービスをイメージしています。
       </p>
-    </div>
 
-    <!-- ▼ 1つ目のチャット埋め込み（概要の下） -->
-    <div class="chat-embed-card">
-      <div class="chat-embed-title">解析内容についてAIに聞いてみる（デモ）</div>
-      <p class="chat-embed-text">「どんな解析ができる？」「このケースは分析可能？」など AI に質問できます。</p>
-      <div class="chat-embed-wrapper">
-        <iframe src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI" allow="microphone"></iframe>
+      <!-- ▼ サービス概要 -->
+      <div class="card">
+        <div class="card-title">サービスの概要</div>
+        <p class="card-text">
+          データベースを用いた定量解析を実施し、疾患構造や治療実態、患者遷移などの把握を支援します。
+        </p>
       </div>
-    </div>
 
-    <!-- ▼ 主なステップ -->
-    <div class="card">
-      <div class="card-title">主な実施ステップ（イメージ）</div>
-      <ul class="card-list">
-        <li>① 課題ヒアリング・仮説整理</li>
-        <li>② データ抽出条件の設計</li>
-        <li>③ 解析用データセット作成</li>
-        <li>④ 統計解析の実施</li>
-        <li>⑤ レポート納品・示唆出し</li>
-      </ul>
-    </div>
-
-    <!-- ▼ 関連サービス -->
-    <div class="card">
-      <div class="card-title">関連サービス</div>
-      <p class="card-text">Webツールやデータセット提供と組み合わせて利用できます。</p>
-      <a href="webtool.html" class="link-more">Webツールへ</a><br>
-      <a href="dataset.html" class="link-more">データセット提供へ</a>
-    </div>
-
-    <!-- ▼ 2つ目チャット埋め込み（関連サービスの下） -->
-    <div class="chat-embed-card">
-      <div class="chat-embed-title">どのサービスが最適か相談（デモ）</div>
-      <p class="chat-embed-text">用途に応じて AI がおすすめを提示します。</p>
-      <div class="chat-embed-wrapper">
-        <iframe src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI" allow="microphone"></iframe>
+      <!-- ▼ 1つ目のチャット埋め込み（概要の下） -->
+      <div class="chat-embed-card">
+        <div class="chat-embed-title">解析内容についてAIに聞いてみる（デモ）</div>
+        <p class="chat-embed-text">「どんな解析ができる？」「このケースは分析可能？」など AI に質問できます。</p>
+        <div class="chat-embed-wrapper">
+          <iframe src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI" allow="microphone"></iframe>
+        </div>
       </div>
-    </div>
 
-  </div>
-</section>
+      <!-- ▼ 主なステップ -->
+      <div class="card">
+        <div class="card-title">主な実施ステップ（イメージ）</div>
+        <ul class="card-list">
+          <li>① 課題ヒアリング・仮説整理</li>
+          <li>② データ抽出条件の設計</li>
+          <li>③ 解析用データセット作成</li>
+          <li>④ 統計解析の実施</li>
+          <li>⑤ レポート納品・示唆出し</li>
+        </ul>
+      </div>
+
+      <!-- ▼ 関連サービス -->
+      <div class="card">
+        <div class="card-title">関連サービス</div>
+        <p class="card-text">Webツールやデータセット提供と組み合わせて利用できます。</p>
+        <a href="webtool.html" class="link-more">Webツールへ</a><br>
+        <a href="dataset.html" class="link-more">データセット提供へ</a>
+      </div>
+
+      <!-- ▼ 2つ目チャット埋め込み（関連サービスの下） -->
+      <div class="chat-embed-card">
+        <div class="chat-embed-title">どのサービスが最適か相談（デモ）</div>
+        <p class="chat-embed-text">用途に応じて AI がおすすめを提示します。</p>
+        <div class="chat-embed-wrapper">
+          <iframe src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI" allow="microphone"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
 </main>
+
+<!-- ▼▼▼ ポップアップチャット（全ページ共通） ▼▼▼ -->
+
+<div id="chatbot-launcher" class="chatbot-launcher">
+  AIチャットボットはこちら 💬
+</div>
+
+<div id="chatbot-panel" class="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-header-actions">
+      <button id="chatbot-expand" class="chatbot-icon-btn">⤢</button>
+      <button id="chatbot-close" class="chatbot-icon-btn">×</button>
+    </div>
+  </div>
+  <div class="chatbot-frame-wrapper">
+    <iframe class="chatbot-frame"
+      src="https://bchealthcare.click/chatbot/bzmQ0PwDS37R1nrI"
+      allow="microphone"></iframe>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const launcher = document.getElementById("chatbot-launcher");
+  const panel = document.getElementById("chatbot-panel");
+  const closeBtn = document.getElementById("chatbot-close");
+  const expandBtn = document.getElementById("chatbot-expand");
+
+  if (!launcher || !panel) return;
+
+  const isDesktop = window.matchMedia("(min-width: 901px)").matches;
+
+  function openPanel() {
+    panel.classList.add("open");
+    launcher.style.display = "none";
+  }
+  function closePanel() {
+    panel.classList.remove("open");
+    panel.classList.remove("fullscreen");
+    launcher.style.display = "inline-flex";
+  }
+  function toggleFullscreen() {
+    panel.classList.toggle("fullscreen");
+  }
+
+  launcher.addEventListener("click", openPanel);
+  closeBtn.addEventListener("click", closePanel);
+  expandBtn.addEventListener("click", toggleFullscreen);
+
+  // 初期動作
+  if (isDesktop) {
+    openPanel();
+  } else {
+    launcher.style.display = "inline-flex";
+  }
+});
+</script>
 
 </body>
 </html>
